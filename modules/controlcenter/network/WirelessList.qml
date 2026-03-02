@@ -28,7 +28,7 @@ DeviceList {
             visible: Nmcli.scanning
             text: qsTr("Scanning...")
             color: Colours.palette.m3primary
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
         }
     }
 
@@ -42,11 +42,11 @@ DeviceList {
 
     headerComponent: Component {
         RowLayout {
-            spacing: Appearance.spacing.smaller
+            spacing: Appearance.spacing.md
 
             StyledText {
                 text: qsTr("Settings")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: 500
             }
 
@@ -58,9 +58,9 @@ DeviceList {
                 toggled: Nmcli.wifiEnabled
                 icon: "wifi"
                 accent: "Tertiary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
 
                 onClicked: {
                     Nmcli.toggleWifi(null);
@@ -71,9 +71,9 @@ DeviceList {
                 toggled: Nmcli.scanning
                 icon: "wifi_find"
                 accent: "Secondary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
 
                 onClicked: {
                     Nmcli.rescanWifi();
@@ -84,9 +84,9 @@ DeviceList {
                 toggled: !root.session.network.active
                 icon: "settings"
                 accent: "Primary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
 
                 onClicked: {
                     if (root.session.network.active)
@@ -123,13 +123,13 @@ DeviceList {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.padding.md
 
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 StyledRect {
                     implicitWidth: implicitHeight
-                    implicitHeight: icon.implicitHeight + Appearance.padding.normal * 2
+                    implicitHeight: icon.implicitHeight + Appearance.padding.md * 2
 
                     radius: Appearance.rounding.normal
                     color: modelData.active ? Colours.palette.m3primaryContainer : Colours.tPalette.m3surfaceContainerHigh
@@ -139,7 +139,7 @@ DeviceList {
 
                         anchors.centerIn: parent
                         text: Icons.getNetworkIcon(modelData.strength, modelData.isSecure)
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                         fill: modelData.active ? 1 : 0
                         color: modelData.active ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
                     }
@@ -160,7 +160,7 @@ DeviceList {
 
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: Appearance.spacing.smaller
+                        spacing: Appearance.spacing.md
 
                         StyledText {
                             Layout.fillWidth: true
@@ -175,7 +175,7 @@ DeviceList {
                                 return qsTr("Open");
                             }
                             color: modelData.active ? Colours.palette.m3primary : Colours.palette.m3outline
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             font.weight: modelData.active ? 500 : 400
                             elide: Text.ElideRight
                         }
@@ -184,7 +184,7 @@ DeviceList {
 
                 StyledRect {
                     implicitWidth: implicitHeight
-                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.smaller * 2
+                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.sm * 2
 
                     radius: Appearance.rounding.full
                     color: Qt.alpha(Colours.palette.m3primaryContainer, modelData.active ? 1 : 0)
@@ -209,7 +209,7 @@ DeviceList {
                 }
             }
 
-            implicitHeight: rowLayout.implicitHeight + Appearance.padding.normal * 2
+            implicitHeight: rowLayout.implicitHeight + Appearance.padding.md * 2
         }
     }
 

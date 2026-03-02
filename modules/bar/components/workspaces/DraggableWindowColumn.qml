@@ -170,8 +170,8 @@ Item {
     Rectangle {
         id: dropIndicator
         anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.width - Appearance.padding.small
-        height: Appearance.padding.small
+        width: parent.width - Appearance.padding.xs
+        height: Appearance.padding.xs
         color: root.isWsFocused ? Colours.palette.m3primaryContainer : Colours.palette.m3primaryContainer
         radius: Appearance.rounding.small
         visible: false

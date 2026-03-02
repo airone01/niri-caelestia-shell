@@ -11,8 +11,8 @@ GridLayout {
     required property PersistentProperties visibilities
     required property PersistentProperties state
 
-    rowSpacing: Appearance.spacing.normal
-    columnSpacing: Appearance.spacing.normal
+    rowSpacing: Appearance.spacing.lg
+    columnSpacing: Appearance.spacing.lg
 
     Rect {
         Layout.column: 2

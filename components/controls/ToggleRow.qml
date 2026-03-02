@@ -13,7 +13,7 @@ RowLayout {
     property alias toggle: toggle
 
     Layout.fillWidth: true
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
 
     StyledText {
         Layout.fillWidth: true

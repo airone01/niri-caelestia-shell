@@ -45,7 +45,7 @@ StyledRect {
 
     clip: true
     y: offset + mask.y
-    implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+    implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.xs * 2
     implicitHeight: size
     radius: Appearance.rounding.full
     color: Colours.palette.m3primary
@@ -53,8 +53,8 @@ StyledRect {
     anchors {
         left: parent.left
         right: parent.right
-        leftMargin: Appearance.padding.small
-        rightMargin: Appearance.padding.small
+        leftMargin: Appearance.padding.xs
+        rightMargin: Appearance.padding.xs
     }
 
     Colouriser {

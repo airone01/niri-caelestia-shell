@@ -225,7 +225,7 @@ WlSessionLockSurface {
     Item {
         id: lockContent
 
-        readonly property int size: lockIcon.implicitHeight + Appearance.padding.large * 4
+        readonly property int size: lockIcon.implicitHeight + Appearance.padding.xl * 4
         readonly property int radius: size / 4 * Appearance.rounding.scale
 
         anchors.centerIn: parent
@@ -257,7 +257,7 @@ WlSessionLockSurface {
 
             anchors.centerIn: parent
             text: "lock"
-            font.pointSize: Appearance.font.size.extraLarge * 4
+            font.pointSize: Appearance.font.size.headlineLarge * 4
             font.bold: true
             rotation: 180
         }
@@ -266,8 +266,8 @@ WlSessionLockSurface {
             id: content
 
             anchors.centerIn: parent
-            width: (root.screen?.height ?? 0) * Config.lock.sizes.heightMult * Config.lock.sizes.ratio - Appearance.padding.large * 2
-            height: (root.screen?.height ?? 0) * Config.lock.sizes.heightMult - Appearance.padding.large * 2
+            width: (root.screen?.height ?? 0) * Config.lock.sizes.heightMult * Config.lock.sizes.ratio - Appearance.padding.xl * 2
+            height: (root.screen?.height ?? 0) * Config.lock.sizes.heightMult - Appearance.padding.xl * 2
 
             lock: root
             opacity: 0

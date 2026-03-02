@@ -56,28 +56,28 @@ Item {
 
             Row {
                 anchors.centerIn: parent
-                spacing: Appearance.spacing.large
+                spacing: Appearance.spacing.xxl
 
                 MaterialIcon {
                     text: "sentiment_stressed"
                     color: Colours.palette.m3onSurfaceVariant
-                    font.pointSize: Appearance.font.size.extraLarge * 5
+                    font.pointSize: Appearance.font.size.headlineLarge * 5
                 }
 
                 Column {
                     anchors.verticalCenter: parent.verticalCenter
-                    spacing: Appearance.spacing.small
+                    spacing: Appearance.spacing.sm
 
                     StyledText {
                         text: qsTr("Wallpaper missing?")
                         color: Colours.palette.m3onSurfaceVariant
-                        font.pointSize: Appearance.font.size.extraLarge * 2
+                        font.pointSize: Appearance.font.size.headlineLarge * 2
                         font.bold: true
                     }
 
                     StyledRect {
-                        implicitWidth: selectWallText.implicitWidth + Appearance.padding.large * 2
-                        implicitHeight: selectWallText.implicitHeight + Appearance.padding.small * 2
+                        implicitWidth: selectWallText.implicitWidth + Appearance.padding.xl * 2
+                        implicitHeight: selectWallText.implicitHeight + Appearance.padding.xs * 2
 
                         radius: Appearance.rounding.full
                         color: Colours.palette.m3primary
@@ -107,7 +107,7 @@ Item {
 
                             text: qsTr("Set it now!")
                             color: Colours.palette.m3onPrimary
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                         }
                     }
                 }

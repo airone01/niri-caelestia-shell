@@ -32,11 +32,11 @@ DeviceList {
 
     headerComponent: Component {
         RowLayout {
-            spacing: Appearance.spacing.smaller
+            spacing: Appearance.spacing.md
 
             StyledText {
                 text: qsTr("Bluetooth")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: 500
             }
 
@@ -48,9 +48,9 @@ DeviceList {
                 toggled: Bluetooth.defaultAdapter?.enabled ?? false
                 icon: "power"
                 accent: "Tertiary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
                 tooltip: qsTr("Toggle Bluetooth")
 
                 onClicked: {
@@ -64,9 +64,9 @@ DeviceList {
                 toggled: Bluetooth.defaultAdapter?.discoverable ?? false
                 icon: root.smallDiscoverable ? "group_search" : ""
                 label: root.smallDiscoverable ? "" : qsTr("Discoverable")
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
                 tooltip: qsTr("Make discoverable")
 
                 onClicked: {
@@ -80,9 +80,9 @@ DeviceList {
                 toggled: Bluetooth.defaultAdapter?.pairable ?? false
                 icon: "missing_controller"
                 label: root.smallPairable ? "" : qsTr("Pairable")
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
                 tooltip: qsTr("Make pairable")
 
                 onClicked: {
@@ -96,9 +96,9 @@ DeviceList {
                 toggled: Bluetooth.defaultAdapter?.discovering ?? false
                 icon: "bluetooth_searching"
                 accent: "Secondary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
                 tooltip: qsTr("Scan for devices")
 
                 onClicked: {
@@ -112,9 +112,9 @@ DeviceList {
                 toggled: !root.session.bt.active
                 icon: "settings"
                 accent: "Primary"
-                iconSize: Appearance.font.size.normal
-                horizontalPadding: Appearance.padding.normal
-                verticalPadding: Appearance.padding.smaller
+                iconSize: Appearance.font.size.bodyMedium
+                horizontalPadding: Appearance.padding.md
+                verticalPadding: Appearance.padding.sm
                 tooltip: qsTr("Bluetooth settings")
 
                 onClicked: {
@@ -137,7 +137,7 @@ DeviceList {
             readonly property bool connected: modelData && modelData.state === BluetoothDeviceState.Connected
 
             width: ListView.view ? ListView.view.width : undefined
-            implicitHeight: deviceInner.implicitHeight + Appearance.padding.normal * 2
+            implicitHeight: deviceInner.implicitHeight + Appearance.padding.md * 2
 
             color: Qt.alpha(Colours.tPalette.m3surfaceContainer, root.activeItem === modelData ? Colours.tPalette.m3surfaceContainer.a : 0)
             radius: Appearance.rounding.normal
@@ -155,13 +155,13 @@ DeviceList {
                 id: deviceInner
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.padding.md
 
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 StyledRect {
                     implicitWidth: implicitHeight
-                    implicitHeight: icon.implicitHeight + Appearance.padding.normal * 2
+                    implicitHeight: icon.implicitHeight + Appearance.padding.md * 2
 
                     radius: Appearance.rounding.normal
                     color: device.connected ? Colours.palette.m3primaryContainer : (device.modelData && device.modelData.bonded) ? Colours.palette.m3secondaryContainer : Colours.tPalette.m3surfaceContainerHigh
@@ -178,7 +178,7 @@ DeviceList {
                         anchors.centerIn: parent
                         text: Icons.getBluetoothIcon(device.modelData ? device.modelData.icon : "")
                         color: device.connected ? Colours.palette.m3onPrimaryContainer : (device.modelData && device.modelData.bonded) ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                         fill: device.connected ? 1 : 0
 
                         Behavior on fill {
@@ -202,7 +202,7 @@ DeviceList {
                         Layout.fillWidth: true
                         text: (device.modelData ? device.modelData.address : "") + (device.connected ? qsTr(" (Connected)") : (device.modelData && device.modelData.bonded) ? qsTr(" (Paired)") : "")
                         color: Colours.palette.m3outline
-                        font.pointSize: Appearance.font.size.small
+                        font.pointSize: Appearance.font.size.labelLarge
                         elide: Text.ElideRight
                     }
                 }
@@ -211,7 +211,7 @@ DeviceList {
                     id: connectBtn
 
                     implicitWidth: implicitHeight
-                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.smaller * 2
+                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.sm * 2
 
                     radius: Appearance.rounding.full
                     color: Qt.alpha(Colours.palette.m3primaryContainer, device.connected ? 1 : 0)

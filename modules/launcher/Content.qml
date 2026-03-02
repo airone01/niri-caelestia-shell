@@ -15,11 +15,11 @@ Item {
     required property PersistentProperties visibilities
     required property var panels
 
-    readonly property int padding: Appearance.padding.large
+    readonly property int padding: Appearance.padding.xl
     readonly property int rounding: Appearance.rounding.large
 
     implicitWidth: listWrapper.width + padding * 2
-    implicitHeight: searchWrapper.height + listWrapper.height + padding * 2
+    implicitHeight: searchWrapper.height + listWrapper.height + (modeIndicator.visible ? modeIndicator.height + root.padding : 0) + padding * 2
 
     anchors.top: parent.top
     anchors.horizontalCenter: parent.horizontalCenter
@@ -43,6 +43,66 @@ Item {
             search: search
             padding: root.padding
             rounding: root.rounding
+        }
+    }
+
+    StyledRect {
+        id: modeIndicator
+
+        visible: list.activeMode !== "apps"
+        color: Colours.tPalette.m3tertiaryContainer
+        radius: Appearance.rounding.full
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: searchWrapper.top
+        anchors.bottomMargin: Appearance.spacing.sm
+
+        implicitWidth: modeRow.implicitWidth + Appearance.padding.md * 2
+        implicitHeight: modeRow.implicitHeight + Appearance.padding.xs * 2
+
+        Row {
+            id: modeRow
+            anchors.centerIn: parent
+            spacing: Appearance.spacing.xs
+
+            MaterialIcon {
+                anchors.verticalCenter: parent.verticalCenter
+                text: {
+                    switch (list.activeMode) {
+                    case "actions": return "terminal";
+                    case "calc": return "calculate";
+                    case "scheme": return "palette";
+                    case "variant": return "format_paint";
+                    case "wallpapers": return "wallpaper";
+                    default: return "search";
+                    }
+                }
+                color: Colours.palette.m3onTertiaryContainer
+                font.pointSize: Appearance.font.size.labelLarge
+            }
+
+            StyledText {
+                anchors.verticalCenter: parent.verticalCenter
+                text: {
+                    switch (list.activeMode) {
+                    case "actions": return qsTr("Actions");
+                    case "calc": return qsTr("Calculator");
+                    case "scheme": return qsTr("Colour Scheme");
+                    case "variant": return qsTr("Variant");
+                    case "wallpapers": return qsTr("Wallpapers");
+                    default: return "";
+                    }
+                }
+                color: Colours.palette.m3onTertiaryContainer
+                font.pointSize: Appearance.font.size.labelMedium
+                font.bold: true
+            }
+        }
+
+        Behavior on opacity {
+            Anim {
+                duration: Appearance.anim.durations.small
+            }
         }
     }
 
@@ -75,11 +135,11 @@ Item {
 
             anchors.left: searchIcon.right
             anchors.right: clearIcon.left
-            anchors.leftMargin: Appearance.spacing.small
-            anchors.rightMargin: Appearance.spacing.small
+            anchors.leftMargin: Appearance.spacing.sm
+            anchors.rightMargin: Appearance.spacing.sm
 
-            topPadding: Appearance.padding.larger
-            bottomPadding: Appearance.padding.larger
+            topPadding: Appearance.padding.lg
+            bottomPadding: Appearance.padding.lg
 
             placeholderText: qsTr("Type \"%1\" for commands").arg(Config.launcher.actionPrefix)
 

@@ -16,9 +16,9 @@ ColumnLayout {
     required property var lock
 
     anchors.fill: parent
-    anchors.margins: Appearance.padding.large
+    anchors.margins: Appearance.padding.xl
 
-    spacing: Appearance.spacing.smaller
+    spacing: Appearance.spacing.md
 
     StyledText {
         Layout.fillWidth: true
@@ -45,7 +45,7 @@ ColumnLayout {
             opacity: Notifs.list.length > 0 ? 0 : 1
 
             sourceComponent: ColumnLayout {
-                spacing: Appearance.spacing.large
+                spacing: Appearance.spacing.xxl
 
                 Image {
                     asynchronous: true
@@ -64,7 +64,7 @@ ColumnLayout {
                     Layout.alignment: Qt.AlignHCenter
                     text: qsTr("No Notifications")
                     color: Colours.palette.m3outlineVariant
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.family: Appearance.font.family.mono
                     font.weight: 500
                 }
@@ -80,7 +80,7 @@ ColumnLayout {
         StyledListView {
             anchors.fill: parent
 
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
             clip: true
 
             model: ScriptModel {

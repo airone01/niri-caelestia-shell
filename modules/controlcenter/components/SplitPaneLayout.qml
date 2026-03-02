@@ -34,9 +34,9 @@ RowLayout {
             id: leftClippingRect
 
             anchors.fill: parent
-            anchors.margins: Appearance.padding.normal
+            anchors.margins: Appearance.padding.md
             anchors.leftMargin: 0
-            anchors.rightMargin: Appearance.padding.normal / 2
+            anchors.rightMargin: Appearance.padding.md / 2
 
             radius: leftBorder.innerRadius
             color: "transparent"
@@ -45,9 +45,9 @@ RowLayout {
                 id: leftLoader
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.large + Appearance.padding.normal
-                anchors.leftMargin: Appearance.padding.large
-                anchors.rightMargin: Appearance.padding.large + Appearance.padding.normal / 2
+                anchors.margins: Appearance.padding.xl + Appearance.padding.md
+                anchors.leftMargin: Appearance.padding.xl
+                anchors.rightMargin: Appearance.padding.xl + Appearance.padding.md / 2
 
                 sourceComponent: root.leftContent
 
@@ -63,7 +63,7 @@ RowLayout {
             id: leftBorder
 
             leftThickness: 0
-            rightThickness: Appearance.padding.normal / 2
+            rightThickness: Appearance.padding.md / 2
         }
     }
 
@@ -77,9 +77,9 @@ RowLayout {
             id: rightClippingRect
 
             anchors.fill: parent
-            anchors.margins: Appearance.padding.normal
+            anchors.margins: Appearance.padding.md
             anchors.leftMargin: 0
-            anchors.rightMargin: Appearance.padding.normal / 2
+            anchors.rightMargin: Appearance.padding.md / 2
 
             radius: rightBorder.innerRadius
             color: "transparent"
@@ -88,7 +88,7 @@ RowLayout {
                 id: rightLoader
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.large * 2
+                anchors.margins: Appearance.padding.xl * 2
 
                 sourceComponent: root.rightContent
 
@@ -103,7 +103,7 @@ RowLayout {
         InnerBorder {
             id: rightBorder
 
-            leftThickness: Appearance.padding.normal / 2
+            leftThickness: Appearance.padding.md / 2
         }
     }
 }

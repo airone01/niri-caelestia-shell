@@ -9,7 +9,7 @@ Item {
 
     // Comfortable width to fit 4 workspace buttons in single row
     implicitWidth: 720
-    implicitHeight: content.implicitHeight + Appearance.padding.large * 2
+    implicitHeight: content.implicitHeight + Appearance.padding.xl * 2
 
     property var client: null
 
@@ -30,8 +30,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.margins: Appearance.padding.large
-        spacing: Appearance.spacing.normal
+        anchors.margins: Appearance.padding.xl
+        spacing: Appearance.spacing.lg
 
         // ***************************************************
         // WORKSPACE SECTION
@@ -43,8 +43,8 @@ Item {
             GridLayout {
                 id: wsGrid
                 columns: 4  // Maximum 4 workspaces per row
-                rowSpacing: Appearance.spacing.normal
-                columnSpacing: Appearance.spacing.normal
+                rowSpacing: Appearance.spacing.lg
+                columnSpacing: Appearance.spacing.lg
                 Layout.fillWidth: true
 
                 Repeater {
@@ -93,15 +93,16 @@ Item {
 
             GridLayout {
                 columns: 3
-                rowSpacing: Appearance.spacing.normal
-                columnSpacing: Appearance.spacing.normal
+                rowSpacing: Appearance.spacing.lg
+                columnSpacing: Appearance.spacing.lg
                 Layout.fillWidth: true
 
                 // Row 1: Main window controls
                 ActionButton {
                     Layout.fillWidth: true
-                    icon: "fullscreen"
+                    icon: root.client?.is_fullscreen ? "fullscreen_exit" : "fullscreen"
                     text: qsTr("Fullscreen")
+                    active: root.client?.is_fullscreen ?? false
                     function onClicked(): void {
                         Niri.toggleFullscreen();
                     }
@@ -120,6 +121,7 @@ Item {
                     Layout.fillWidth: true
                     icon: "center_focus_strong"
                     text: qsTr("Center Window")
+                    disabled: !root.client
                     function onClicked(): void {
                         Niri.centerWindow();
                     }
@@ -205,8 +207,8 @@ Item {
         radius: Appearance.rounding.full
         color: active ? Colours.palette.m3primary : Colours.palette.m3surfaceContainerHigh
 
-        implicitHeight: label.implicitHeight + Appearance.padding.small * 2
-        implicitWidth: label.implicitWidth + Appearance.padding.normal * 2
+        implicitHeight: label.implicitHeight + Appearance.padding.xs * 2
+        implicitWidth: label.implicitWidth + Appearance.padding.md * 2
 
         Behavior on color {
             CAnim {}
@@ -226,7 +228,7 @@ Item {
             id: label
             anchors.centerIn: parent
             color: active ? Colours.palette.m3onPrimary : Colours.palette.m3onSurface
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             font.weight: active ? Font.Medium : Font.Normal
 
             Behavior on color {
@@ -243,23 +245,31 @@ Item {
         property alias text: actionLabel.text
         property alias icon: actionIcon.text
         property bool accent: false
+        property bool active: false
 
         function onClicked(): void {}
 
         radius: Appearance.rounding.small
-        color: accent ? Colours.palette.m3primaryContainer : Colours.palette.m3surfaceContainerHigh
+        color: active ? Colours.palette.m3primaryContainer : accent ? Colours.palette.m3primaryContainer : Colours.palette.m3surfaceContainerHigh
+        opacity: disabled ? 0.5 : 1
 
-        implicitHeight: contentCol.implicitHeight + Appearance.padding.normal * 2
-        implicitWidth: Math.max(contentCol.implicitWidth + Appearance.padding.normal * 2, 100)
+        implicitHeight: contentCol.implicitHeight + Appearance.padding.md * 2
+        implicitWidth: Math.max(contentCol.implicitWidth + Appearance.padding.md * 2, 100)
 
         Behavior on color {
             CAnim {}
         }
 
+        Behavior on opacity {
+            Anim {
+                duration: Appearance.anim.durations.small
+            }
+        }
+
         StateLayer {
             id: actionStateLayer
             radius: parent.radius
-            color: accent ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
+            color: active || accent ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
 
             function onClicked(): void {
                 actionBtn.onClicked();
@@ -269,13 +279,13 @@ Item {
         Column {
             id: contentCol
             anchors.centerIn: parent
-            spacing: Appearance.spacing.smaller
+            spacing: Appearance.spacing.md
 
             MaterialIcon {
                 id: actionIcon
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: accent ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
-                font.pointSize: Appearance.font.size.large
+                color: active || accent ? Colours.palette.m3onPrimaryContainer : actionBtn.disabled ? Colours.palette.m3onSurfaceVariant : Colours.palette.m3onSurface
+                font.pointSize: Appearance.font.size.titleMedium
                 text: "radio_button_unchecked"
 
                 Behavior on color {
@@ -286,8 +296,8 @@ Item {
             StyledText {
                 id: actionLabel
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: accent ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.smaller
+                color: active || accent ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurfaceVariant
+                font.pointSize: Appearance.font.size.bodySmall
                 horizontalAlignment: Text.AlignHCenter
 
                 Behavior on color {
@@ -311,8 +321,8 @@ Item {
 
         radius: Appearance.rounding.small
 
-        implicitHeight: (icon.implicitHeight + Appearance.padding.small * 2)
-        implicitWidth: (52 + Appearance.padding.small * 2)
+        implicitHeight: (icon.implicitHeight + Appearance.padding.xs * 2)
+        implicitWidth: (52 + Appearance.padding.xs * 2)
 
         RowLayout {
             anchors.verticalCenter: parent.verticalCenter
@@ -326,7 +336,7 @@ Item {
             MaterialIcon {
                 id: icon
                 color: parent.parent.onColor
-                // font.pointSize: Appearance.font.size.large
+                // font.pointSize: Appearance.font.size.titleMedium
                 text: "radio_button_unchecked"
                 font.pointSize: label.font.pointSize * 3.0
 
@@ -346,7 +356,7 @@ Item {
             StyledText {
                 id: label
                 color: parent.parent.onColor
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 wrapMode: Text.WordWrap
                 maximumLineCount: 2
                 Layout.preferredWidth: 90 // Adjust as needed for your layout

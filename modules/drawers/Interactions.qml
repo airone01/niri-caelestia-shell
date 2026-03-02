@@ -17,10 +17,22 @@ CustomMouseArea {
 
     property bool osdHovered
     property point dragStart
-    property bool dashboardShortcutActive
-    property bool osdShortcutActive
-    property bool utilitiesShortcutActive
-    property bool quicktogglesShortcutActive
+    // Unified panel state: tracks which panel was opened via shortcut
+    // Only one shortcut-activated panel at a time; empty string means idle
+    property string shortcutPanel: ""
+
+    function isShortcutActive(panel: string): bool {
+        return shortcutPanel === panel;
+    }
+
+    function setShortcutPanel(panel: string): void {
+        shortcutPanel = panel;
+    }
+
+    function clearShortcutPanel(panel: string): void {
+        if (shortcutPanel === panel)
+            shortcutPanel = "";
+    }
 
     property bool draggingBar: false
 
@@ -72,19 +84,19 @@ CustomMouseArea {
 
     onContainsMouseChanged: {
         if (!containsMouse) {
-            // Only hide if not activated by shortcut
-            if (!osdShortcutActive) {
+            // Only hide panels not activated by shortcut
+            if (!isShortcutActive("osd")) {
                 visibilities.osd = false;
                 osdHovered = false;
             }
 
-            if (!dashboardShortcutActive)
+            if (!isShortcutActive("dashboard"))
                 visibilities.dashboard = false;
 
-            if (!utilitiesShortcutActive)
+            if (!isShortcutActive("utilities"))
                 visibilities.utilities = false;
 
-            if (!quicktogglesShortcutActive)
+            if (!isShortcutActive("quicktoggles"))
                 visibilities.quicktoggles = false;
 
             if (!popouts.currentName.startsWith("traymenu"))
@@ -121,12 +133,12 @@ CustomMouseArea {
         const showOsd = inRightPanel(panels.osd, x, y);
 
         // Always update visibility based on hover if not in shortcut mode
-        if (!osdShortcutActive) {
+        if (!isShortcutActive("osd")) {
             visibilities.osd = showOsd;
             osdHovered = showOsd;
         } else if (showOsd) {
             // If hovering over OSD area while in shortcut mode, transition to hover control
-            osdShortcutActive = false;
+            clearShortcutPanel("osd");
             osdHovered = true;
         }
 
@@ -154,12 +166,11 @@ CustomMouseArea {
         const showDashboard = Config.dashboard.showOnHover && inTopPanel(panels.dashboard, x, y);
 
         // Always update visibility based on hover if not in shortcut mode
-        if (!dashboardShortcutActive) {
+        if (!isShortcutActive("dashboard")) {
             visibilities.dashboard = showDashboard;
-            // GlobalStates.sidebarLeftOpen = showDashboard;
         } else if (showDashboard) {
             // If hovering over dashboard area while in shortcut mode, transition to hover control
-            dashboardShortcutActive = false;
+            clearShortcutPanel("dashboard");
         }
 
         // Show/hide dashboard on drag (for touchscreen devices)
@@ -175,22 +186,22 @@ CustomMouseArea {
         const showUtilities = inBottomPanel(panels.utilities, x, y);
 
         // Always update visibility based on hover if not in shortcut mode
-        if (!utilitiesShortcutActive) {
+        if (!isShortcutActive("utilities")) {
             visibilities.utilities = showUtilities;
         } else if (showUtilities) {
             // If hovering over utilities area while in shortcut mode, transition to hover control
-            utilitiesShortcutActive = false;
+            clearShortcutPanel("utilities");
         }
 
         // Show quicktoggles on hover (bottom-right area)
         const showQuicktoggles = inBottomPanel(panels.quicktoggles, x, y) && inRightPanel(panels.quicktoggles, x, y);
 
         // Always update visibility based on hover if not in shortcut mode
-        if (!quicktogglesShortcutActive) {
+        if (!isShortcutActive("quicktoggles")) {
             visibilities.quicktoggles = showQuicktoggles;
         } else if (showQuicktoggles) {
             // If hovering over quicktoggles area while in shortcut mode, transition to hover control
-            quicktogglesShortcutActive = false;
+            clearShortcutPanel("quicktoggles");
         }
 
         // Show popouts on hover
@@ -205,75 +216,58 @@ CustomMouseArea {
         target: root.visibilities
 
         function onLauncherChanged() {
-            // If launcher is hidden, clear shortcut flags for dashboard and OSD
-            if (!root.visibilities.launcher) {
-                root.dashboardShortcutActive = false;
-                root.osdShortcutActive = false;
-                root.utilitiesShortcutActive = false;
-
-                // Also hide dashboard and OSD if they're not being hovered
-                const inDashboardArea = root.inTopPanel(root.panels.dashboard, root.mouseX, root.mouseY);
-                const inOsdArea = root.inRightPanel(root.panels.osd, root.mouseX, root.mouseY);
-
-                if (!inDashboardArea) {
-                    root.visibilities.dashboard = false;
-                }
-                if (!inOsdArea) {
-                    root.visibilities.osd = false;
-                    root.osdHovered = false;
-                }
-            }
+            // Launcher doesn't cascade to other panels — each panel manages itself
         }
 
         function onDashboardChanged() {
             if (root.visibilities.dashboard) {
-                // Dashboard became visible, immediately check if this should be shortcut mode
+                // Dashboard became visible, check if this should be shortcut mode
                 const inDashboardArea = root.inTopPanel(root.panels.dashboard, root.mouseX, root.mouseY);
                 if (!inDashboardArea) {
-                    root.dashboardShortcutActive = true;
+                    root.setShortcutPanel("dashboard");
                 }
             } else {
                 // Dashboard hidden, clear shortcut flag
-                root.dashboardShortcutActive = false;
+                root.clearShortcutPanel("dashboard");
             }
         }
 
         function onOsdChanged() {
             if (root.visibilities.osd) {
-                // OSD became visible, immediately check if this should be shortcut mode
+                // OSD became visible, check if this should be shortcut mode
                 const inOsdArea = root.inRightPanel(root.panels.osd, root.mouseX, root.mouseY);
                 if (!inOsdArea) {
-                    root.osdShortcutActive = true;
+                    root.setShortcutPanel("osd");
                 }
             } else {
                 // OSD hidden, clear shortcut flag
-                root.osdShortcutActive = false;
+                root.clearShortcutPanel("osd");
             }
         }
 
         function onUtilitiesChanged() {
             if (root.visibilities.utilities) {
-                // Utilities became visible, immediately check if this should be shortcut mode
+                // Utilities became visible, check if this should be shortcut mode
                 const inUtilitiesArea = root.inBottomPanel(root.panels.utilities, root.mouseX, root.mouseY);
                 if (!inUtilitiesArea) {
-                    root.utilitiesShortcutActive = true;
+                    root.setShortcutPanel("utilities");
                 }
             } else {
                 // Utilities hidden, clear shortcut flag
-                root.utilitiesShortcutActive = false;
+                root.clearShortcutPanel("utilities");
             }
         }
 
         function onQuicktogglesChanged() {
             if (root.visibilities.quicktoggles) {
-                // Quicktoggles became visible, immediately check if this should be shortcut mode
+                // Quicktoggles became visible, check if this should be shortcut mode
                 const inQuicktogglesArea = root.inBottomPanel(root.panels.quicktoggles, root.mouseX, root.mouseY) && root.inRightPanel(root.panels.quicktoggles, root.mouseX, root.mouseY);
                 if (!inQuicktogglesArea) {
-                    root.quicktogglesShortcutActive = true;
+                    root.setShortcutPanel("quicktoggles");
                 }
             } else {
                 // Quicktoggles hidden, clear shortcut flag
-                root.quicktogglesShortcutActive = false;
+                root.clearShortcutPanel("quicktoggles");
             }
         }
     }

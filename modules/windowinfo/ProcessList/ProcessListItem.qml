@@ -48,7 +48,7 @@ StyledRect {
             id: processIcon
 
             text: SysMonitorService.getProcessIcon(processItem.process ? processItem.process.command : "")
-            font.pointSize: Appearance.font.size.small * 2
+            font.pointSize: Appearance.font.size.labelLarge * 2
             color: {
                 if (processItem.process && processItem.process.cpu > 80)
                     return Colours.palette.error;
@@ -65,7 +65,7 @@ StyledRect {
 
         StyledText {
             text: processItem.process ? processItem.process.displayName : ""
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             font.family: Appearance.font.family.mono
             font.weight: Font.Medium
             color: Colours.palette.m3onSurface
@@ -97,7 +97,7 @@ StyledRect {
 
             StyledText {
                 text: SysMonitorService.formatCpuUsage(processItem.process ? processItem.process.cpu : 0)
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: Font.Bold
                 color: {
@@ -134,7 +134,7 @@ StyledRect {
 
             StyledText {
                 text: SysMonitorService.formatMemoryUsage(processItem.process ? processItem.process.memoryKB : 0)
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: Font.Bold
                 color: {
@@ -152,7 +152,7 @@ StyledRect {
 
         StyledText {
             text: processItem.process ? processItem.process.pid.toString() : ""
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             font.family: Appearance.font.family.mono
             color: Colours.palette.m3onSurface
             opacity: 0.7
@@ -175,7 +175,7 @@ StyledRect {
 
             MaterialIcon {
                 text: "more_vert"
-                font.pointSize: Appearance.font.size.small * 2
+                font.pointSize: Appearance.font.size.labelLarge * 2
                 color: Colours.palette.m3onSurface
                 opacity: 0.6
                 anchors.centerIn: parent

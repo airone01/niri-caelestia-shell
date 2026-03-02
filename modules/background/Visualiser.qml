@@ -58,7 +58,7 @@ Item {
 
                     anchors.fill: parent
                     anchors.margins: Config.border.thickness
-                    anchors.leftMargin: Visibilities.bars.get(root.screen).exclusiveZone + Appearance.spacing.small * Config.background.visualiser.spacing
+                    anchors.leftMargin: Visibilities.bars.get(root.screen).exclusiveZone + Appearance.spacing.sm * Config.background.visualiser.spacing
 
                     Side {
                         content: content
@@ -101,7 +101,7 @@ Item {
             clip: true
 
             x: modelData * ((side.content.width * 0.4) / Config.services.visualiserBars) + (side.isRight ? side.content.width * 0.6 : 0)
-            implicitWidth: (side.content.width * 0.4) / Config.services.visualiserBars - Appearance.spacing.small * Config.background.visualiser.spacing
+            implicitWidth: (side.content.width * 0.4) / Config.services.visualiserBars - Appearance.spacing.sm * Config.background.visualiser.spacing
 
             y: side.content.height - height
             implicitHeight: bar.value * side.content.height * 0.4

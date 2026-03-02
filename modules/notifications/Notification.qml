@@ -19,6 +19,24 @@ StyledRect {
     readonly property bool hasAppIcon: modelData.appIcon.length > 0
     readonly property int nonAnimHeight: summary.implicitHeight + (root.expanded ? appName.height + body.height + actions.height + actions.anchors.topMargin : bodyPreview.height) + inner.anchors.margins * 2
     property bool expanded
+    property bool pendingDismiss: false
+
+    Timer {
+        id: undoTimer
+        interval: 3000
+        onTriggered: root.modelData.notification.dismiss()
+    }
+
+    function startDismiss(): void {
+        pendingDismiss = true;
+        undoTimer.start();
+    }
+
+    function undoDismiss(): void {
+        pendingDismiss = false;
+        undoTimer.stop();
+        root.x = 0;
+    }
 
     color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3secondaryContainer : Colours.tPalette.m3surfaceContainer
     radius: Appearance.rounding.normal
@@ -70,7 +88,7 @@ StyledRect {
             if (Math.abs(root.x) < Config.notifs.sizes.width * Config.notifs.clearThreshold)
                 root.x = 0;
             else
-                root.modelData.notification.dismiss(); // TODO: change back to popup when notif dock impled
+                root.startDismiss();
         }
         onPositionChanged: event => {
             if (pressed) {
@@ -94,7 +112,7 @@ StyledRect {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: Appearance.padding.normal
+            anchors.margins: Appearance.padding.md
 
             implicitHeight: root.nonAnimHeight
 
@@ -172,14 +190,14 @@ StyledRect {
                         active: !root.hasAppIcon
                         asynchronous: true
                         anchors.centerIn: parent
-                        anchors.horizontalCenterOffset: -Appearance.font.size.large * 0.02
-                        anchors.verticalCenterOffset: Appearance.font.size.large * 0.02
+                        anchors.horizontalCenterOffset: -Appearance.font.size.titleMedium * 0.02
+                        anchors.verticalCenterOffset: Appearance.font.size.titleMedium * 0.02
 
                         sourceComponent: MaterialIcon {
                             text: Icons.getNotifIcon(root.modelData.summary, root.modelData.urgency)
 
                             color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : root.modelData.urgency === NotificationUrgency.Low ? Colours.palette.m3onSurface : Colours.palette.m3onSecondaryContainer
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                         }
                     }
                 }
@@ -190,13 +208,13 @@ StyledRect {
 
                 anchors.top: parent.top
                 anchors.left: image.right
-                anchors.leftMargin: Appearance.spacing.smaller
+                anchors.leftMargin: Appearance.spacing.md
 
                 animate: true
                 text: appNameMetrics.elidedText
                 maximumLineCount: 1
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
 
                 opacity: root.expanded ? 1 : 0
 
@@ -212,7 +230,7 @@ StyledRect {
                 font.family: appName.font.family
                 font.pointSize: appName.font.pointSize
                 elide: Text.ElideRight
-                elideWidth: expandBtn.x - time.width - timeSep.width - summary.x - Appearance.spacing.small * 3
+                elideWidth: expandBtn.x - time.width - timeSep.width - summary.x - Appearance.spacing.sm * 3
             }
 
             StyledText {
@@ -220,7 +238,7 @@ StyledRect {
 
                 anchors.top: parent.top
                 anchors.left: image.right
-                anchors.leftMargin: Appearance.spacing.smaller
+                anchors.leftMargin: Appearance.spacing.md
 
                 animate: true
                 text: summaryMetrics.elidedText
@@ -265,7 +283,7 @@ StyledRect {
                 font.family: summary.font.family
                 font.pointSize: summary.font.pointSize
                 elide: Text.ElideRight
-                elideWidth: expandBtn.x - time.width - timeSep.width - summary.x - Appearance.spacing.small * 3
+                elideWidth: expandBtn.x - time.width - timeSep.width - summary.x - Appearance.spacing.sm * 3 - (primaryAction.visible && primaryAction.item ? primaryAction.item.width + Appearance.spacing.sm : 0)
             }
 
             StyledText {
@@ -273,11 +291,11 @@ StyledRect {
 
                 anchors.top: parent.top
                 anchors.left: summary.right
-                anchors.leftMargin: Appearance.spacing.small
+                anchors.leftMargin: Appearance.spacing.sm
 
                 text: "•"
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
 
                 states: State {
                     name: "expanded"
@@ -303,13 +321,13 @@ StyledRect {
 
                 anchors.top: parent.top
                 anchors.left: timeSep.right
-                anchors.leftMargin: Appearance.spacing.small
+                anchors.leftMargin: Appearance.spacing.sm
 
                 animate: true
                 horizontalAlignment: Text.AlignLeft
                 text: root.modelData.timeStr
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
             }
 
             Item {
@@ -337,7 +355,49 @@ StyledRect {
 
                     animate: true
                     text: root.expanded ? "expand_less" : "expand_more"
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
+                }
+            }
+
+            // Primary action inline (visible when collapsed and actions exist)
+            Loader {
+                id: primaryAction
+
+                active: root.modelData.actions.length > 0
+                visible: !root.expanded
+
+                anchors.right: expandBtn.left
+                anchors.top: parent.top
+                anchors.rightMargin: Appearance.spacing.sm
+
+                sourceComponent: StyledRect {
+                    radius: Appearance.rounding.full
+                    color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3secondary : Colours.layer(Colours.palette.m3surfaceContainerHigh, 2)
+                    implicitWidth: primaryActionText.implicitWidth + Appearance.padding.sm * 2
+                    implicitHeight: primaryActionText.implicitHeight + Appearance.padding.xs
+
+                    StateLayer {
+                        radius: Appearance.rounding.full
+                        color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3onSecondary : Colours.palette.m3onSurface
+
+                        function onClicked(): void {
+                            root.modelData.actions[0].invoke();
+                        }
+                    }
+
+                    StyledText {
+                        id: primaryActionText
+                        anchors.centerIn: parent
+                        text: root.modelData.actions[0]?.text ?? ""
+                        color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3onSecondary : Colours.palette.m3onSurfaceVariant
+                        font.pointSize: Appearance.font.size.labelSmall
+                        font.weight: Font.Medium
+                    }
+                }
+
+                opacity: root.expanded ? 0 : 1
+                Behavior on opacity {
+                    Anim {}
                 }
             }
 
@@ -347,13 +407,13 @@ StyledRect {
                 anchors.left: summary.left
                 anchors.right: expandBtn.left
                 anchors.top: summary.bottom
-                anchors.rightMargin: Appearance.spacing.small
+                anchors.rightMargin: Appearance.spacing.sm
 
                 animate: true
                 textFormat: Text.MarkdownText
                 text: bodyPreviewMetrics.elidedText
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
 
                 opacity: root.expanded ? 0 : 1
 
@@ -378,13 +438,13 @@ StyledRect {
                 anchors.left: summary.left
                 anchors.right: expandBtn.left
                 anchors.top: summary.bottom
-                anchors.rightMargin: Appearance.spacing.small
+                anchors.rightMargin: Appearance.spacing.sm
 
                 animate: true
                 textFormat: Text.MarkdownText
                 text: root.modelData.body
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 height: text ? implicitHeight : 0
 
@@ -408,9 +468,9 @@ StyledRect {
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: body.bottom
-                anchors.topMargin: Appearance.spacing.small
+                anchors.topMargin: Appearance.spacing.sm
 
-                spacing: Appearance.spacing.smaller
+                spacing: Appearance.spacing.md
 
                 opacity: root.expanded ? 1 : 0
 
@@ -438,6 +498,59 @@ StyledRect {
         }
     }
 
+    // Undo overlay — shown during pending dismiss
+    Rectangle {
+        anchors.fill: parent
+        radius: root.radius
+        color: Colours.palette.m3inverseSurface
+        visible: root.pendingDismiss
+        opacity: root.pendingDismiss ? 1 : 0
+
+        Behavior on opacity {
+            Anim {
+                duration: Appearance.anim.durations.small
+            }
+        }
+
+        Row {
+            anchors.centerIn: parent
+            spacing: Appearance.spacing.lg
+
+            StyledText {
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Dismissed")
+                color: Colours.palette.m3inverseOnSurface
+                font.pointSize: Appearance.font.size.labelLarge
+            }
+
+            StyledRect {
+                anchors.verticalCenter: parent.verticalCenter
+                radius: Appearance.rounding.full
+                color: Colours.palette.m3inversePrimary
+                implicitWidth: undoText.implicitWidth + Appearance.padding.md * 2
+                implicitHeight: undoText.implicitHeight + Appearance.padding.xs * 2
+
+                StateLayer {
+                    radius: Appearance.rounding.full
+                    color: Colours.palette.m3onSurface
+
+                    function onClicked(): void {
+                        root.undoDismiss();
+                    }
+                }
+
+                StyledText {
+                    id: undoText
+                    anchors.centerIn: parent
+                    text: qsTr("Undo")
+                    color: Colours.palette.m3onSurface
+                    font.pointSize: Appearance.font.size.labelLarge
+                    font.bold: true
+                }
+            }
+        }
+    }
+
     component Action: StyledRect {
         id: action
 
@@ -446,10 +559,10 @@ StyledRect {
         radius: Appearance.rounding.full
         color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3secondary : Colours.layer(Colours.palette.m3surfaceContainerHigh, 2)
 
-        Layout.preferredWidth: actionText.width + Appearance.padding.normal * 2
-        Layout.preferredHeight: actionText.height + Appearance.padding.small * 2
-        implicitWidth: actionText.width + Appearance.padding.normal * 2
-        implicitHeight: actionText.height + Appearance.padding.small * 2
+        Layout.preferredWidth: actionText.width + Appearance.padding.md * 2
+        Layout.preferredHeight: actionText.height + Appearance.padding.xs * 2
+        implicitWidth: actionText.width + Appearance.padding.md * 2
+        implicitHeight: actionText.height + Appearance.padding.xs * 2
 
         StateLayer {
             radius: Appearance.rounding.full
@@ -466,7 +579,7 @@ StyledRect {
             anchors.centerIn: parent
             text: actionTextMetrics.elidedText
             color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3onSecondary : Colours.palette.m3onSurfaceVariant
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
         }
 
         TextMetrics {
@@ -478,7 +591,7 @@ StyledRect {
             elide: Text.ElideRight
             elideWidth: {
                 const numActions = root.modelData.actions.length + 1;
-                return (inner.width - actions.spacing * (numActions - 1)) / numActions - Appearance.padding.normal * 2;
+                return (inner.width - actions.spacing * (numActions - 1)) / numActions - Appearance.padding.md * 2;
             }
         }
     }

@@ -17,7 +17,7 @@ Item {
     required property var wrapper
     required property PersistentProperties visibilities
 
-    readonly property int padding: Appearance.padding.large
+    readonly property int padding: Appearance.padding.xl
     readonly property int rounding: Appearance.rounding.large
 
     implicitWidth: 380
@@ -90,22 +90,22 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: root.padding
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         /* HEADER */
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             MaterialIcon {
                 text: "content_paste"
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 color: Colours.palette.m3primary
             }
 
             StyledText {
                 text: qsTr("Clipboard")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: Font.Bold
                 Layout.fillWidth: true
             }
@@ -129,7 +129,7 @@ Item {
                 MaterialIcon {
                     anchors.centerIn: parent
                     text: "delete_sweep"
-                    font.pointSize: Appearance.font.size.larger
+                    font.pointSize: Appearance.font.size.bodyLarge
                     color: Colours.palette.m3error
                 }
             }
@@ -153,7 +153,7 @@ Item {
                 MaterialIcon {
                     anchors.centerIn: parent
                     text: "close"
-                    font.pointSize: Appearance.font.size.larger
+                    font.pointSize: Appearance.font.size.bodyLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
             }
@@ -170,7 +170,7 @@ Item {
                 id: searchIcon
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                anchors.leftMargin: Appearance.padding.normal
+                anchors.leftMargin: Appearance.padding.md
                 text: "search"
                 color: Colours.palette.m3onSurfaceVariant
             }
@@ -179,10 +179,10 @@ Item {
                 id: searchInput
                 anchors.left: searchIcon.right
                 anchors.right: clearIcon.left
-                anchors.leftMargin: Appearance.spacing.small
-                anchors.rightMargin: Appearance.spacing.small
-                topPadding: Appearance.padding.larger
-                bottomPadding: Appearance.padding.larger
+                anchors.leftMargin: Appearance.spacing.sm
+                anchors.rightMargin: Appearance.spacing.sm
+                topPadding: Appearance.padding.lg
+                bottomPadding: Appearance.padding.lg
 
                 placeholderText: qsTr("Search...")
 
@@ -211,7 +211,7 @@ Item {
                 id: clearIcon
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
-                anchors.rightMargin: Appearance.padding.normal
+                anchors.rightMargin: Appearance.padding.md
 
                 width: searchInput.text ? implicitWidth : implicitWidth / 2
                 opacity: searchInput.text ? 1 : 0
@@ -250,9 +250,9 @@ Item {
             StyledListView {
                 id: listView
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.smaller
+                anchors.margins: Appearance.padding.sm
                 model: filteredModel
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
                 currentIndex: 0
                 highlightFollowsCurrentItem: true
                 clip: true
@@ -345,19 +345,19 @@ Item {
             Column {
                 visible: filteredModel.count === 0
                 anchors.centerIn: parent
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 MaterialIcon {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: searchInput.text === "" ? "content_paste_off" : "search_off"
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     color: Colours.palette.m3outline
                 }
 
                 StyledText {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: searchInput.text === "" ? qsTr("No clipboard history") : qsTr("No results found")
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     color: Colours.palette.m3outline
                 }
             }
@@ -366,44 +366,44 @@ Item {
         /* FOOTER */
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             StyledText {
                 text: filteredModel.count + " " + qsTr("items")
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 color: Colours.palette.m3outline
             }
 
             Item { Layout.fillWidth: true }
 
             RowLayout {
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 MaterialIcon {
                     text: "keyboard_return"
-                    font.pointSize: Appearance.font.size.extraSmall
+                    font.pointSize: Appearance.font.size.labelMedium
                     color: Colours.palette.m3outline
                 }
 
                 StyledText {
                     text: qsTr("Select")
-                    font.pointSize: Appearance.font.size.extraSmall
+                    font.pointSize: Appearance.font.size.labelMedium
                     color: Colours.palette.m3outline
                 }
             }
 
             RowLayout {
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 MaterialIcon {
                     text: "backspace"
-                    font.pointSize: Appearance.font.size.extraSmall
+                    font.pointSize: Appearance.font.size.labelMedium
                     color: Colours.palette.m3outline
                 }
 
                 StyledText {
                     text: qsTr("Delete")
-                    font.pointSize: Appearance.font.size.extraSmall
+                    font.pointSize: Appearance.font.size.labelMedium
                     color: Colours.palette.m3outline
                 }
             }

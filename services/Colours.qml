@@ -12,6 +12,7 @@ Singleton {
     id: root
 
     property bool showPreview
+    property bool transitioning
     property string scheme
     property string flavour
     readonly property bool light: showPreview ? previewLight : currentLight
@@ -56,6 +57,7 @@ Singleton {
     }
 
     function load(data: string, isPreview: bool): void {
+        root.transitioning = true;
         const colours = isPreview ? preview : current;
         const scheme = JSON.parse(data);
         console.log("Colours.load called, isPreview:", isPreview, "scheme name:", scheme.name);
@@ -77,6 +79,13 @@ Singleton {
             }
         }
         console.log("Colours.load: loaded", loadedCount, "colors out of", Object.keys(scheme.colours).length);
+        transitionTimer.restart();
+    }
+
+    Timer {
+        id: transitionTimer
+        interval: 200
+        onTriggered: root.transitioning = false
     }
 
     // Set mode (light/dark) and save to state file
@@ -166,9 +175,10 @@ Singleton {
     }
 
     component Transparency: QtObject {
-        readonly property bool enabled: Appearance.transparency.enabled
-        readonly property real base: Appearance.transparency.base - (root.light ? 0.1 : 0)
-        readonly property real layers: Appearance.transparency.layers
+        readonly property bool reduceTransparency: Appearance.transparency.reduceTransparency
+        readonly property bool enabled: Appearance.transparency.enabled && !reduceTransparency
+        readonly property real base: reduceTransparency ? 1.0 : Appearance.transparency.base - (root.light ? 0.1 : 0)
+        readonly property real layers: reduceTransparency ? 1.0 : Appearance.transparency.layers
     }
 
     component M3TPalette: QtObject {

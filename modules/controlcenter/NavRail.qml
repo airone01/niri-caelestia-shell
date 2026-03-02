@@ -15,23 +15,23 @@ Item {
     required property Session session
     required property bool initialOpeningComplete
 
-    implicitWidth: layout.implicitWidth + Appearance.padding.larger * 4
-    implicitHeight: layout.implicitHeight + Appearance.padding.large * 2
+    implicitWidth: layout.implicitWidth + Appearance.padding.lg * 4
+    implicitHeight: layout.implicitHeight + Appearance.padding.xl * 2
 
     ColumnLayout {
         id: layout
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: Appearance.padding.larger * 2
-        spacing: Appearance.spacing.normal
+        anchors.leftMargin: Appearance.padding.lg * 2
+        spacing: Appearance.spacing.lg
 
         states: State {
             name: "expanded"
             when: root.session.navExpanded
 
             PropertyChanges {
-                layout.spacing: Appearance.spacing.small
+                layout.spacing: Appearance.spacing.sm
             }
         }
 
@@ -42,7 +42,7 @@ Item {
         }
 
         Loader {
-            Layout.topMargin: Appearance.spacing.large
+            Layout.topMargin: Appearance.spacing.xxl
             active: !root.session.floating
             visible: active
 
@@ -50,7 +50,7 @@ Item {
                 readonly property int nonAnimWidth: normalWinIcon.implicitWidth + (root.session.navExpanded ? normalWinLabel.anchors.leftMargin + normalWinLabel.implicitWidth : 0) + normalWinIcon.anchors.leftMargin * 2
 
                 implicitWidth: nonAnimWidth
-                implicitHeight: root.session.navExpanded ? normalWinIcon.implicitHeight + Appearance.padding.normal * 2 : nonAnimWidth
+                implicitHeight: root.session.navExpanded ? normalWinIcon.implicitHeight + Appearance.padding.md * 2 : nonAnimWidth
 
                 color: Colours.palette.m3primaryContainer
                 radius: Appearance.rounding.small
@@ -74,11 +74,11 @@ Item {
 
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: Appearance.padding.large
+                    anchors.leftMargin: Appearance.padding.xl
 
                     text: "select_window"
                     color: Colours.palette.m3onPrimaryContainer
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     fill: 1
                 }
 
@@ -87,7 +87,7 @@ Item {
 
                     anchors.left: normalWinIcon.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: Appearance.spacing.normal
+                    anchors.leftMargin: Appearance.spacing.lg
 
                     text: qsTr("Float window")
                     color: Colours.palette.m3onPrimaryContainer
@@ -121,7 +121,7 @@ Item {
 
             NavItem {
                 required property int index
-                Layout.topMargin: index === 0 ? Appearance.spacing.large * 2 : 0
+                Layout.topMargin: index === 0 ? Appearance.spacing.xxl * 2 : 0
                 icon: PaneRegistry.getByIndex(index).icon
                 label: PaneRegistry.getByIndex(index).label
             }
@@ -146,7 +146,7 @@ Item {
                 expandedLabel.opacity: 1
                 smallLabel.opacity: 0
                 background.implicitWidth: icon.implicitWidth + icon.anchors.leftMargin * 2 + expandedLabel.anchors.leftMargin + expandedLabel.implicitWidth
-                background.implicitHeight: icon.implicitHeight + Appearance.padding.normal * 2
+                background.implicitHeight: icon.implicitHeight + Appearance.padding.md * 2
                 item.implicitHeight: background.implicitHeight
             }
         }
@@ -171,7 +171,7 @@ Item {
             color: Qt.alpha(Colours.palette.m3secondaryContainer, item.active ? 1 : 0)
 
             implicitWidth: icon.implicitWidth + icon.anchors.leftMargin * 2
-            implicitHeight: icon.implicitHeight + Appearance.padding.small
+            implicitHeight: icon.implicitHeight + Appearance.padding.xs
 
             StateLayer {
                 color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
@@ -190,11 +190,11 @@ Item {
 
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.padding.large
+                anchors.leftMargin: Appearance.padding.xl
 
                 text: item.icon
                 color: item.active ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 fill: item.active ? 1 : 0
 
                 Behavior on fill {
@@ -207,7 +207,7 @@ Item {
 
                 anchors.left: icon.right
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.spacing.normal
+                anchors.leftMargin: Appearance.spacing.lg
 
                 opacity: 0
                 text: item.label
@@ -220,10 +220,10 @@ Item {
 
                 anchors.horizontalCenter: icon.horizontalCenter
                 anchors.top: icon.bottom
-                anchors.topMargin: Appearance.spacing.small / 2
+                anchors.topMargin: Appearance.spacing.sm / 2
 
                 text: item.label
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.capitalization: Font.Capitalize
             }
         }

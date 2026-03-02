@@ -28,7 +28,7 @@ Item {
         root.client = Niri.focusedWindow || Niri.lastFocusedWindow;
     }
 
-    Layout.preferredWidth: preview.implicitWidth + Appearance.padding.large * 2
+    Layout.preferredWidth: preview.implicitWidth + Appearance.padding.xl * 2
     Layout.fillHeight: true
 
     StyledClippingRect {
@@ -37,8 +37,8 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.bottom: label.top
-        anchors.topMargin: Appearance.padding.large
-        anchors.bottomMargin: Appearance.spacing.normal
+        anchors.topMargin: Appearance.padding.xl
+        anchors.bottomMargin: Appearance.spacing.lg
 
         implicitWidth: view.implicitWidth
 
@@ -57,14 +57,14 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     text: "web_asset_off"
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.extraLarge * 3
+                    font.pointSize: Appearance.font.size.headlineLarge * 3
                 }
 
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
                     text: qsTr("No active client")
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     font.weight: 500
                 }
 
@@ -72,7 +72,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     text: qsTr("Try switching to a window")
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                 }
             }
         }
@@ -118,7 +118,7 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Appearance.padding.large
+        anchors.bottomMargin: Appearance.padding.xl
 
         animate: true
         text: {

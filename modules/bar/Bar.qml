@@ -15,7 +15,7 @@ ColumnLayout {
     required property ShellScreen screen
     required property PersistentProperties visibilities
     required property BarPopouts.Wrapper popouts
-    readonly property int vPadding: Appearance.padding.large
+    readonly property int vPadding: Appearance.padding.xl
 
     // Handle Workspace Popouts for Niri
 
@@ -43,7 +43,7 @@ ColumnLayout {
         }
 
         const ch = childAt(width / 2, y) as WrappedLoader;
-        if (!ch) {
+        if (!ch?.item) {
             popouts.hasCurrent = false;
             return;
         }
@@ -79,25 +79,16 @@ ColumnLayout {
     function handleWheel(y: real, angleDelta: point): void {
         const ch = childAt(width / 2, y) as WrappedLoader;
         if (ch?.id === "workspaces" && Config.bar.scrollActions.workspaces) {
-            // Workspace scroll (No special workspaces for niri yet.)
             Niri.switchToWorkspaceUpDown(angleDelta.y > 0 ? "up" : "down");
-        } else if (y < screen.height / 2 && Config.bar.scrollActions.workspaces) {
-            // Volume scroll on top half
+        } else if (Config.bar.scrollActions.volume) {
             if (angleDelta.y > 0)
                 Audio.incrementVolume();
             else if (angleDelta.y < 0)
                 Audio.decrementVolume();
-        } else if (Config.bar.scrollActions.brightness) {
-            // Brightness scroll on bottom half
-            const monitor = Brightness.getMonitorForScreen(screen);
-            if (angleDelta.y > 0)
-                monitor.setBrightness(monitor.brightness + 0.1);
-            else if (angleDelta.y < 0)
-                monitor.setBrightness(monitor.brightness - 0.1);
         }
     }
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
 
     Repeater {
         id: repeater
@@ -111,6 +102,16 @@ ColumnLayout {
                 roleValue: "spacer"
                 delegate: WrappedLoader {
                     Layout.fillHeight: enabled
+                }
+            }
+            DelegateChoice {
+                roleValue: "divider"
+                delegate: WrappedLoader {
+                    sourceComponent: Rectangle {
+                        implicitWidth: Appearance.padding.md
+                        implicitHeight: 1
+                        color: Colours.palette.m3outlineVariant
+                    }
                 }
             }
             DelegateChoice {
@@ -193,35 +194,43 @@ ColumnLayout {
         }
     }
 
+    // Cached first/last enabled items — recomputed once when repeater changes
+    property Item firstEnabled: null
+    property Item lastEnabled: null
+
+    function updateEnabledCache(): void {
+        let first = null;
+        let last = null;
+        const count = repeater.count;
+        for (let i = 0; i < count; i++) {
+            const item = repeater.itemAt(i);
+            if (item?.enabled) {
+                if (!first) first = item;
+                last = item;
+            }
+        }
+        firstEnabled = first;
+        lastEnabled = last;
+    }
+
+    Connections {
+        target: repeater
+        function onCountChanged() { root.updateEnabledCache(); }
+    }
+
+    Component.onCompleted: updateEnabledCache()
+
     component WrappedLoader: Loader {
         required property bool enabled
         required property string id
         required property int index
 
-        function findFirstEnabled(): Item {
-            const count = repeater.count;
-            for (let i = 0; i < count; i++) {
-                const item = repeater.itemAt(i);
-                if (item?.enabled)
-                    return item;
-            }
-            return null;
-        }
-
-        function findLastEnabled(): Item {
-            for (let i = repeater.count - 1; i >= 0; i--) {
-                const item = repeater.itemAt(i);
-                if (item?.enabled)
-                    return item;
-            }
-            return null;
-        }
+        onEnabledChanged: root.updateEnabledCache()
 
         Layout.alignment: Qt.AlignHCenter
 
-        // Cursed ahh thing to add padding to first and last enabled components
-        Layout.topMargin: findFirstEnabled() === this ? root.vPadding : 0
-        Layout.bottomMargin: findLastEnabled() === this ? root.vPadding : 0
+        Layout.topMargin: root.firstEnabled === this ? root.vPadding : 0
+        Layout.bottomMargin: root.lastEnabled === this ? root.vPadding : 0
 
         visible: enabled
         active: enabled

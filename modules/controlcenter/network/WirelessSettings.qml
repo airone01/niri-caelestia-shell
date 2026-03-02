@@ -15,7 +15,7 @@ ColumnLayout {
 
     required property Session session
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
 
     SettingsHeader {
         icon: "wifi"
@@ -23,7 +23,7 @@ ColumnLayout {
     }
 
     SectionHeader {
-        Layout.topMargin: Appearance.spacing.large
+        Layout.topMargin: Appearance.spacing.xxl
         title: qsTr("WiFi status")
         description: qsTr("General WiFi settings")
     }
@@ -39,13 +39,13 @@ ColumnLayout {
     }
 
     SectionHeader {
-        Layout.topMargin: Appearance.spacing.large
+        Layout.topMargin: Appearance.spacing.xxl
         title: qsTr("Network information")
         description: qsTr("Current network connection")
     }
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.small / 2
+        contentSpacing: Appearance.spacing.sm / 2
 
         PropertyRow {
             label: qsTr("Connected network")

@@ -13,8 +13,8 @@ Row {
     required property PersistentProperties visibilities
     required property PersistentProperties state
 
-    padding: Appearance.padding.large
-    spacing: Appearance.spacing.normal
+    padding: Appearance.padding.xl
+    spacing: Appearance.spacing.lg
 
     StyledClippingRect {
         implicitWidth: info.implicitHeight
@@ -59,8 +59,8 @@ Row {
             StyledRect {
                 anchors.centerIn: parent
 
-                implicitWidth: selectIcon.implicitHeight + Appearance.padding.small * 2
-                implicitHeight: selectIcon.implicitHeight + Appearance.padding.small * 2
+                implicitWidth: selectIcon.implicitHeight + Appearance.padding.xs * 2
+                implicitHeight: selectIcon.implicitHeight + Appearance.padding.xs * 2
 
                 radius: Appearance.rounding.normal
                 color: Colours.palette.m3primary
@@ -84,7 +84,7 @@ Row {
 
                     text: "frame_person"
                     color: Colours.palette.m3onPrimary
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                 }
 
                 Behavior on scale {
@@ -107,7 +107,7 @@ Row {
         id: info
 
         anchors.verticalCenter: parent.verticalCenter
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         Item {
             id: line
@@ -122,7 +122,7 @@ Row {
                 anchors.leftMargin: (Config.dashboard.sizes.infoIconSize - implicitWidth) / 2
 
                 source: SysInfo.osLogo
-                implicitSize: Math.floor(Appearance.font.size.normal * 1.34)
+                implicitSize: Math.floor(Appearance.font.size.bodyMedium * 1.34)
                 colour: Colours.palette.m3primary
             }
 
@@ -133,7 +133,7 @@ Row {
                 anchors.left: icon.right
                 anchors.leftMargin: icon.anchors.leftMargin
                 text: `:  ${SysInfo.osPrettyName || SysInfo.osName}`
-                font.pointSize: Appearance.font.size.normal
+                font.pointSize: Appearance.font.size.bodyMedium
 
                 width: Config.dashboard.sizes.infoWidth
                 elide: Text.ElideRight
@@ -174,7 +174,7 @@ Row {
             fill: 1
             text: line.icon
             color: line.colour
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
         }
 
         StyledText {
@@ -184,7 +184,7 @@ Row {
             anchors.left: icon.right
             anchors.leftMargin: icon.anchors.leftMargin
             text: `:  ${line.text}`
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
 
             width: Config.dashboard.sizes.infoWidth
             elide: Text.ElideRight

@@ -14,39 +14,55 @@ StyledRect {
     property bool active: false
     property bool entered: Config.bar.workspaces.shown < Niri.getWorkspaceCount() && active
 
+    readonly property int wsCount: Niri.getWorkspaceCount()
+    readonly property int focusedIdx: Niri.focusedWorkspaceIndex
+
     color: Colours.palette.m3surfaceContainer
     radius: entered ? Appearance.rounding.small / 2 : Appearance.rounding.full
 
-    // Animate both y and opacity for a smooth effect
-    anchors.topMargin: entered ? -Appearance.padding.normal : -Config.bar.sizes.innerWidth
+    anchors.topMargin: entered ? -Appearance.padding.md : -Config.bar.sizes.innerWidth
 
-    width: Config.bar.sizes.innerWidth - Appearance.spacing.small
-    height: (text.contentHeight + Appearance.spacing.normal)
+    width: Config.bar.sizes.innerWidth - Appearance.spacing.sm
+    height: minimap.height + Appearance.spacing.sm * 2
 
-    // Animate when 'entered' changes
     Behavior on anchors.topMargin {
         Anim {}
     }
 
-    StyledText {
-        id: text
+    // Scroll-position minimap
+    Row {
+        id: minimap
 
         opacity: root.entered ? 1 : 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 2
+
+        Repeater {
+            model: root.wsCount
+
+            Rectangle {
+                required property int index
+
+                width: Math.max(3, (root.width - minimap.spacing * (root.wsCount - 1) - Appearance.spacing.sm * 2) / root.wsCount)
+                height: index === root.focusedIdx ? 6 : 3
+                radius: height / 2
+                color: index === root.focusedIdx ? Colours.palette.m3primary : Colours.palette.m3surfaceContainerHighest
+
+                anchors.verticalCenter: parent.verticalCenter
+
+                Behavior on height {
+                    Anim {
+                        duration: Appearance.anim.durations.small
+                    }
+                }
+
+                CAnim on color {}
+            }
+        }
+
         Behavior on opacity {
             Anim {}
         }
-
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Appearance.spacing.small / 2
-
-        font.family: Appearance.font.family.mono
-        font.pointSize: Appearance.font.size.extraSmall
-
-        color: Colours.palette.m3surfaceContainerHighest
-
-        readonly property int pageNumber: Math.floor(root.groupOffset / Config.bar.workspaces.shown) + 1
-        readonly property int totalPages: Math.ceil(Niri.getWorkspaceCount() / Config.bar.workspaces.shown)
-        text: qsTr(`${pageNumber}/${totalPages}`)
     }
 }

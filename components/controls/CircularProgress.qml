@@ -8,9 +8,9 @@ Shape {
 
     property real value
     property int startAngle: -90
-    property int strokeWidth: Appearance.padding.smaller
+    property int strokeWidth: Appearance.padding.sm
     property int padding: 0
-    property int spacing: Appearance.spacing.small
+    property int spacing: Appearance.spacing.sm
     property color fgColour: Colours.palette.m3primary
     property color bgColour: Colours.palette.m3secondaryContainer
 

@@ -16,7 +16,7 @@ Item {
     // The width available for text (excluding icon and spacing)
     // TODO: Fix change window when panel open, still overflows.
 
-    property int textAvailableWidth: Math.max(0, width - icon.width - Appearance.spacing.small)
+    property int textAvailableWidth: Math.max(0, width - icon.width - Appearance.spacing.sm)
 
     implicitWidth: child.implicitWidth
     implicitHeight: child.implicitHeight
@@ -72,7 +72,7 @@ Item {
             property string separator: " -> "
 
             text: classPart + separator + cleanedTitlePart
-            font.pointSize: Appearance.font.size.smaller
+            font.pointSize: Appearance.font.size.bodySmall
             font.family: Appearance.font.family.mono
             elide: Qt.ElideRight
             elideWidth: root.textAvailableWidth
@@ -136,7 +136,7 @@ Item {
 
         anchors.verticalCenter: icon.verticalCenter
         anchors.left: icon.right
-        anchors.leftMargin: Appearance.spacing.small
+        anchors.leftMargin: Appearance.spacing.sm
 
         spacing: 0 // Remove extra spacing
 

@@ -23,7 +23,7 @@ StyledRect {
     signal selected(item: MenuItem)
 
     Layout.fillWidth: true
-    implicitHeight: row.implicitHeight + Appearance.padding.large * 2
+    implicitHeight: row.implicitHeight + Appearance.padding.xl * 2
     radius: Appearance.rounding.normal
     color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -34,8 +34,8 @@ StyledRect {
     RowLayout {
         id: row
         anchors.fill: parent
-        anchors.margins: Appearance.padding.large
-        spacing: Appearance.spacing.normal
+        anchors.margins: Appearance.padding.xl
+        spacing: Appearance.spacing.lg
 
         StyledText {
             Layout.fillWidth: true

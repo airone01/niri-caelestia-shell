@@ -14,9 +14,9 @@ StyledRect {
     property string icon
     property string label
     property string accent: "Secondary"
-    property real iconSize: Appearance.font.size.large
-    property real horizontalPadding: Appearance.padding.large
-    property real verticalPadding: Appearance.padding.normal
+    property real iconSize: Appearance.font.size.titleMedium
+    property real horizontalPadding: Appearance.padding.xl
+    property real verticalPadding: Appearance.padding.md
     property string tooltip: ""
 
     property bool hovered: false
@@ -36,7 +36,7 @@ StyledRect {
         }
     }
 
-    Layout.preferredWidth: implicitWidth + (toggleStateLayer.pressed ? Appearance.padding.normal * 2 : toggled ? Appearance.padding.small * 2 : 0)
+    Layout.preferredWidth: implicitWidth + (toggleStateLayer.pressed ? Appearance.padding.md * 2 : toggled ? Appearance.padding.xs * 2 : 0)
     implicitWidth: toggleBtnInner.implicitWidth + horizontalPadding * 2
     implicitHeight: toggleBtnIcon.implicitHeight + verticalPadding * 2
 
@@ -57,7 +57,7 @@ StyledRect {
         id: toggleBtnInner
 
         anchors.centerIn: parent
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         MaterialIcon {
             id: toggleBtnIcon

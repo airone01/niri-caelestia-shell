@@ -7,6 +7,7 @@ MouseArea {
 
     property bool disabled
     property bool showHoverBackground: true
+    property bool showFocusRing: true
     property color color: Colours.palette.m3onSurface
     property real radius: parent?.radius ?? 0
     property alias rect: hoverLayer
@@ -91,5 +92,9 @@ MouseArea {
                 y: -ripple.height / 2
             }
         }
+    }
+
+    FocusRing {
+        visible: root.showFocusRing && (root.parent?.activeFocus ?? false)
     }
 }

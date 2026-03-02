@@ -22,7 +22,7 @@ Item {
     signal textEdited(string text)
     signal editingFinished
 
-    implicitHeight: inputField.implicitHeight + Appearance.padding.small * 2
+    implicitHeight: inputField.implicitHeight + Appearance.padding.xs * 2
 
     StyledRect {
         id: container
@@ -53,7 +53,7 @@ Item {
         StyledTextField {
             id: inputField
             anchors.centerIn: parent
-            width: parent.width - Appearance.padding.normal
+            width: parent.width - Appearance.padding.md
             horizontalAlignment: root.horizontalAlignment
             validator: root.validator
             readOnly: root.readOnly

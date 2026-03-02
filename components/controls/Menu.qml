@@ -46,8 +46,8 @@ Elevation {
                     readonly property bool active: modelData === root.active
 
                     Layout.fillWidth: true
-                    implicitWidth: menuOptionRow.implicitWidth + Appearance.padding.normal * 2
-                    implicitHeight: menuOptionRow.implicitHeight + Appearance.padding.normal * 2
+                    implicitWidth: menuOptionRow.implicitWidth + Appearance.padding.md * 2
+                    implicitHeight: menuOptionRow.implicitHeight + Appearance.padding.md * 2
 
                     color: Qt.alpha(Colours.palette.m3secondaryContainer, active ? 1 : 0)
 
@@ -66,8 +66,8 @@ Elevation {
                         id: menuOptionRow
 
                         anchors.fill: parent
-                        anchors.margins: Appearance.padding.normal
-                        spacing: Appearance.spacing.small
+                        anchors.margins: Appearance.padding.md
+                        spacing: Appearance.spacing.sm
 
                         MaterialIcon {
                             Layout.alignment: Qt.AlignVCenter

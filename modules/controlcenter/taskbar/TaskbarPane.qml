@@ -112,9 +112,9 @@ Item {
     ClippingRectangle {
         id: taskbarClippingRect
         anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.padding.md
         anchors.leftMargin: 0
-        anchors.rightMargin: Appearance.padding.normal
+        anchors.rightMargin: Appearance.padding.md
 
         radius: taskbarBorder.innerRadius
         color: "transparent"
@@ -123,9 +123,9 @@ Item {
             id: taskbarLoader
 
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large + Appearance.padding.normal
-            anchors.leftMargin: Appearance.padding.large
-            anchors.rightMargin: Appearance.padding.large
+            anchors.margins: Appearance.padding.xl + Appearance.padding.md
+            anchors.leftMargin: Appearance.padding.xl
+            anchors.rightMargin: Appearance.padding.xl
 
             sourceComponent: taskbarContentComponent
         }
@@ -134,7 +134,7 @@ Item {
     InnerBorder {
         id: taskbarBorder
         leftThickness: 0
-        rightThickness: Appearance.padding.normal
+        rightThickness: Appearance.padding.md
     }
 
     Component {
@@ -155,14 +155,14 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
 
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 RowLayout {
-                    spacing: Appearance.spacing.smaller
+                    spacing: Appearance.spacing.md
 
                     StyledText {
                         text: qsTr("Taskbar")
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                         font.weight: 500
                     }
                 }
@@ -173,7 +173,7 @@ Item {
 
                     StyledText {
                         text: qsTr("Status Icons")
-                        font.pointSize: Appearance.font.size.normal
+                        font.pointSize: Appearance.font.size.bodyMedium
                     }
 
                     ConnectedButtonGroup {
@@ -251,13 +251,13 @@ Item {
                 RowLayout {
                     id: mainRowLayout
                     Layout.fillWidth: true
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     ColumnLayout {
                         id: leftColumnLayout
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignTop
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         SectionContainer {
                             Layout.fillWidth: true
@@ -265,12 +265,12 @@ Item {
 
                             StyledText {
                                 text: qsTr("Workspaces")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             StyledRect {
                                 Layout.fillWidth: true
-                                implicitHeight: workspacesShownRow.implicitHeight + Appearance.padding.large * 2
+                                implicitHeight: workspacesShownRow.implicitHeight + Appearance.padding.xl * 2
                                 radius: Appearance.rounding.normal
                                 color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -283,8 +283,8 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    anchors.margins: Appearance.padding.large
-                                    spacing: Appearance.spacing.normal
+                                    anchors.margins: Appearance.padding.xl
+                                    spacing: Appearance.spacing.lg
 
                                     StyledText {
                                         Layout.fillWidth: true
@@ -305,7 +305,7 @@ Item {
 
                             StyledRect {
                                 Layout.fillWidth: true
-                                implicitHeight: workspacesActiveIndicatorRow.implicitHeight + Appearance.padding.large * 2
+                                implicitHeight: workspacesActiveIndicatorRow.implicitHeight + Appearance.padding.xl * 2
                                 radius: Appearance.rounding.normal
                                 color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -318,8 +318,8 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    anchors.margins: Appearance.padding.large
-                                    spacing: Appearance.spacing.normal
+                                    anchors.margins: Appearance.padding.xl
+                                    spacing: Appearance.spacing.lg
 
                                     StyledText {
                                         Layout.fillWidth: true
@@ -338,7 +338,7 @@ Item {
 
                             StyledRect {
                                 Layout.fillWidth: true
-                                implicitHeight: workspacesOccupiedBgRow.implicitHeight + Appearance.padding.large * 2
+                                implicitHeight: workspacesOccupiedBgRow.implicitHeight + Appearance.padding.xl * 2
                                 radius: Appearance.rounding.normal
                                 color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -351,8 +351,8 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    anchors.margins: Appearance.padding.large
-                                    spacing: Appearance.spacing.normal
+                                    anchors.margins: Appearance.padding.xl
+                                    spacing: Appearance.spacing.lg
 
                                     StyledText {
                                         Layout.fillWidth: true
@@ -371,7 +371,7 @@ Item {
 
                             StyledRect {
                                 Layout.fillWidth: true
-                                implicitHeight: workspacesShowWindowsRow.implicitHeight + Appearance.padding.large * 2
+                                implicitHeight: workspacesShowWindowsRow.implicitHeight + Appearance.padding.xl * 2
                                 radius: Appearance.rounding.normal
                                 color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -384,8 +384,8 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    anchors.margins: Appearance.padding.large
-                                    spacing: Appearance.spacing.normal
+                                    anchors.margins: Appearance.padding.xl
+                                    spacing: Appearance.spacing.lg
 
                                     StyledText {
                                         Layout.fillWidth: true
@@ -404,7 +404,7 @@ Item {
 
                             StyledRect {
                                 Layout.fillWidth: true
-                                implicitHeight: workspacesPerMonitorRow.implicitHeight + Appearance.padding.large * 2
+                                implicitHeight: workspacesPerMonitorRow.implicitHeight + Appearance.padding.xl * 2
                                 radius: Appearance.rounding.normal
                                 color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
 
@@ -417,8 +417,8 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    anchors.margins: Appearance.padding.large
-                                    spacing: Appearance.spacing.normal
+                                    anchors.margins: Appearance.padding.xl
+                                    spacing: Appearance.spacing.lg
 
                                     StyledText {
                                         Layout.fillWidth: true
@@ -442,7 +442,7 @@ Item {
 
                             StyledText {
                                 text: qsTr("Scroll Actions")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             ConnectedButtonGroup {
@@ -482,7 +482,7 @@ Item {
                         id: middleColumnLayout
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignTop
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         SectionContainer {
                             Layout.fillWidth: true
@@ -490,7 +490,7 @@ Item {
 
                             StyledText {
                                 text: qsTr("Clock")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             SwitchRow {
@@ -509,7 +509,7 @@ Item {
 
                             StyledText {
                                 text: qsTr("Bar Behavior")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             SwitchRow {
@@ -531,7 +531,7 @@ Item {
                             }
 
                             SectionContainer {
-                                contentSpacing: Appearance.spacing.normal
+                                contentSpacing: Appearance.spacing.lg
 
                                 SliderInput {
                                     Layout.fillWidth: true
@@ -561,7 +561,7 @@ Item {
                         id: rightColumnLayout
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignTop
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         SectionContainer {
                             Layout.fillWidth: true
@@ -569,7 +569,7 @@ Item {
 
                             StyledText {
                                 text: qsTr("Popouts")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             SwitchRow {
@@ -606,7 +606,7 @@ Item {
 
                             StyledText {
                                 text: qsTr("Tray Settings")
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                             }
 
                             ConnectedButtonGroup {

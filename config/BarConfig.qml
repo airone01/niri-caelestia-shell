@@ -1,8 +1,8 @@
 import Quickshell.Io
 
 JsonObject {
-    property bool persistent: false
-    property bool showOnHover: true
+    property bool persistent: true
+    property bool showOnHover: false
     property int dragThreshold: 20
     property ScrollActions scrollActions: ScrollActions {}
     property Workspaces workspaces: Workspaces {}
@@ -38,11 +38,19 @@ JsonObject {
             enabled: true
         },
         {
+            id: "divider",
+            enabled: true
+        },
+        {
             id: "clock",
             enabled: true
         },
         {
             id: "statusIcons",
+            enabled: true
+        },
+        {
+            id: "divider",
             enabled: true
         },
         {

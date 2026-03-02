@@ -9,8 +9,8 @@ Item {
 
     required property var currentItem
 
-    implicitWidth: content.implicitWidth + Appearance.padding.larger + content.anchors.rightMargin
-    implicitHeight: currentItem ? content.implicitHeight + Appearance.padding.normal + content.anchors.bottomMargin : 0
+    implicitWidth: content.implicitWidth + Appearance.padding.lg + content.anchors.rightMargin
+    implicitHeight: currentItem ? content.implicitHeight + Appearance.padding.md + content.anchors.bottomMargin : 0
 
     Shape {
         preferredRendererType: Shape.CurveRenderer
@@ -76,8 +76,8 @@ Item {
 
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.rightMargin: Appearance.padding.larger - Appearance.padding.small
-            anchors.bottomMargin: Appearance.padding.normal - Appearance.padding.small
+            anchors.rightMargin: Appearance.padding.lg - Appearance.padding.xs
+            anchors.bottomMargin: Appearance.padding.md - Appearance.padding.xs
 
             Connections {
                 target: root

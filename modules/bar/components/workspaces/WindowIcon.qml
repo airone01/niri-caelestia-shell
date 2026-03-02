@@ -54,7 +54,7 @@ Item {
     Loader {
         id: contextLoader
         anchors.left: parent.left
-        anchors.leftMargin: iconLoader.implicitWidth + Appearance.padding.small
+        anchors.leftMargin: iconLoader.implicitWidth + Appearance.padding.xs
         anchors.verticalCenter: parent.verticalCenter
         active: (Niri.wsContextType !== "none" && Config.bar.workspaces.windowRighClickContext)
         sourceComponent: WindowIconContext {
@@ -72,7 +72,7 @@ Item {
         sourceComponent: iconItem.useImageIcon ? imageIconComp : materialIconComp
         property var windowData: iconItem.windowData
         property var windowCount: iconItem.windowCount
-        // anchors.margins: Appearance.padding.small
+        // anchors.margins: Appearance.padding.xs
     }
 
     Component {
@@ -89,7 +89,7 @@ Item {
                 anchors.centerIn: parent
                 property var windowData: iconItem.windowData
                 property int windowCount: iconItem.windowCount
-                implicitSize: (iconItem.isFocused && iconItem.isWsFocused) ? Config.bar.workspaces.windowIconSize : Config.bar.workspaces.windowIconSize - Appearance.padding.small
+                implicitSize: (iconItem.isFocused && iconItem.isWsFocused) ? Config.bar.workspaces.windowIconSize : Config.bar.workspaces.windowIconSize - Appearance.padding.xs
                 source: Icons.getAppIcon(windowData.app_id ?? "", "image-missing")
                 Behavior on implicitSize {
                     Anim {
@@ -114,7 +114,7 @@ Item {
                 anchors.centerIn: parent
                 property var windowData: iconItem.windowData
                 property int windowCount: iconItem.windowCount
-                font.pointSize: ((iconItem.isFocused && iconItem.isWsFocused)) ? Config.bar.workspaces.windowIconSize - Appearance.padding.small : Config.bar.workspaces.windowIconSize - Appearance.padding.small * 2
+                font.pointSize: ((iconItem.isFocused && iconItem.isWsFocused)) ? Config.bar.workspaces.windowIconSize - Appearance.padding.xs : Config.bar.workspaces.windowIconSize - Appearance.padding.xs * 2
                 grade: 0
                 text: Icons.getAppCategoryIcon(windowData.app_id, "help_center")
                 color: (iconItem.isWsFocused ? Colours.palette.m3onPrimary : Colours.palette.m3onSurfaceVariant)
@@ -135,8 +135,8 @@ Item {
         id: dragPreview
         visible: false
         z: 999
-        width: iconLoader.width + Appearance.padding.small
-        height: iconLoader.height + Appearance.padding.small
+        width: iconLoader.width + Appearance.padding.xs
+        height: iconLoader.height + Appearance.padding.xs
 
         color: iconItem.isWsFocused ? Colours.palette.m3primaryContainer : Colours.palette.m3surfaceContainer
         radius: Appearance.rounding.small / 2
@@ -245,20 +245,20 @@ Item {
         function calculateMargins() {
             if (iconItem.popupActive && Niri.wsContextType === "item")
                 return {
-                    right: -Appearance.padding.large,
-                    bottom: (iconLoader.implicitHeight - badgeLoader.height) / 2 - (!iconItem.isFocused ? Appearance.padding.small / 2 : Config.bar.workspaces.windowIconGap),
-                    size: Appearance.padding.large
+                    right: -Appearance.padding.xl,
+                    bottom: (iconLoader.implicitHeight - badgeLoader.height) / 2 - (!iconItem.isFocused ? Appearance.padding.xs / 2 : Config.bar.workspaces.windowIconGap),
+                    size: Appearance.padding.xl
                 };
             else if (iconItem.isFocused)
                 return {
                     right: 0,
                     bottom: 0,
-                    size: Appearance.padding.larger
+                    size: Appearance.padding.lg
                 };
             return {
-                right: -Appearance.padding.small / 2,
-                bottom: -Appearance.padding.small / 2,
-                size: Appearance.padding.larger
+                right: -Appearance.padding.xs / 2,
+                bottom: -Appearance.padding.xs / 2,
+                size: Appearance.padding.lg
             };
         }
 

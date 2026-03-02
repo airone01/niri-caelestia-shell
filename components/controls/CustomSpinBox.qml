@@ -16,16 +16,16 @@ RowLayout {
 
     signal valueModified(value: int)
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     StyledTextField {
         inputMethodHints: Qt.ImhFormattedNumbersOnly
         text: root.value
         onAccepted: root.valueModified(text)
 
-        padding: Appearance.padding.small
-        leftPadding: Appearance.padding.normal
-        rightPadding: Appearance.padding.normal
+        padding: Appearance.padding.xs
+        leftPadding: Appearance.padding.md
+        rightPadding: Appearance.padding.md
 
         background: StyledRect {
             implicitWidth: 100
@@ -39,7 +39,7 @@ RowLayout {
         color: Colours.palette.m3primary
 
         implicitWidth: implicitHeight
-        implicitHeight: upIcon.implicitHeight + Appearance.padding.small * 2
+        implicitHeight: upIcon.implicitHeight + Appearance.padding.xs * 2
 
         StateLayer {
             id: upState
@@ -68,7 +68,7 @@ RowLayout {
         color: Colours.palette.m3primary
 
         implicitWidth: implicitHeight
-        implicitHeight: downIcon.implicitHeight + Appearance.padding.small * 2
+        implicitHeight: downIcon.implicitHeight + Appearance.padding.xs * 2
 
         StateLayer {
             id: downState

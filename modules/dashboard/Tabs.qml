@@ -32,7 +32,7 @@ Item {
 
         Tab {
             iconName: "dashboard"
-            text: qsTr("Dashboard")
+            text: qsTr("Overview")
         }
 
         Tab {
@@ -42,17 +42,7 @@ Item {
 
         Tab {
             iconName: "speed"
-            text: qsTr("Performance")
-        }
-
-        Tab {
-            iconName: "cloud"
-            text: qsTr("Weather")
-        }
-
-        Tab {
-            iconName: "workspaces"
-            text: qsTr("Niri")
+            text: qsTr("System")
         }
     }
 
@@ -226,7 +216,7 @@ Item {
                 text: tab.iconName
                 color: tab.current ? Colours.palette.m3primary : Colours.palette.m3onSurfaceVariant
                 fill: tab.current ? 1 : 0
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
 
                 Behavior on fill {
                     Anim {}

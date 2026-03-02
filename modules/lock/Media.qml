@@ -73,11 +73,11 @@ Item {
 
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: Appearance.padding.large
+        anchors.margins: Appearance.padding.xl
 
         StyledText {
-            Layout.topMargin: Appearance.padding.large
-            Layout.bottomMargin: Appearance.spacing.larger
+            Layout.topMargin: Appearance.padding.xl
+            Layout.bottomMargin: Appearance.spacing.xl
             text: qsTr("Now playing")
             color: Colours.palette.m3onSurfaceVariant
             font.family: Appearance.font.family.mono
@@ -90,7 +90,7 @@ Item {
             text: Players.active?.trackArtist ?? qsTr("No media")
             color: Colours.palette.m3primary
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             font.family: Appearance.font.family.mono
             font.weight: 600
             elide: Text.ElideRight
@@ -101,17 +101,17 @@ Item {
             animate: true
             text: Players.active?.trackTitle ?? qsTr("No media")
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: Appearance.font.size.larger
+            font.pointSize: Appearance.font.size.bodyLarge
             font.family: Appearance.font.family.mono
             elide: Text.ElideRight
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: Appearance.spacing.large * 1.2
-            Layout.bottomMargin: Appearance.padding.large
+            Layout.topMargin: Appearance.spacing.xxl * 1.2
+            Layout.bottomMargin: Appearance.padding.xl
 
-            spacing: Appearance.spacing.large
+            spacing: Appearance.spacing.xxl
 
             PlayerControl {
                 icon: "skip_previous"
@@ -158,9 +158,9 @@ Item {
         function onClicked(): void {
         }
 
-        Layout.preferredWidth: implicitWidth + (controlState.pressed ? Appearance.padding.normal * 2 : active ? Appearance.padding.small * 2 : 0)
-        implicitWidth: controlIcon.implicitWidth + Appearance.padding.large * 2
-        implicitHeight: controlIcon.implicitHeight + Appearance.padding.normal * 2
+        Layout.preferredWidth: implicitWidth + (controlState.pressed ? Appearance.padding.md * 2 : active ? Appearance.padding.xs * 2 : 0)
+        implicitWidth: controlIcon.implicitWidth + Appearance.padding.xl * 2
+        implicitHeight: controlIcon.implicitHeight + Appearance.padding.md * 2
 
         color: active ? Colours.palette[`m3${colour.toLowerCase()}`] : Colours.palette[`m3${colour.toLowerCase()}Container`]
         radius: active || controlState.pressed ? Appearance.rounding.normal : Math.min(implicitWidth, implicitHeight) / 2 * Math.min(1, Appearance.rounding.scale)
@@ -187,7 +187,7 @@ Item {
 
             anchors.centerIn: parent
             color: control.active ? Colours.palette[`m3on${control.colour}`] : Colours.palette[`m3on${control.colour}Container`]
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             fill: control.active ? 1 : 0
 
             Behavior on fill {

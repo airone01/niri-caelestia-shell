@@ -15,11 +15,11 @@ ColumnLayout {
 
     required property Item wrapper
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     StyledText {
-        Layout.topMargin: Appearance.padding.normal
-        Layout.rightMargin: Appearance.padding.small
+        Layout.topMargin: Appearance.padding.md
+        Layout.rightMargin: Appearance.padding.xs
         text: qsTr("Bluetooth %1").arg(BluetoothAdapterState.toString(Bluetooth.defaultAdapter?.state).toLowerCase())
         font.weight: 500
     }
@@ -45,8 +45,8 @@ ColumnLayout {
     }
 
     StyledText {
-        Layout.topMargin: Appearance.spacing.small
-        Layout.rightMargin: Appearance.padding.small
+        Layout.topMargin: Appearance.spacing.sm
+        Layout.rightMargin: Appearance.padding.xs
         text: {
             const devices = Bluetooth.devices.values;
             let available = qsTr("%1 device%2 available").arg(devices.length).arg(devices.length === 1 ? "" : "s");
@@ -56,7 +56,7 @@ ColumnLayout {
             return available;
         }
         color: Colours.palette.m3onSurfaceVariant
-        font.pointSize: Appearance.font.size.small
+        font.pointSize: Appearance.font.size.labelLarge
     }
 
     Repeater {
@@ -71,8 +71,8 @@ ColumnLayout {
             readonly property bool loading: modelData.state === BluetoothDeviceState.Connecting || modelData.state === BluetoothDeviceState.Disconnecting
 
             Layout.fillWidth: true
-            Layout.rightMargin: Appearance.padding.small
-            spacing: Appearance.spacing.small
+            Layout.rightMargin: Appearance.padding.xs
+            spacing: Appearance.spacing.sm
 
             opacity: 0
             scale: 0.7
@@ -95,8 +95,8 @@ ColumnLayout {
             }
 
             StyledText {
-                Layout.leftMargin: Appearance.spacing.small / 2
-                Layout.rightMargin: Appearance.spacing.small / 2
+                Layout.leftMargin: Appearance.spacing.sm / 2
+                Layout.rightMargin: Appearance.spacing.sm / 2
                 Layout.fillWidth: true
                 text: device.modelData.name
             }
@@ -105,7 +105,7 @@ ColumnLayout {
                 id: connectBtn
 
                 implicitWidth: implicitHeight
-                implicitHeight: connectIcon.implicitHeight + Appearance.padding.small
+                implicitHeight: connectIcon.implicitHeight + Appearance.padding.xs
 
                 radius: Appearance.rounding.full
                 color: Qt.alpha(Colours.palette.m3primary, device.modelData.state === BluetoothDeviceState.Connected ? 1 : 0)
@@ -165,9 +165,9 @@ ColumnLayout {
     }
 
     StyledRect {
-        Layout.topMargin: Appearance.spacing.small
-        implicitWidth: expandBtn.implicitWidth + Appearance.padding.normal * 2
-        implicitHeight: expandBtn.implicitHeight + Appearance.padding.small
+        Layout.topMargin: Appearance.spacing.sm
+        implicitWidth: expandBtn.implicitWidth + Appearance.padding.md * 2
+        implicitHeight: expandBtn.implicitHeight + Appearance.padding.xs
 
         radius: Appearance.rounding.normal
         color: Colours.palette.m3primaryContainer
@@ -184,10 +184,10 @@ ColumnLayout {
             id: expandBtn
 
             anchors.centerIn: parent
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
 
             StyledText {
-                Layout.leftMargin: Appearance.padding.smaller
+                Layout.leftMargin: Appearance.padding.sm
                 text: qsTr("Open panel")
                 color: Colours.palette.m3onPrimaryContainer
             }
@@ -195,7 +195,7 @@ ColumnLayout {
             MaterialIcon {
                 text: "chevron_right"
                 color: Colours.palette.m3onPrimaryContainer
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
             }
         }
     }
@@ -206,8 +206,8 @@ ColumnLayout {
         property alias toggle: toggle
 
         Layout.fillWidth: true
-        Layout.rightMargin: Appearance.padding.small
-        spacing: Appearance.spacing.normal
+        Layout.rightMargin: Appearance.padding.xs
+        spacing: Appearance.spacing.lg
 
         StyledText {
             Layout.fillWidth: true

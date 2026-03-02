@@ -17,14 +17,34 @@ Item {
     implicitWidth: nonAnimWidth
     implicitHeight: tabs.implicitHeight + tabs.anchors.topMargin + column.implicitHeight + viewWrapper.anchors.margins * 2
 
+    focus: true
+
+    onVisibleChanged: {
+        if (visible)
+            forceActiveFocus();
+    }
+
+    Keys.onPressed: event => {
+        if (event.key === Qt.Key_H || (event.key === Qt.Key_Tab && event.modifiers & Qt.ControlModifier && event.modifiers & Qt.ShiftModifier)) {
+            root.state.currentTab = Math.max(root.state.currentTab - 1, 0);
+            event.accepted = true;
+        } else if (event.key === Qt.Key_L || (event.key === Qt.Key_Tab && event.modifiers & Qt.ControlModifier && !(event.modifiers & Qt.ShiftModifier))) {
+            root.state.currentTab = Math.min(root.state.currentTab + 1, tabs.count - 1);
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Escape) {
+            root.visibilities.dashboard = false;
+            event.accepted = true;
+        }
+    }
+
     Tabs {
         id: tabs
 
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.topMargin: Appearance.padding.normal
-        anchors.margins: Appearance.padding.large
+        anchors.topMargin: Appearance.padding.md
+        anchors.margins: Appearance.padding.xl
 
         nonAnimWidth: root.nonAnimWidth - anchors.margins * 2
         state: root.state
@@ -37,7 +57,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Appearance.padding.large
+        anchors.margins: Appearance.padding.xl
 
         radius: Appearance.rounding.normal
         color: "transparent"
@@ -117,14 +137,6 @@ Item {
                     Pane {
                         sourceComponent: Performance {}
                     }
-
-                    Pane {
-                        sourceComponent: WeatherPanel {}
-                    }
-
-                    Pane {
-                        sourceComponent: NiriThing {}
-                    }
                 }
 
                 Behavior on contentX {
@@ -154,6 +166,8 @@ Item {
         Layout.alignment: Qt.AlignTop
 
         Component.onCompleted: active = Qt.binding(() => {
+            if (!root.visibilities.dashboard)
+                return false;
             const vx = Math.floor(view.visibleArea.xPosition * view.contentWidth);
             const vex = Math.floor(vx + view.visibleArea.widthRatio * view.contentWidth);
             return (vx >= x && vx <= x + implicitWidth) || (vex >= x && vex <= x + implicitWidth);

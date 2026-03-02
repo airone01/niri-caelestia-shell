@@ -100,6 +100,7 @@ Singleton {
             },
             transparency: {
                 enabled: appearance.transparency.enabled,
+                reduceTransparency: appearance.transparency.reduceTransparency,
                 base: appearance.transparency.base,
                 layers: appearance.transparency.layers
             }
@@ -357,6 +358,7 @@ Singleton {
         return {
             recolourLogo: lock.recolourLogo,
             enableFprint: lock.enableFprint,
+            showExtras: lock.showExtras,
             maxFprintTries: lock.maxFprintTries,
             sizes: {
                 heightMult: lock.sizes.heightMult,

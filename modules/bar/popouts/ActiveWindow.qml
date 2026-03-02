@@ -14,14 +14,14 @@ Item {
 
     required property Item wrapper
 
-    implicitWidth: Niri.focusedWindowTitle /*Niri.activeToplevel*/  ? child.implicitWidth : -Appearance.padding.large * 2
+    implicitWidth: Niri.focusedWindowTitle /*Niri.activeToplevel*/  ? child.implicitWidth : -Appearance.padding.xl * 2
     implicitHeight: child.implicitHeight
 
     ColumnLayout {
         id: child
 
         anchors.left: parent.left
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         // height: 20
         // width: Config.bar.sizes.windowPreviewSize - 100
@@ -32,7 +32,7 @@ Item {
             Layout.alignment: Qt.AlignLeft
             // anchors.left: parent.left
             // anchors.right: parent.right
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             IconImage {
                 id: icon
@@ -51,7 +51,7 @@ Item {
                 StyledText {
                     Layout.fillWidth: true
                     text: Niri.focusedWindowTitle ?? ""
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     elide: Text.ElideRight
                     Layout.preferredWidth: 200
                 }
@@ -65,8 +65,8 @@ Item {
             }
 
             Item {
-                implicitWidth: expandIcon.implicitHeight + Appearance.padding.small * 2
-                implicitHeight: expandIcon.implicitHeight + Appearance.padding.small * 2
+                implicitWidth: expandIcon.implicitHeight + Appearance.padding.xs * 2
+                implicitHeight: expandIcon.implicitHeight + Appearance.padding.xs * 2
 
                 Layout.alignment: Qt.AlignVCenter
 
@@ -86,7 +86,7 @@ Item {
 
                     text: "chevron_right"
 
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                 }
             }
         }

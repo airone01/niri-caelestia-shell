@@ -7,7 +7,7 @@ import QtQuick.Controls
 RadioButton {
     id: root
 
-    font.pointSize: Appearance.font.size.smaller
+    font.pointSize: Appearance.font.size.bodySmall
 
     indicator: Rectangle {
         id: outerCircle
@@ -21,7 +21,7 @@ RadioButton {
         anchors.verticalCenter: parent.verticalCenter
 
         StateLayer {
-            anchors.margins: -Appearance.padding.smaller
+            anchors.margins: -Appearance.padding.sm
             color: root.checked ? Colours.palette.m3onSurface : Colours.palette.m3primary
             z: -1
 
@@ -49,6 +49,6 @@ RadioButton {
         font.pointSize: root.font.pointSize
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: outerCircle.right
-        anchors.leftMargin: Appearance.spacing.smaller
+        anchors.leftMargin: Appearance.spacing.md
     }
 }

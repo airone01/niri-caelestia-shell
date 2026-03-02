@@ -14,12 +14,12 @@ ColumnLayout {
 
     property string connectingToSsid: ""
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
     width: Config.bar.sizes.networkWidth
 
     StyledText {
-        Layout.topMargin: Appearance.padding.normal
-        Layout.rightMargin: Appearance.padding.small
+        Layout.topMargin: Appearance.padding.md
+        Layout.rightMargin: Appearance.padding.xs
         text: qsTr("Wifi %1").arg(Network.wifiEnabled ? "enabled" : "disabled")
         font.weight: 500
     }
@@ -31,11 +31,11 @@ ColumnLayout {
     }
 
     StyledText {
-        Layout.topMargin: Appearance.spacing.small
-        Layout.rightMargin: Appearance.padding.small
+        Layout.topMargin: Appearance.spacing.sm
+        Layout.rightMargin: Appearance.padding.xs
         text: qsTr("%1 networks available").arg(Network.networks.length)
         color: Colours.palette.m3onSurfaceVariant
-        font.pointSize: Appearance.font.size.small
+        font.pointSize: Appearance.font.size.labelLarge
     }
 
     Repeater {
@@ -55,8 +55,8 @@ ColumnLayout {
 
             RowLayout {
                 Layout.fillWidth: true
-                Layout.rightMargin: Appearance.padding.small
-                spacing: Appearance.spacing.small
+                Layout.rightMargin: Appearance.padding.xs
+                spacing: Appearance.spacing.sm
 
                 opacity: 0
                 scale: 0.7
@@ -82,12 +82,12 @@ ColumnLayout {
                 MaterialIcon {
                     visible: networkItem.modelData.isSecure
                     text: "lock"
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                 }
 
                 StyledText {
-                    Layout.leftMargin: Appearance.spacing.small / 2
-                    Layout.rightMargin: Appearance.spacing.small / 2
+                    Layout.leftMargin: Appearance.spacing.sm / 2
+                    Layout.rightMargin: Appearance.spacing.sm / 2
                     Layout.fillWidth: true
                     text: networkItem.modelData.ssid
                     elide: Text.ElideRight
@@ -99,7 +99,7 @@ ColumnLayout {
                     id: connectBtn
 
                     implicitWidth: implicitHeight
-                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.small
+                    implicitHeight: connectIcon.implicitHeight + Appearance.padding.xs
 
                     radius: Appearance.rounding.full
                     color: Qt.alpha(Colours.palette.m3primary, networkItem.modelData.active ? 1 : 0)
@@ -145,17 +145,17 @@ ColumnLayout {
                 id: askWifiPassword
                 visible: networkItem.isConnecting && Network.isconnectionFailed
 
-                Layout.rightMargin: Appearance.padding.small
+                Layout.rightMargin: Appearance.padding.xs
                 Layout.fillWidth: true
-                implicitHeight: confirmPswdIcon.implicitHeight + Appearance.padding.small * 2
+                implicitHeight: confirmPswdIcon.implicitHeight + Appearance.padding.xs * 2
 
                 color: Colours.palette.m3surfaceContainerHighest
                 radius: Appearance.rounding.large
 
                 RowLayout {
                     anchors.fill: parent
-                    anchors.margins: Appearance.padding.small / 2
-                    spacing: Appearance.spacing.small
+                    anchors.margins: Appearance.padding.xs / 2
+                    spacing: Appearance.spacing.sm
 
                     opacity: 0
                     scale: 0.7
@@ -170,9 +170,9 @@ ColumnLayout {
                         id: hidePswdBtn
                         property bool isclicked: false
 
-                        Layout.leftMargin: Appearance.padding.small / 2
+                        Layout.leftMargin: Appearance.padding.xs / 2
                         implicitWidth: implicitHeight
-                        implicitHeight: hidePswdIcon.implicitHeight + Appearance.padding.small
+                        implicitHeight: hidePswdIcon.implicitHeight + Appearance.padding.xs
 
                         radius: Appearance.rounding.full
                         color: Qt.alpha(Colours.palette.m3primary, hidePswdBtn.isclicked ? 1 : 0)
@@ -198,8 +198,8 @@ ColumnLayout {
                     // Password input field
                     StyledTextField {
                         id: wifiPasswordField
-                        Layout.leftMargin: Appearance.spacing.small / 2
-                        Layout.rightMargin: Appearance.spacing.small / 2
+                        Layout.leftMargin: Appearance.spacing.sm / 2
+                        Layout.rightMargin: Appearance.spacing.sm / 2
                         Layout.fillWidth: true
                         placeholderText: qsTr("Enter Password")
                         passwordMaskDelay: 300
@@ -229,7 +229,7 @@ ColumnLayout {
                         property bool isclicked: false
 
                         implicitWidth: implicitHeight
-                        implicitHeight: confirmPswdIcon.implicitHeight + Appearance.padding.small
+                        implicitHeight: confirmPswdIcon.implicitHeight + Appearance.padding.xs
 
                         radius: Appearance.rounding.full
                         color: Qt.alpha(Colours.palette.m3primary, confirmPswdBtn.isclicked ? 1 : 0)
@@ -269,9 +269,9 @@ ColumnLayout {
                         id: cancelPswdBtn
                         property bool isclicked: false
 
-                        Layout.rightMargin: Appearance.spacing.small / 2
+                        Layout.rightMargin: Appearance.spacing.sm / 2
                         implicitWidth: implicitHeight
-                        implicitHeight: cancelPswdIcon.implicitHeight + Appearance.padding.small
+                        implicitHeight: cancelPswdIcon.implicitHeight + Appearance.padding.xs
 
                         radius: Appearance.rounding.full
                         color: Qt.alpha(Colours.palette.m3primary, cancelPswdBtn.isclicked ? 1 : 0)
@@ -319,9 +319,9 @@ ColumnLayout {
     }
 
     StyledRect {
-        Layout.topMargin: Appearance.spacing.small
+        Layout.topMargin: Appearance.spacing.sm
         Layout.fillWidth: true
-        implicitHeight: rescanBtn.implicitHeight + Appearance.padding.small * 2
+        implicitHeight: rescanBtn.implicitHeight + Appearance.padding.xs * 2
 
         radius: Appearance.rounding.full
         color: Colours.palette.m3primaryContainer
@@ -339,7 +339,7 @@ ColumnLayout {
             id: rescanBtn
 
             anchors.centerIn: parent
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
             opacity: Network.scanning ? 0 : 1
 
             MaterialIcon {
@@ -362,9 +362,9 @@ ColumnLayout {
 
         StyledBusyIndicator {
             anchors.centerIn: parent
-            strokeWidth: Appearance.padding.small / 2
+            strokeWidth: Appearance.padding.xs / 2
             bgColour: "transparent"
-            implicitHeight: parent.implicitHeight - Appearance.padding.smaller * 2
+            implicitHeight: parent.implicitHeight - Appearance.padding.sm * 2
             running: Network.scanning
         }
     }
@@ -391,8 +391,8 @@ ColumnLayout {
         property alias toggle: toggle
 
         Layout.fillWidth: true
-        Layout.rightMargin: Appearance.padding.small
-        spacing: Appearance.spacing.normal
+        Layout.rightMargin: Appearance.padding.xs
+        spacing: Appearance.spacing.lg
 
         StyledText {
             Layout.fillWidth: true

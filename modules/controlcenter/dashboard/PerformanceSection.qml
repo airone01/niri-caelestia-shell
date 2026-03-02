@@ -22,7 +22,7 @@ SectionContainer {
 
     StyledText {
         text: qsTr("Performance Resources")
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 
     ConnectedButtonGroup {

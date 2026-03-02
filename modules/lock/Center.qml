@@ -22,17 +22,17 @@ ColumnLayout {
     Layout.fillWidth: false
     Layout.fillHeight: true
 
-    spacing: Appearance.spacing.large * 2
+    spacing: Appearance.spacing.xxl * 2
 
     RowLayout {
         Layout.alignment: Qt.AlignHCenter
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         StyledText {
             Layout.alignment: Qt.AlignVCenter
             text: root.timeComponents[0]
             color: Colours.palette.m3secondary
-            font.pointSize: Math.floor(Appearance.font.size.extraLarge * 3 * root.centerScale)
+            font.pointSize: Math.floor(Appearance.font.size.headlineLarge * 3 * root.centerScale)
             font.family: Appearance.font.family.clock
             font.bold: true
         }
@@ -41,7 +41,7 @@ ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
             text: ":"
             color: Colours.palette.m3primary
-            font.pointSize: Math.floor(Appearance.font.size.extraLarge * 3 * root.centerScale)
+            font.pointSize: Math.floor(Appearance.font.size.headlineLarge * 3 * root.centerScale)
             font.family: Appearance.font.family.clock
             font.bold: true
         }
@@ -50,13 +50,13 @@ ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
             text: root.timeComponents[1]
             color: Colours.palette.m3secondary
-            font.pointSize: Math.floor(Appearance.font.size.extraLarge * 3 * root.centerScale)
+            font.pointSize: Math.floor(Appearance.font.size.headlineLarge * 3 * root.centerScale)
             font.family: Appearance.font.family.clock
             font.bold: true
         }
 
         Loader {
-            Layout.leftMargin: Appearance.spacing.small
+            Layout.leftMargin: Appearance.spacing.sm
             Layout.alignment: Qt.AlignVCenter
 
             asynchronous: true
@@ -66,7 +66,7 @@ ColumnLayout {
             sourceComponent: StyledText {
                 text: root.timeComponents[2] ?? ""
                 color: Colours.palette.m3primary
-                font.pointSize: Math.floor(Appearance.font.size.extraLarge * 2 * root.centerScale)
+                font.pointSize: Math.floor(Appearance.font.size.headlineLarge * 2 * root.centerScale)
                 font.family: Appearance.font.family.clock
                 font.bold: true
             }
@@ -75,17 +75,17 @@ ColumnLayout {
 
     StyledText {
         Layout.alignment: Qt.AlignHCenter
-        Layout.topMargin: -Appearance.padding.large * 2
+        Layout.topMargin: -Appearance.padding.xl * 2
 
         text: Time.format("dddd, d MMMM yyyy")
         color: Colours.palette.m3tertiary
-        font.pointSize: Math.floor(Appearance.font.size.extraLarge * root.centerScale)
+        font.pointSize: Math.floor(Appearance.font.size.headlineLarge * root.centerScale)
         font.family: Appearance.font.family.mono
         font.bold: true
     }
 
     StyledClippingRect {
-        Layout.topMargin: Appearance.spacing.large * 2
+        Layout.topMargin: Appearance.spacing.xxl * 2
         Layout.alignment: Qt.AlignHCenter
 
         implicitWidth: root.centerWidth / 2
@@ -114,7 +114,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
 
         implicitWidth: root.centerWidth * 0.8
-        implicitHeight: input.implicitHeight + Appearance.padding.small * 2
+        implicitHeight: input.implicitHeight + Appearance.padding.xs * 2
 
         color: Colours.tPalette.m3surfaceContainer
         radius: Appearance.rounding.full
@@ -148,12 +148,12 @@ ColumnLayout {
             id: input
 
             anchors.fill: parent
-            anchors.margins: Appearance.padding.small
-            spacing: Appearance.spacing.normal
+            anchors.margins: Appearance.padding.xs
+            spacing: Appearance.spacing.lg
 
             Item {
                 implicitWidth: implicitHeight
-                implicitHeight: fprintIcon.implicitHeight + Appearance.padding.small * 2
+                implicitHeight: fprintIcon.implicitHeight + Appearance.padding.xs * 2
 
                 MaterialIcon {
                     id: fprintIcon
@@ -189,7 +189,7 @@ ColumnLayout {
 
             StyledRect {
                 implicitWidth: implicitHeight
-                implicitHeight: enterIcon.implicitHeight + Appearance.padding.small * 2
+                implicitHeight: enterIcon.implicitHeight + Appearance.padding.xs * 2
 
                 color: root.lock.pam.buffer ? Colours.palette.m3primary : Colours.layer(Colours.palette.m3surfaceContainerHigh, 2)
                 radius: Appearance.rounding.full
@@ -214,13 +214,28 @@ ColumnLayout {
         }
     }
 
+    StyledText {
+        Layout.alignment: Qt.AlignHCenter
+
+        text: qsTr("Press Enter ↵")
+        color: Colours.palette.m3onSurfaceVariant
+        font.pointSize: Appearance.font.size.labelSmall
+        opacity: root.lock.pam.buffer ? 1 : 0
+
+        Behavior on opacity {
+            Anim {
+                duration: Appearance.anim.durations.small
+            }
+        }
+    }
+
 // --- Keyboard State Tracker ---
     
     readonly property bool isCapsLock: Niri.capsLock
 
     Item {
         Layout.fillWidth: true
-        Layout.topMargin: -Appearance.spacing.large
+        Layout.topMargin: -Appearance.spacing.xxl
 
         implicitHeight: Math.max(message.implicitHeight, stateMessage.implicitHeight)
 
@@ -327,7 +342,7 @@ ColumnLayout {
             opacity: 0
             color: Colours.palette.m3error
 
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             font.family: Appearance.font.family.mono
             horizontalAlignment: Qt.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere

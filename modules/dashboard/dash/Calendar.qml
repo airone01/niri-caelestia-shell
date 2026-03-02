@@ -35,18 +35,18 @@ CustomMouseArea {
         id: inner
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.large
-        spacing: Appearance.spacing.small
+        anchors.margins: Appearance.padding.xl
+        spacing: Appearance.spacing.sm
 
         RowLayout {
             id: monthNavigationRow
 
             Layout.fillWidth: true
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
 
             Item {
                 implicitWidth: implicitHeight
-                implicitHeight: prevMonthText.implicitHeight + Appearance.padding.small * 2
+                implicitHeight: prevMonthText.implicitHeight + Appearance.padding.xs * 2
 
                 StateLayer {
                     id: prevMonthStateLayer
@@ -64,7 +64,7 @@ CustomMouseArea {
                     anchors.centerIn: parent
                     text: "chevron_left"
                     color: Colours.palette.m3tertiary
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.weight: 700
                 }
             }
@@ -72,14 +72,14 @@ CustomMouseArea {
             Item {
                 Layout.fillWidth: true
 
-                implicitWidth: monthYearDisplay.implicitWidth + Appearance.padding.small * 2
-                implicitHeight: monthYearDisplay.implicitHeight + Appearance.padding.small * 2
+                implicitWidth: monthYearDisplay.implicitWidth + Appearance.padding.xs * 2
+                implicitHeight: monthYearDisplay.implicitHeight + Appearance.padding.xs * 2
 
                 StateLayer {
                     anchors.fill: monthYearDisplay
-                    anchors.margins: -Appearance.padding.small
-                    anchors.leftMargin: -Appearance.padding.normal
-                    anchors.rightMargin: -Appearance.padding.normal
+                    anchors.margins: -Appearance.padding.xs
+                    anchors.leftMargin: -Appearance.padding.md
+                    anchors.rightMargin: -Appearance.padding.md
 
                     radius: Appearance.rounding.full
                     disabled: {
@@ -98,7 +98,7 @@ CustomMouseArea {
                     anchors.centerIn: parent
                     text: grid.title
                     color: Colours.palette.m3primary
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.weight: 500
                     font.capitalization: Font.Capitalize
                 }
@@ -106,7 +106,7 @@ CustomMouseArea {
 
             Item {
                 implicitWidth: implicitHeight
-                implicitHeight: nextMonthText.implicitHeight + Appearance.padding.small * 2
+                implicitHeight: nextMonthText.implicitHeight + Appearance.padding.xs * 2
 
                 StateLayer {
                     id: nextMonthStateLayer
@@ -124,7 +124,7 @@ CustomMouseArea {
                     anchors.centerIn: parent
                     text: "chevron_right"
                     color: Colours.palette.m3tertiary
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.weight: 700
                 }
             }
@@ -167,7 +167,7 @@ CustomMouseArea {
                     required property var model
 
                     implicitWidth: implicitHeight
-                    implicitHeight: text.implicitHeight + Appearance.padding.small * 2
+                    implicitHeight: text.implicitHeight + Appearance.padding.xs * 2
 
                     StyledText {
                         id: text
@@ -184,7 +184,7 @@ CustomMouseArea {
                             return Colours.palette.m3onSurfaceVariant;
                         }
                         opacity: dayItem.model.today || dayItem.model.month === grid.month ? 1 : 0.4
-                        font.pointSize: Appearance.font.size.normal
+                        font.pointSize: Appearance.font.size.bodyMedium
                         font.weight: 500
                     }
                 }

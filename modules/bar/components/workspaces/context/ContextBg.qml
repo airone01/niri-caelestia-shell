@@ -21,8 +21,8 @@ Item {
     readonly property bool isFocused: (isItem && anchorWs.isWsFocused) || (isWorkspace && (Number(anchorWs.index) === Number(Niri.focusedWorkspaceIndex)))
 
     readonly property int rounding: Appearance.rounding.small
-    readonly property int gPadding: isItem ? Appearance.padding.small / 2 : 0
-    readonly property int cornerPieceSize: Config.bar.workspaces.windowIconSize + Appearance.padding.small
+    readonly property int gPadding: isItem ? Appearance.padding.xs / 2 : 0
+    readonly property int cornerPieceSize: Config.bar.workspaces.windowIconSize + Appearance.padding.xs
 
     property bool activated: false
     Component.onCompleted: root.activated = true
@@ -101,7 +101,7 @@ Item {
 
         anchors.fill: highlight
 
-        anchors.margins: -Appearance.padding.small
+        anchors.margins: -Appearance.padding.xs
 
         anchors.leftMargin: Config.bar.workspaces.windowIconSize
         topLeftRadius: 0
@@ -147,12 +147,12 @@ Item {
         property int cornerType: 0 // 1 = bottom, 3 = top
         width: root.activated && !root.isWorkspaces && Niri.wsContextAnchor ? root.cornerPieceSize : 0
         height: root.cornerPieceSize
-        radius: Appearance.padding.large * 1.3
+        radius: Appearance.padding.xl * 1.3
         orientation: cornerType
         color: parent.color
 
         anchors.left: parent.left
-        anchors.leftMargin: Appearance.padding.small
+        anchors.leftMargin: Appearance.padding.xs
         anchors.top: cornerType === 0 ? parent.bottom : undefined
         anchors.bottom: cornerType === 2 ? parent.top : undefined
         anchors.topMargin: cornerType === 0 ? -1 : undefined

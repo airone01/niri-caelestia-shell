@@ -23,7 +23,7 @@ ColumnLayout {
     }
 
     anchors.fill: parent
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     // ***************************************************
     // Using the new CollapsibleSection component
@@ -35,8 +35,8 @@ ColumnLayout {
         GridLayout {
             id: wsGrid
 
-            // rowSpacing: Appearance.spacing.smaller
-            // columnSpacing: Appearance.spacing.smaller
+            // rowSpacing: Appearance.spacing.md
+            // columnSpacing: Appearance.spacing.md
             columns: 5
 
             Repeater {
@@ -80,8 +80,8 @@ ColumnLayout {
         //  toggleMaximize
         RowLayout {
             Layout.fillWidth: true
-            // Layout.leftMargin: Appearance.padding.large
-            // Layout.rightMargin: Appearance.padding.large
+            // Layout.leftMargin: Appearance.padding.xl
+            // Layout.rightMargin: Appearance.padding.xl
 
             Button {
                 color: Colours.palette.m3secondaryContainer
@@ -125,9 +125,9 @@ ColumnLayout {
         asynchronous: true
         Layout.fillWidth: active
         visible: active
-        Layout.leftMargin: Appearance.padding.large
-        Layout.rightMargin: Appearance.padding.large
-        Layout.bottomMargin: Appearance.padding.large
+        Layout.leftMargin: Appearance.padding.xl
+        Layout.rightMargin: Appearance.padding.xl
+        Layout.bottomMargin: Appearance.padding.xl
 
         sourceComponent: RowLayout {
             // Layout.fillWidth: true
@@ -185,13 +185,13 @@ ColumnLayout {
 
         radius: Appearance.rounding.small
 
-        implicitHeight: (icon.implicitHeight + Appearance.padding.small * 2)
-        implicitWidth: (52 + Appearance.padding.small * 2)
+        implicitHeight: (icon.implicitHeight + Appearance.padding.xs * 2)
+        implicitWidth: (52 + Appearance.padding.xs * 2)
 
         MaterialIcon {
             id: icon
             color: parent.onColor
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
 
@@ -209,7 +209,7 @@ ColumnLayout {
         StyledText {
             id: label
             color: parent.onColor
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
 

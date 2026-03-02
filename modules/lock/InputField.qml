@@ -49,7 +49,7 @@ Item {
 
         animate: true
         color: root.pam.passwd.active ? Colours.palette.m3secondary : Colours.palette.m3outline
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
         font.family: Appearance.font.family.mono
 
         opacity: root.buffer ? 0 : 1
@@ -74,10 +74,10 @@ Item {
         anchors.horizontalCenterOffset: implicitWidth > root.width ? -(implicitWidth - root.width) / 2 : 0
 
         implicitWidth: fullWidth
-        implicitHeight: Appearance.font.size.normal
+        implicitHeight: Appearance.font.size.bodyMedium
 
         orientation: Qt.Horizontal
-        spacing: Appearance.spacing.small / 2
+        spacing: Appearance.spacing.sm / 2
         interactive: false
 
         model: ScriptModel {

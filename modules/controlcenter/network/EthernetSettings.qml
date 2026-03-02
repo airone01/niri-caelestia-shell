@@ -15,7 +15,7 @@ ColumnLayout {
 
     required property Session session
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
 
     SettingsHeader {
         icon: "cable"
@@ -23,9 +23,9 @@ ColumnLayout {
     }
 
     StyledText {
-        Layout.topMargin: Appearance.spacing.large
+        Layout.topMargin: Appearance.spacing.xxl
         text: qsTr("Ethernet devices")
-        font.pointSize: Appearance.font.size.larger
+        font.pointSize: Appearance.font.size.bodyLarge
         font.weight: 500
     }
 
@@ -36,7 +36,7 @@ ColumnLayout {
 
     StyledRect {
         Layout.fillWidth: true
-        implicitHeight: ethernetInfo.implicitHeight + Appearance.padding.large * 2
+        implicitHeight: ethernetInfo.implicitHeight + Appearance.padding.xl * 2
 
         radius: Appearance.rounding.normal
         color: Colours.tPalette.m3surfaceContainer
@@ -47,9 +47,9 @@ ColumnLayout {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: Appearance.padding.large
+            anchors.margins: Appearance.padding.xl
 
-            spacing: Appearance.spacing.small / 2
+            spacing: Appearance.spacing.sm / 2
 
             StyledText {
                 text: qsTr("Total devices")
@@ -58,18 +58,18 @@ ColumnLayout {
             StyledText {
                 text: qsTr("%1").arg(Nmcli.ethernetDevices.length)
                 color: Colours.palette.m3outline
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
             }
 
             StyledText {
-                Layout.topMargin: Appearance.spacing.normal
+                Layout.topMargin: Appearance.spacing.lg
                 text: qsTr("Connected devices")
             }
 
             StyledText {
                 text: qsTr("%1").arg(Nmcli.ethernetDevices.filter(d => d.connected).length)
                 color: Colours.palette.m3outline
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
             }
         }
     }

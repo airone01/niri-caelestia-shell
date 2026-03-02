@@ -65,14 +65,14 @@ Item {
                 // horizontalCenter: root.horizontalCenter
                 left: root.left
                 right: root.right
-                rightMargin: isContextActiveInWs ? -Config.bar.workspaces.windowContextWidth + Appearance.padding.small : 0
+                rightMargin: isContextActiveInWs ? -Config.bar.workspaces.windowContextWidth + Appearance.padding.xs : 0
             }
 
             topRightRadius: isContextActiveInWs ? Appearance.rounding.normal : radius
             bottomRightRadius: isContextActiveInWs ? Appearance.rounding.normal : radius
 
             y: (start?.y ?? 0)
-            // implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.small * 2 + 2
+            // implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.xs * 2 + 2
             implicitHeight: start && end ? end.y + end.size - start.y : 0
             // implicitHeight: end?.y + end?.height - start?.y
 

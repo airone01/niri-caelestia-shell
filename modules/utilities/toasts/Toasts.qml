@@ -10,10 +10,10 @@ import QtQuick
 Item {
     id: root
 
-    readonly property int spacing: Appearance.spacing.small
+    readonly property int spacing: Appearance.spacing.sm
     property bool flag
 
-    implicitWidth: Config.utilities.sizes.toastWidth - Appearance.padding.normal * 2
+    implicitWidth: Config.utilities.sizes.toastWidth - Appearance.padding.md * 2
     implicitHeight: {
         let h = -spacing;
         for (let i = 0; i < repeater.count; i++) {

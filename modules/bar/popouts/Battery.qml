@@ -9,7 +9,7 @@ import QtQuick
 Column {
     id: root
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
     width: Config.bar.sizes.batteryWidth
 
     StyledText {
@@ -45,8 +45,8 @@ Column {
         height: active ? (item?.implicitHeight ?? 0) : 0
 
         sourceComponent: StyledRect {
-            implicitWidth: child.implicitWidth + Appearance.padding.normal * 2
-            implicitHeight: child.implicitHeight + Appearance.padding.smaller * 2
+            implicitWidth: child.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: child.implicitHeight + Appearance.padding.sm * 2
 
             color: Colours.palette.m3error
             radius: Appearance.rounding.normal
@@ -58,7 +58,7 @@ Column {
 
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Appearance.spacing.small
+                    spacing: Appearance.spacing.sm
 
                     MaterialIcon {
                         anchors.verticalCenter: parent.verticalCenter
@@ -109,8 +109,8 @@ Column {
 
         anchors.horizontalCenter: parent.horizontalCenter
 
-        implicitWidth: saver.implicitHeight + balance.implicitHeight + perf.implicitHeight + Appearance.padding.normal * 2 + Appearance.spacing.large * 2
-        implicitHeight: Math.max(saver.implicitHeight, balance.implicitHeight, perf.implicitHeight) + Appearance.padding.small * 2
+        implicitWidth: saver.implicitHeight + balance.implicitHeight + perf.implicitHeight + Appearance.padding.md * 2 + Appearance.spacing.xxl * 2
+        implicitHeight: Math.max(saver.implicitHeight, balance.implicitHeight, perf.implicitHeight) + Appearance.padding.xs * 2
 
         color: Colours.tPalette.m3surfaceContainer
         radius: Appearance.rounding.full
@@ -160,7 +160,7 @@ Column {
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.small
+            anchors.leftMargin: Appearance.padding.xs
 
             profile: PowerProfile.PowerSaver
             icon: "energy_savings_leaf"
@@ -180,7 +180,7 @@ Column {
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: Appearance.padding.small
+            anchors.rightMargin: Appearance.padding.xs
 
             profile: PowerProfile.Performance
             icon: "rocket_launch"
@@ -201,8 +201,8 @@ Column {
         required property string icon
         required property int profile
 
-        implicitWidth: icon.implicitHeight + Appearance.padding.small * 2
-        implicitHeight: icon.implicitHeight + Appearance.padding.small * 2
+        implicitWidth: icon.implicitHeight + Appearance.padding.xs * 2
+        implicitHeight: icon.implicitHeight + Appearance.padding.xs * 2
 
         StateLayer {
             radius: Appearance.rounding.full
@@ -219,7 +219,7 @@ Column {
             anchors.centerIn: parent
 
             text: parent.icon
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             color: profiles.current === text ? Colours.palette.m3onPrimary : Colours.palette.m3onSurface
             fill: profiles.current === text ? 1 : 0
 

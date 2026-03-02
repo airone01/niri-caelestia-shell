@@ -35,7 +35,7 @@ StyledRect {
             model: Niri.getWorkspaceCount()
             implicitHeight: contentHeight
 
-            // spacing: Appearance.spacing.small
+            // spacing: Appearance.spacing.sm
 
             delegate: WorkspaceDelegate {}
         }
@@ -76,7 +76,7 @@ StyledRect {
 
         ColumnLayout {
             id: col
-            // spacing: Appearance.spacing.small
+            // spacing: Appearance.spacing.sm
             spacing: 0
 
             StyledText {
@@ -86,7 +86,7 @@ StyledRect {
                     return wsRect.windows.length > 0 ? baseName : `${baseName} (empty)`;
                 }
                 text: wsName
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 elide: Text.ElideRight
                 color: Colours.palette.m3tertiary
             }
@@ -96,9 +96,9 @@ StyledRect {
                 Layout.fillWidth: true
                 model: wsRect.groupedWindows
                 implicitHeight: contentHeight + spacing
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
                 Layout.alignment: Qt.AlignCenter
-                Layout.leftMargin: Appearance.spacing.small
+                Layout.leftMargin: Appearance.spacing.sm
 
                 Behavior on implicitHeight {
                     Anim {}
@@ -122,7 +122,7 @@ StyledRect {
         clip: true
 
         implicitHeight: appCol.implicitHeight
-        implicitWidth: groupMenu.width - Appearance.spacing.small * 2
+        implicitWidth: groupMenu.width - Appearance.spacing.sm * 2
 
         ColumnLayout {
             id: appCol
@@ -134,7 +134,7 @@ StyledRect {
                 id: winList
                 Layout.fillWidth: true
                 model: appGroup.modelData.windows
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
                 boundsBehavior: Flickable.DragAndOvershootBounds
                 implicitHeight: contentHeight + spacing
                 reuseItems: true // ✅ enable reuse
@@ -150,9 +150,9 @@ StyledRect {
 
                 // footer: StyledText {
                 // anchors.right: parent.right
-                // anchors.rightMargin: Appearance.spacing.small
+                // anchors.rightMargin: Appearance.spacing.sm
                 // text: `${appGroup.modelData.app_id} (${winList.count})`
-                // font.pointSize: Appearance.font.size.extraSmall
+                // font.pointSize: Appearance.font.size.labelMedium
                 // color: Colours.palette.m3primary
                 // }
 
@@ -176,8 +176,8 @@ StyledRect {
 
         RowLayout {
             anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: Appearance.spacing.small
-            spacing: Appearance.spacing.normal
+            anchors.margins: Appearance.spacing.sm
+            spacing: Appearance.spacing.lg
 
             Loader {
                 id: iconLoader
@@ -191,7 +191,7 @@ StyledRect {
                 MaterialIcon {
                     grade: 0
                     text: Icons.getAppCategoryIcon(itemMain.modelData?.app_id, "help_center")
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     color: itemMain.isFocused ? Colours.palette.m3onPrimary : groupMenu.onColor
                 }
             }

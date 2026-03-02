@@ -8,7 +8,7 @@ import QtQuick.Layouts
 ColumnLayout {
     id: root
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     StyledText {
         text: qsTr("Capslock: %1").arg(Niri.capsLock ? "Enabled" : "Disabled")

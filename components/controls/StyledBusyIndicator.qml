@@ -7,8 +7,8 @@ import QtQuick.Controls
 BusyIndicator {
     id: root
 
-    property real implicitSize: Appearance.font.size.normal * 3
-    property real strokeWidth: Appearance.padding.small
+    property real implicitSize: Appearance.font.size.bodyMedium * 3
+    property real strokeWidth: Appearance.padding.xs
     property color fgColour: Colours.palette.m3primary
     property color bgColour: Colours.palette.m3secondaryContainer
 

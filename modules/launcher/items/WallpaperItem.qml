@@ -23,8 +23,8 @@ Item {
         opacity = Qt.binding(() => PathView.onPath ? 1 : 0);
     }
 
-    implicitWidth: image.width + Appearance.padding.larger * 2
-    implicitHeight: image.height + label.height + Appearance.spacing.small / 2 + Appearance.padding.large + Appearance.padding.normal
+    implicitWidth: image.width + Appearance.padding.lg * 2
+    implicitHeight: image.height + label.height + Appearance.spacing.sm / 2 + Appearance.padding.xl + Appearance.padding.md
 
     StateLayer {
         radius: Appearance.rounding.normal
@@ -50,7 +50,7 @@ Item {
         id: image
 
         anchors.horizontalCenter: parent.horizontalCenter
-        y: Appearance.padding.large
+        y: Appearance.padding.xl
         color: Colours.tPalette.m3surfaceContainer
         radius: Appearance.rounding.normal
 
@@ -61,7 +61,7 @@ Item {
             anchors.centerIn: parent
             text: "image"
             color: Colours.tPalette.m3outline
-            font.pointSize: Appearance.font.size.extraLarge * 2
+            font.pointSize: Appearance.font.size.headlineLarge * 2
             font.weight: 600
         }
 
@@ -79,15 +79,15 @@ Item {
         id: label
 
         anchors.top: image.bottom
-        anchors.topMargin: Appearance.spacing.small / 2
+        anchors.topMargin: Appearance.spacing.sm / 2
         anchors.horizontalCenter: parent.horizontalCenter
 
-        width: image.width - Appearance.padding.normal * 2
+        width: image.width - Appearance.padding.md * 2
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         renderType: Text.QtRendering
         text: root.modelData.relativePath
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 
     Behavior on scale {

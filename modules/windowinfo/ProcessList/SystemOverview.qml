@@ -5,7 +5,7 @@ import qs.config
 
 Row {
     width: parent.width
-    spacing: Appearance.padding.normal
+    spacing: Appearance.padding.md
 
     Component.onCompleted: {
         SysMonitorService.addRef();
@@ -16,7 +16,7 @@ Row {
     }
 
     StyledRect {
-        width: (parent.width - Appearance.padding.normal * 2) / 3
+        width: (parent.width - Appearance.padding.md * 2) / 3
         height: 80
         radius: Appearance.rounding.small
         color: {
@@ -39,13 +39,13 @@ Row {
 
         Column {
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.normal
+            anchors.leftMargin: Appearance.padding.md
             anchors.verticalCenter: parent.verticalCenter
             spacing: 2
 
             StyledText {
                 text: "CPU"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.weight: Font.Medium
                 color: SysMonitorService.sortBy === "cpu" ? Colours.palette.m3primary : Colours.palette.m3secondary
                 opacity: SysMonitorService.sortBy === "cpu" ? 1 : 0.8
@@ -53,7 +53,7 @@ Row {
 
             StyledText {
                 text: SysMonitorService.totalCpuUsage.toFixed(1) + "%"
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.family: Appearance.font.family.mono
                 font.weight: Font.Bold
                 color: Colours.palette.m3onSurface
@@ -61,7 +61,7 @@ Row {
 
             StyledText {
                 text: SysMonitorService.cpuCount + " cores"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 color: Colours.palette.m3onSurface
                 opacity: 0.7
@@ -82,7 +82,7 @@ Row {
     }
 
     StyledRect {
-        width: (parent.width - Appearance.padding.normal * 2) / 3
+        width: (parent.width - Appearance.padding.md * 2) / 3
         height: 80
         radius: Appearance.rounding.small
         color: {
@@ -105,13 +105,13 @@ Row {
 
         Column {
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.normal
+            anchors.leftMargin: Appearance.padding.md
             anchors.verticalCenter: parent.verticalCenter
             spacing: 2
 
             StyledText {
                 text: "Memory"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.weight: Font.Medium
                 color: SysMonitorService.sortBy === "memory" ? Colours.palette.m3tertiary : Colours.palette.m3secondary
                 opacity: SysMonitorService.sortBy === "memory" ? 1 : 0.8
@@ -119,7 +119,7 @@ Row {
 
             StyledText {
                 text: SysMonitorService.formatSystemMemory(SysMonitorService.usedMemoryKB)
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.family: Appearance.font.family.mono
                 font.weight: Font.Bold
                 color: Colours.palette.m3onSurface
@@ -127,7 +127,7 @@ Row {
 
             StyledText {
                 text: "of " + SysMonitorService.formatSystemMemory(SysMonitorService.totalMemoryKB)
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 color: Colours.palette.m3onSurface
                 opacity: 0.7
@@ -148,20 +148,20 @@ Row {
     }
 
     StyledRect {
-        width: (parent.width - Appearance.padding.normal * 2) / 3
+        width: (parent.width - Appearance.padding.md * 2) / 3
         height: 80
         radius: Appearance.rounding.small
         color: SysMonitorService.totalSwapKB > 0 ? Qt.rgba(Colours.palette.warning.r, Colours.palette.warning.g, Colours.palette.warning.b, 0.08) : Qt.rgba(Colours.palette.m3onSurface.r, Colours.palette.m3onSurface.g, Colours.palette.m3onSurface.b, 0.04)
 
         Column {
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.normal
+            anchors.leftMargin: Appearance.padding.md
             anchors.verticalCenter: parent.verticalCenter
             spacing: 2
 
             StyledText {
                 text: "Swap"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.weight: Font.Medium
                 color: SysMonitorService.totalSwapKB > 0 ? Colours.palette.warning : Colours.palette.m3onSurface
                 opacity: 0.8
@@ -169,7 +169,7 @@ Row {
 
             StyledText {
                 text: SysMonitorService.totalSwapKB > 0 ? SysMonitorService.formatSystemMemory(SysMonitorService.usedSwapKB) : "None"
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.family: Appearance.font.family.mono
                 font.weight: Font.Bold
                 color: Colours.palette.m3onSurface
@@ -177,7 +177,7 @@ Row {
 
             StyledText {
                 text: SysMonitorService.totalSwapKB > 0 ? "of " + SysMonitorService.formatSystemMemory(SysMonitorService.totalSwapKB) : "No swap configured"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 color: Colours.palette.m3onSurface
                 opacity: 0.7

@@ -19,7 +19,7 @@ CollapsibleSection {
     showBackground: true
 
     ColumnLayout {
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
         Layout.fillWidth: true
 
     SwitchRow {
@@ -32,7 +32,7 @@ CollapsibleSection {
     }
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.normal
+        contentSpacing: Appearance.spacing.lg
 
         SliderInput {
             Layout.fillWidth: true
@@ -57,7 +57,7 @@ CollapsibleSection {
     }
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.normal
+        contentSpacing: Appearance.spacing.lg
 
         SliderInput {
             Layout.fillWidth: true

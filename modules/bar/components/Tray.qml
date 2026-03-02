@@ -13,7 +13,7 @@ StyledRect {
     visible: width > 0 && height > 0 // To avoid warnings about being visible with no size
 
     implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: layout.implicitHeight + (Config.bar.tray.background ? Appearance.padding.normal : Appearance.padding.small) * 2
+    implicitHeight: layout.implicitHeight + (Config.bar.tray.background ? Appearance.padding.md : Appearance.padding.xs) * 2
 
     color: Qt.alpha(Colours.tPalette.m3surfaceContainer, Config.bar.tray.background ? Colours.tPalette.m3surfaceContainer.a : 0)
     radius: Appearance.rounding.full
@@ -22,7 +22,7 @@ StyledRect {
         id: layout
 
         anchors.centerIn: parent
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         add: Transition {
             Anim {

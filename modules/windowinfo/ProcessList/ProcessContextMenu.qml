@@ -16,7 +16,7 @@ Popup {
         }
 
         const menuWidth = 180;
-        const menuHeight = menuColumn.implicitHeight + Appearance.padding.small * 2;
+        const menuHeight = menuColumn.implicitHeight + Appearance.padding.xs * 2;
         const screenWidth = Screen.width;
         const screenHeight = Screen.height;
 
@@ -36,7 +36,7 @@ Popup {
     }
 
     width: 180
-    height: menuColumn.implicitHeight + Appearance.padding.small * 2
+    height: menuColumn.implicitHeight + Appearance.padding.xs * 2
     padding: 0
     modal: false
     closePolicy: Popup.CloseOnEscape
@@ -69,7 +69,7 @@ Popup {
         Column {
             id: menuColumn
             anchors.fill: parent
-            anchors.margins: Appearance.padding.small
+            anchors.margins: Appearance.padding.xs
             spacing: 1
 
             StyledRect {
@@ -80,10 +80,10 @@ Popup {
 
                 StyledText {
                     anchors.left: parent.left
-                    anchors.leftMargin: Appearance.padding.small
+                    anchors.leftMargin: Appearance.padding.xs
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Copy PID"
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurface
                     font.weight: Font.Normal
                 }
@@ -110,10 +110,10 @@ Popup {
 
                 StyledText {
                     anchors.left: parent.left
-                    anchors.leftMargin: Appearance.padding.small
+                    anchors.leftMargin: Appearance.padding.xs
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Copy Process Name"
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurface
                     font.weight: Font.Normal
                 }
@@ -134,7 +134,7 @@ Popup {
             }
 
             StyledRect {
-                width: parent.width - Appearance.padding.small * 2
+                width: parent.width - Appearance.padding.xs * 2
                 height: 5
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "transparent"
@@ -157,10 +157,10 @@ Popup {
 
                 StyledText {
                     anchors.left: parent.left
-                    anchors.leftMargin: Appearance.padding.small
+                    anchors.leftMargin: Appearance.padding.xs
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Kill Process"
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: parent.enabled ? (killArea.containsMouse ? Colours.palette.m3onErrorContainer : Colours.palette.m3onSurface) : Qt.rgba(Colours.palette.m3onSurface.r, Colours.palette.m3onSurface.g, Colours.palette.m3onSurface.b, 0.5)
                     font.weight: Font.Normal
                 }
@@ -190,10 +190,10 @@ Popup {
 
                 StyledText {
                     anchors.left: parent.left
-                    anchors.leftMargin: Appearance.padding.small
+                    anchors.leftMargin: Appearance.padding.xs
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Force Kill Process"
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: parent.enabled ? (forceKillArea.containsMouse ? Colours.palette.m3onErrorContainer : Colours.palette.m3onSurface) : Qt.rgba(Colours.palette.m3onSurface.r, Colours.palette.m3onSurface.g, Colours.palette.m3onSurface.b, 0.5)
                     font.weight: Font.Normal
                 }

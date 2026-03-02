@@ -15,7 +15,7 @@ PathView {
     required property var panels
     required property var wrapper
 
-    readonly property int itemWidth: Config.launcher.sizes.wallpaperWidth * 0.8 + Appearance.padding.larger * 2
+    readonly property int itemWidth: Config.launcher.sizes.wallpaperWidth * 0.8 + Appearance.padding.lg * 2
 
     readonly property int numItems: {
         const screen = QsWindow.window?.screen;
@@ -53,9 +53,18 @@ PathView {
     Component.onCompleted: currentIndex = Wallpapers.list.findIndex(w => w.path === Wallpapers.actualCurrent)
     Component.onDestruction: Wallpapers.stopPreview()
 
+    Timer {
+        id: previewDebounce
+        interval: 250
+        onTriggered: {
+            if (root.currentItem)
+                Wallpapers.preview(root.currentItem.modelData.path);
+        }
+    }
+
     onCurrentItemChanged: {
         if (currentItem)
-            Wallpapers.preview(currentItem.modelData.path);
+            previewDebounce.restart();
     }
 
     implicitWidth: Math.min(numItems, count) * itemWidth

@@ -17,16 +17,16 @@ SectionContainer {
 
     StyledText {
         text: qsTr("Weather")
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 
     ColumnLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.smaller / 2
+        spacing: Appearance.spacing.md / 2
 
         StyledText {
             text: qsTr("Location (city name, state, or lat,long)")
-            font.pointSize: Appearance.font.size.small
+            font.pointSize: Appearance.font.size.labelLarge
             color: Colours.palette.m3onSurfaceVariant
         }
 
@@ -48,7 +48,7 @@ SectionContainer {
             StyledTextField {
                 id: locationField
                 anchors.centerIn: parent
-                width: parent.width - Appearance.padding.normal
+                width: parent.width - Appearance.padding.md
                 horizontalAlignment: TextInput.AlignLeft
                 placeholderText: qsTr("Auto-detect by IP")
                 text: root.rootItem.weatherLocation

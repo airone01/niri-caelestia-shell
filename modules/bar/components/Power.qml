@@ -9,7 +9,7 @@ Item {
 
     required property PersistentProperties visibilities
 
-    implicitWidth: icon.implicitHeight + Appearance.padding.small * 2
+    implicitWidth: icon.implicitHeight + Appearance.padding.xs * 2
     implicitHeight: icon.implicitHeight
 
     StateLayer {
@@ -17,7 +17,7 @@ Item {
         anchors.fill: undefined
         anchors.centerIn: parent
         implicitWidth: implicitHeight
-        implicitHeight: icon.implicitHeight + Appearance.padding.small * 2
+        implicitHeight: icon.implicitHeight + Appearance.padding.xs * 2
 
         radius: Appearance.rounding.full
 
@@ -35,6 +35,6 @@ Item {
         text: "power_settings_new"
         color: Colours.palette.m3error
         font.bold: true
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 }

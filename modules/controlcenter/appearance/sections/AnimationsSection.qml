@@ -19,7 +19,7 @@ CollapsibleSection {
     showBackground: true
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.normal
+        contentSpacing: Appearance.spacing.lg
 
         SliderInput {
             Layout.fillWidth: true

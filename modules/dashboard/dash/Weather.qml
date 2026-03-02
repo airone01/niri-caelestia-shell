@@ -22,7 +22,7 @@ Item {
         animate: true
         text: Weather.error ? "cloud_alert" : Weather.icon
         color: Weather.error ? Colours.palette.m3error : Colours.palette.m3secondary
-        font.pointSize: Appearance.font.size.extraLarge * 2
+        font.pointSize: Appearance.font.size.headlineLarge * 2
     }
 
     Column {
@@ -30,9 +30,9 @@ Item {
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: icon.right
-        anchors.leftMargin: Appearance.spacing.large
+        anchors.leftMargin: Appearance.spacing.xxl
 
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         StyledText {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -40,7 +40,7 @@ Item {
             animate: true
             text: Weather.error ? Weather.error : Weather.temp
             color: Weather.error ? Colours.palette.m3error : Colours.palette.m3primary
-            font.pointSize: Weather.error ? Appearance.font.size.normal : Appearance.font.size.extraLarge
+            font.pointSize: Weather.error ? Appearance.font.size.bodyMedium : Appearance.font.size.headlineLarge
             font.weight: 500
         }
 
@@ -52,7 +52,7 @@ Item {
             text: Weather.description
 
             elide: Text.ElideRight
-            width: Math.min(implicitWidth, root.parent.width - icon.implicitWidth - info.anchors.leftMargin - Appearance.padding.large * 2)
+            width: Math.min(implicitWidth, root.parent.width - icon.implicitWidth - info.anchors.leftMargin - Appearance.padding.xl * 2)
         }
     }
 }

@@ -13,9 +13,9 @@ ColumnLayout {
     spacing: 0
 
     StyledText {
-        Layout.topMargin: Appearance.spacing.large
+        Layout.topMargin: Appearance.spacing.xxl
         text: root.title
-        font.pointSize: Appearance.font.size.larger
+        font.pointSize: Appearance.font.size.bodyLarge
         font.weight: 500
     }
 

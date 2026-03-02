@@ -43,15 +43,15 @@ Item {
 
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: Appearance.spacing.smaller
+                        spacing: Appearance.spacing.md
 
                         StyledText {
                             text: qsTr("Network")
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             font.weight: 500
                         }
 
@@ -63,9 +63,9 @@ Item {
                             toggled: Nmcli.wifiEnabled
                             icon: "wifi"
                             accent: "Tertiary"
-                            iconSize: Appearance.font.size.normal
-                            horizontalPadding: Appearance.padding.normal
-                            verticalPadding: Appearance.padding.smaller
+                            iconSize: Appearance.font.size.bodyMedium
+                            horizontalPadding: Appearance.padding.md
+                            verticalPadding: Appearance.padding.sm
                             tooltip: qsTr("Toggle WiFi")
 
                             onClicked: {
@@ -77,9 +77,9 @@ Item {
                             toggled: Nmcli.scanning
                             icon: "wifi_find"
                             accent: "Secondary"
-                            iconSize: Appearance.font.size.normal
-                            horizontalPadding: Appearance.padding.normal
-                            verticalPadding: Appearance.padding.smaller
+                            iconSize: Appearance.font.size.bodyMedium
+                            horizontalPadding: Appearance.padding.md
+                            verticalPadding: Appearance.padding.sm
                             tooltip: qsTr("Scan for networks")
 
                             onClicked: {
@@ -91,9 +91,9 @@ Item {
                             toggled: !root.session.ethernet.active && !root.session.network.active
                             icon: "settings"
                             accent: "Primary"
-                            iconSize: Appearance.font.size.normal
-                            horizontalPadding: Appearance.padding.normal
-                            verticalPadding: Appearance.padding.smaller
+                            iconSize: Appearance.font.size.bodyMedium
+                            horizontalPadding: Appearance.padding.md
+                            verticalPadding: Appearance.padding.sm
                             tooltip: qsTr("Network settings")
 
                             onClicked: {

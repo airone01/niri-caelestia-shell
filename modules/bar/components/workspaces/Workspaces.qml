@@ -19,7 +19,7 @@ StyledRect {
 
     readonly property int focusedWindowId: Niri.focusedWindow?.id ?? -1
 
-    implicitHeight: layout.implicitHeight + Appearance.padding.small * 2
+    implicitHeight: layout.implicitHeight + Appearance.padding.xs * 2
     implicitWidth: Config.bar.sizes.innerWidth
 
     color: Colours.tPalette.m3surfaceContainer
@@ -41,7 +41,7 @@ StyledRect {
         asynchronous: true
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.small
+        anchors.margins: Appearance.padding.xs
 
         sourceComponent: OccupiedBg {
             workspaces: workspaces
@@ -60,7 +60,7 @@ StyledRect {
         asynchronous: true
 
         anchors.left: parent.left
-        anchors.leftMargin: Appearance.padding.small
+        anchors.leftMargin: Appearance.padding.xs
 
         z: Niri.wsContextType === "workspaces" ? -10 : 0
 
@@ -78,7 +78,7 @@ StyledRect {
     //     z: Niri.wsContextType === "item" ? 10 : 1
 
     //     anchors.right: parent.right
-    //     anchors.rightMargin: -Appearance.padding.small
+    //     anchors.rightMargin: -Appearance.padding.xs
 
     //     sourceComponent: ContextIndicator {
     //         groupOffset: root.groupOffset
@@ -94,8 +94,8 @@ StyledRect {
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: Appearance.padding.small
-        spacing: Math.floor(Appearance.spacing.small / 2)
+        anchors.leftMargin: Appearance.padding.xs
+        spacing: Math.floor(Appearance.spacing.sm / 2)
 
         Repeater {
             id: workspaces

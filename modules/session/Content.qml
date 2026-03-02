@@ -12,12 +12,12 @@ Column {
 
     required property PersistentProperties visibilities
 
-    padding: Appearance.padding.large
+    padding: Appearance.padding.xl
 
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
 
-    spacing: Appearance.spacing.large
+    spacing: Appearance.spacing.xxl
 
     SessionButton {
         id: logout
@@ -135,7 +135,7 @@ Column {
 
             text: button.icon
             color: button.activeFocus ? Colours.palette.m3onSecondaryContainer : Colours.palette.m3onSurface
-            font.pointSize: Appearance.font.size.extraLarge
+            font.pointSize: Appearance.font.size.headlineLarge
             font.weight: 500
         }
     }

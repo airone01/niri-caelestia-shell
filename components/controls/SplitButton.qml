@@ -12,8 +12,8 @@ Row {
         Tonal
     }
 
-    property real horizontalPadding: Appearance.padding.normal
-    property real verticalPadding: Appearance.padding.smaller
+    property real horizontalPadding: Appearance.padding.md
+    property real verticalPadding: Appearance.padding.sm
     property int type: SplitButton.Filled
     property bool disabled
     property bool menuOnTop
@@ -33,7 +33,7 @@ Row {
     property color disabledColour: Qt.alpha(Colours.palette.m3onSurface, 0.1)
     property color disabledTextColour: Qt.alpha(Colours.palette.m3onSurface, 0.38)
 
-    spacing: Math.floor(Appearance.spacing.small / 2)
+    spacing: Math.floor(Appearance.spacing.sm / 2)
 
     StyledRect {
         radius: implicitHeight / 2 * Math.min(1, Appearance.rounding.scale)
@@ -62,7 +62,7 @@ Row {
 
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: Math.floor(root.verticalPadding / 4)
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
 
             MaterialIcon {
                 id: iconLabel
@@ -157,8 +157,8 @@ Row {
 
             anchors.top: parent.bottom
             anchors.right: parent.right
-            anchors.topMargin: Appearance.spacing.small
-            anchors.bottomMargin: Appearance.spacing.small
+            anchors.topMargin: Appearance.spacing.sm
+            anchors.bottomMargin: Appearance.spacing.sm
         }
     }
 }

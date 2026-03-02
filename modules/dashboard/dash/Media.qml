@@ -49,8 +49,8 @@ Item {
             PathAngleArc {
                 centerX: cover.x + cover.width / 2
                 centerY: cover.y + cover.height / 2
-                radiusX: (cover.width + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.small
-                radiusY: (cover.height + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.small
+                radiusX: (cover.width + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.sm
+                radiusY: (cover.height + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.sm
                 startAngle: -90 - Config.dashboard.sizes.mediaProgressSweep / 2
                 sweepAngle: Config.dashboard.sizes.mediaProgressSweep
             }
@@ -69,8 +69,8 @@ Item {
             PathAngleArc {
                 centerX: cover.x + cover.width / 2
                 centerY: cover.y + cover.height / 2
-                radiusX: (cover.width + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.small
-                radiusY: (cover.height + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.small
+                radiusX: (cover.width + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.sm
+                radiusY: (cover.height + Config.dashboard.sizes.mediaProgressThickness) / 2 + Appearance.spacing.sm
                 startAngle: -90 - Config.dashboard.sizes.mediaProgressSweep / 2
                 sweepAngle: Config.dashboard.sizes.mediaProgressSweep * root.playerProgress
             }
@@ -87,7 +87,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: Appearance.padding.large + Config.dashboard.sizes.mediaProgressThickness + Appearance.spacing.small
+        anchors.margins: Appearance.padding.xl + Config.dashboard.sizes.mediaProgressThickness + Appearance.spacing.sm
 
         implicitHeight: width
         color: Colours.tPalette.m3surfaceContainerHigh
@@ -120,15 +120,15 @@ Item {
 
         anchors.top: cover.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: Appearance.spacing.normal
+        anchors.topMargin: Appearance.spacing.lg
 
         animate: true
         horizontalAlignment: Text.AlignHCenter
         text: (Players.active?.trackTitle ?? qsTr("No media")) || qsTr("Unknown title")
         color: Colours.palette.m3primary
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
 
-        width: parent.implicitWidth - Appearance.padding.large * 2
+        width: parent.implicitWidth - Appearance.padding.xl * 2
         elide: Text.ElideRight
     }
 
@@ -137,15 +137,15 @@ Item {
 
         anchors.top: title.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: Appearance.spacing.small
+        anchors.topMargin: Appearance.spacing.sm
 
         animate: true
         horizontalAlignment: Text.AlignHCenter
         text: (Players.active?.trackAlbum ?? qsTr("No media")) || qsTr("Unknown album")
         color: Colours.palette.m3outline
-        font.pointSize: Appearance.font.size.small
+        font.pointSize: Appearance.font.size.labelLarge
 
-        width: parent.implicitWidth - Appearance.padding.large * 2
+        width: parent.implicitWidth - Appearance.padding.xl * 2
         elide: Text.ElideRight
     }
 
@@ -154,14 +154,14 @@ Item {
 
         anchors.top: album.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: Appearance.spacing.small
+        anchors.topMargin: Appearance.spacing.sm
 
         animate: true
         horizontalAlignment: Text.AlignHCenter
         text: (Players.active?.trackArtist ?? qsTr("No media")) || qsTr("Unknown artist")
         color: Colours.palette.m3secondary
 
-        width: parent.implicitWidth - Appearance.padding.large * 2
+        width: parent.implicitWidth - Appearance.padding.xl * 2
         elide: Text.ElideRight
     }
 
@@ -170,9 +170,9 @@ Item {
 
         anchors.top: artist.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: Appearance.spacing.smaller
+        anchors.topMargin: Appearance.spacing.md
 
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         Control {
             icon: "skip_previous"
@@ -209,9 +209,9 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.topMargin: Appearance.spacing.small
-        anchors.bottomMargin: Appearance.padding.large
-        anchors.margins: Appearance.padding.large * 2
+        anchors.topMargin: Appearance.spacing.sm
+        anchors.bottomMargin: Appearance.padding.xl
+        anchors.margins: Appearance.padding.xl * 2
 
         playing: Players.active?.isPlaying ?? false
         speed: BeatTracker.bpm / 300
@@ -228,7 +228,7 @@ Item {
         function onClicked(): void {
         }
 
-        implicitWidth: Math.max(icon.implicitHeight, icon.implicitHeight) + Appearance.padding.small
+        implicitWidth: Math.max(icon.implicitHeight, icon.implicitHeight) + Appearance.padding.xs
         implicitHeight: implicitWidth
 
         StateLayer {
@@ -249,7 +249,7 @@ Item {
             animate: true
             text: control.icon
             color: control.canUse ? Colours.palette.m3onSurface : Colours.palette.m3outline
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
         }
     }
 }

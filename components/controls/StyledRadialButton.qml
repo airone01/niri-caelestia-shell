@@ -11,7 +11,7 @@ StyledRect {
     property alias disabled: stateLayer.disabled
     property alias icon: icon.text
 
-    property real implicitSize: Appearance.font.size.normal
+    property real implicitSize: Appearance.font.size.bodyMedium
 
     function onClicked(): void {
     }
@@ -23,7 +23,7 @@ StyledRect {
     MaterialIcon {
         id: icon
         color: parent.onColor
-        font.pointSize: Appearance.font.size.small
+        font.pointSize: Appearance.font.size.labelLarge
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 

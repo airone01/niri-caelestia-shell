@@ -49,7 +49,7 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.padding.md
 
         StyledRect {
             Layout.fillWidth: true
@@ -59,8 +59,8 @@ Item {
 
             RowLayout {
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small
-                spacing: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
+                spacing: Appearance.padding.xs
 
                 Repeater {
                     model: processListItem.tabNames
@@ -82,7 +82,7 @@ Item {
 
                         RowLayout {
                             anchors.centerIn: parent
-                            spacing: Appearance.padding.small
+                            spacing: Appearance.padding.xs
 
                             MaterialIcon {
                                 text: {
@@ -97,7 +97,7 @@ Item {
                                         return "tab";
                                     }
                                 }
-                                font.pointSize: Appearance.font.size.small * 2
+                                font.pointSize: Appearance.font.size.labelLarge * 2
                                 color: processListItem.currentTab === individualTab.index ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurfaceVariant
                                 opacity: processListItem.currentTab === individualTab.index ? 1 : 0.7
                                 // anchors.verticalCenter: parent.verticalCenter
@@ -111,7 +111,7 @@ Item {
 
                             StyledText {
                                 text: individualTab.modelData
-                                font.pointSize: Appearance.font.size.normal
+                                font.pointSize: Appearance.font.size.bodyMedium
                                 font.weight: Font.Medium
                                 color: processListItem.currentTab === individualTab.index ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurfaceVariant
                                 // anchors.verticalCenter: parent.verticalCenter
@@ -162,7 +162,7 @@ Item {
                 id: processesTab
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
                 active: processListItem.currentTab === 0
                 visible: processListItem.currentTab === 0
                 opacity: processListItem.currentTab === 0 ? 1 : 0
@@ -180,7 +180,7 @@ Item {
                 id: performanceTab
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
                 active: processListItem.currentTab === 1
                 visible: processListItem.currentTab === 1
                 opacity: processListItem.currentTab === 1 ? 1 : 0
@@ -198,7 +198,7 @@ Item {
                 id: systemTab
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
                 active: processListItem.currentTab === 2
                 visible: processListItem.currentTab === 2
                 opacity: processListItem.currentTab === 2 ? 1 : 0

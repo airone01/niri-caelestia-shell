@@ -13,7 +13,7 @@ Rectangle {
 
     readonly property int contextWidth: Config.bar.workspaces.windowContextWidth
     readonly property int baseRadius: Appearance.rounding.normal
-    readonly property int hPadding: Appearance.padding.small
+    readonly property int hPadding: Appearance.padding.xs
     readonly property int textWidth: mouseArea.containsMouse ? contextWidth - hPadding * 2 - windowDecs.implicitWidth : contextWidth
 
     required property bool onPrimary
@@ -56,13 +56,13 @@ Rectangle {
             AnimatedText {
                 Layout.leftMargin: 0
                 text: root.displayTitle
-                font.pointSize: Appearance.font.size.extraSmall
+                font.pointSize: Appearance.font.size.labelMedium
                 font.italic: root.isFocused
                 color: root.onPrimary ? Colours.palette.m3onPrimary : Colours.palette.m3onSurfaceVariant
             }
 
             Rectangle {
-                implicitWidth: classText.width + Appearance.padding.small * 2
+                implicitWidth: classText.width + Appearance.padding.xs * 2
                 implicitHeight: classText.height
                 color: root.onPrimary ? Colours.palette.m3tertiary : "transparent"
 
@@ -78,7 +78,7 @@ Rectangle {
                     anchors.centerIn: parent
 
                     text: root.displaySubtitle
-                    font.pointSize: Appearance.font.size.ultraSmall
+                    font.pointSize: Appearance.font.size.labelSmall
                     font.family: Appearance.font.family.mono
                     font.bold: root.isFocused
                     color: root.onPrimary ? Colours.palette.m3onTertiary : Colours.palette.m3tertiaryContainer
@@ -100,7 +100,7 @@ Rectangle {
                 anchors.centerIn: parent
                 client: root.mainWindow
                 opacity: mouseArea.containsMouse ? 1 : 0
-                implicitSize: Appearance.font.size.small
+                implicitSize: Appearance.font.size.labelLarge
                 Behavior on opacity {
                     Anim {
                         duration: Appearance.anim.durations.normal

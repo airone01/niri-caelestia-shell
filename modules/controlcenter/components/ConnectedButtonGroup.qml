@@ -15,7 +15,7 @@ StyledRect {
     property string title: "" // Optional title text
 
     Layout.fillWidth: true
-    implicitHeight: layout.implicitHeight + Appearance.padding.large * 2
+    implicitHeight: layout.implicitHeight + Appearance.padding.xl * 2
     radius: Appearance.rounding.normal
     color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
     clip: true
@@ -28,19 +28,19 @@ StyledRect {
         id: layout
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.large
-        spacing: Appearance.spacing.normal
+        anchors.margins: Appearance.padding.xl
+        spacing: Appearance.spacing.lg
 
         StyledText {
             visible: root.title !== ""
             text: root.title
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
         }
 
         RowLayout {
             id: buttonRow
             Layout.alignment: Qt.AlignHCenter
-            spacing: Appearance.spacing.small
+            spacing: Appearance.spacing.sm
 
             Repeater {
                 id: repeater
@@ -79,7 +79,7 @@ StyledRect {
                     inactiveColour: Colours.layer(Colours.palette.m3surfaceContainerHighest, 2)
 
                     // Adjust width similar to utilities toggles
-                    Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.padding.large : internalChecked ? Appearance.padding.smaller : 0)
+                    Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.padding.xl : internalChecked ? Appearance.padding.sm : 0)
 
                     onClicked: {
                         if (modelData.onToggled && root.rootItem && modelData.propertyName) {

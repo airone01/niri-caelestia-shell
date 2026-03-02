@@ -18,19 +18,19 @@ Item {
         id: column
 
         anchors.centerIn: parent
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         MaterialIcon {
             Layout.alignment: Qt.AlignHCenter
             text: root.icon
-            font.pointSize: Appearance.font.size.extraLarge * 3
+            font.pointSize: Appearance.font.size.headlineLarge * 3
             font.bold: true
         }
 
         StyledText {
             Layout.alignment: Qt.AlignHCenter
             text: root.title
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             font.bold: true
         }
     }

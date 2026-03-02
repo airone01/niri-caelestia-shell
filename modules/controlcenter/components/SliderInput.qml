@@ -53,7 +53,7 @@ ColumnLayout {
 
     property bool _initialized: false
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     Component.onCompleted: {
         // Set initialized flag after a brief delay to allow component to fully load
@@ -64,12 +64,12 @@ ColumnLayout {
 
     RowLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         StyledText {
             visible: root.label !== ""
             text: root.label
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
         }
 
         Item {
@@ -130,7 +130,7 @@ ColumnLayout {
             visible: root.suffix !== ""
             text: root.suffix
             color: Colours.palette.m3outline
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
         }
     }
 
@@ -138,7 +138,7 @@ ColumnLayout {
         id: slider
 
         Layout.fillWidth: true
-        implicitHeight: Appearance.padding.normal * 3
+        implicitHeight: Appearance.padding.md * 3
 
         from: root.from
         to: root.to

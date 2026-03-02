@@ -13,7 +13,7 @@ StyledRect {
 
     anchors.left: parent.left
     anchors.right: parent.right
-    implicitHeight: layout.implicitHeight + Appearance.padding.smaller * 2
+    implicitHeight: layout.implicitHeight + Appearance.padding.sm * 2
 
     radius: Appearance.rounding.normal
     color: {
@@ -50,10 +50,10 @@ StyledRect {
         id: layout
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.smaller
-        anchors.leftMargin: Appearance.padding.normal
-        anchors.rightMargin: Appearance.padding.normal
-        spacing: Appearance.spacing.normal
+        anchors.margins: Appearance.padding.sm
+        anchors.leftMargin: Appearance.padding.md
+        anchors.rightMargin: Appearance.padding.md
+        spacing: Appearance.spacing.lg
 
         StyledRect {
             radius: Appearance.rounding.normal
@@ -68,7 +68,7 @@ StyledRect {
             }
 
             implicitWidth: implicitHeight
-            implicitHeight: icon.implicitHeight + Appearance.padding.smaller * 2
+            implicitHeight: icon.implicitHeight + Appearance.padding.sm * 2
 
             MaterialIcon {
                 id: icon
@@ -84,7 +84,7 @@ StyledRect {
                         return Colours.palette.m3onError;
                     return Colours.palette.m3onSurfaceVariant;
                 }
-                font.pointSize: Math.round(Appearance.font.size.large * 1.2)
+                font.pointSize: Math.round(Appearance.font.size.titleMedium * 1.2)
             }
         }
 
@@ -106,7 +106,7 @@ StyledRect {
                         return Colours.palette.m3onErrorContainer;
                     return Colours.palette.m3onSurface;
                 }
-                font.pointSize: Appearance.font.size.normal
+                font.pointSize: Appearance.font.size.bodyMedium
                 elide: Text.ElideRight
             }
 

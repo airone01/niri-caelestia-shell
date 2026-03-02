@@ -11,10 +11,10 @@ GridLayout {
 
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.margins: Appearance.padding.large
+    anchors.margins: Appearance.padding.xl
 
-    rowSpacing: Appearance.spacing.large
-    columnSpacing: Appearance.spacing.large
+    rowSpacing: Appearance.spacing.xxl
+    columnSpacing: Appearance.spacing.xxl
     rows: 2
     columns: 2
 
@@ -23,28 +23,28 @@ GridLayout {
     }
 
     Resource {
-        Layout.topMargin: Appearance.padding.large
+        Layout.topMargin: Appearance.padding.xl
         icon: "memory"
         value: SystemUsage.cpuPerc
         colour: Colours.palette.m3primary
     }
 
     Resource {
-        Layout.topMargin: Appearance.padding.large
+        Layout.topMargin: Appearance.padding.xl
         icon: "thermostat"
         value: Math.min(1, SystemUsage.cpuTemp / 90)
         colour: Colours.palette.m3secondary
     }
 
     Resource {
-        Layout.bottomMargin: Appearance.padding.large
+        Layout.bottomMargin: Appearance.padding.xl
         icon: "memory_alt"
         value: SystemUsage.memPerc
         colour: Colours.palette.m3secondary
     }
 
     Resource {
-        Layout.bottomMargin: Appearance.padding.large
+        Layout.bottomMargin: Appearance.padding.xl
         icon: "hard_disk"
         value: SystemUsage.storagePerc
         colour: Colours.palette.m3tertiary
@@ -68,10 +68,10 @@ GridLayout {
 
             anchors.fill: parent
             value: res.value
-            padding: Appearance.padding.large * 3
+            padding: Appearance.padding.xl * 3
             fgColour: res.colour
             bgColour: Colours.layer(Colours.palette.m3surfaceContainerHighest, 3)
-            strokeWidth: width < 200 ? Appearance.padding.smaller : Appearance.padding.normal
+            strokeWidth: width < 200 ? Appearance.padding.sm : Appearance.padding.md
         }
 
         MaterialIcon {

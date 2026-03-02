@@ -17,7 +17,7 @@ CollapsibleSection {
 
     ColumnLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.small / 2
+        spacing: Appearance.spacing.sm / 2
 
         Repeater {
             model: Schemes.list
@@ -62,9 +62,9 @@ CollapsibleSection {
                     id: schemeRow
 
                     anchors.fill: parent
-                    anchors.margins: Appearance.padding.normal
+                    anchors.margins: Appearance.padding.md
 
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     StyledRect {
                         id: preview
@@ -83,7 +83,7 @@ CollapsibleSection {
                             id: iconPlaceholder
                             visible: false
                             text: "circle"
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                         }
 
                         Item {
@@ -112,12 +112,12 @@ CollapsibleSection {
 
                         StyledText {
                             text: modelData.flavour ?? ""
-                            font.pointSize: Appearance.font.size.normal
+                            font.pointSize: Appearance.font.size.bodyMedium
                         }
 
                         StyledText {
                             text: modelData.name ?? ""
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             color: Colours.palette.m3outline
 
                             elide: Text.ElideRight
@@ -132,12 +132,12 @@ CollapsibleSection {
                         sourceComponent: MaterialIcon {
                             text: "check"
                             color: Colours.palette.m3onSurfaceVariant
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                         }
                     }
                 }
 
-                implicitHeight: schemeRow.implicitHeight + Appearance.padding.normal * 2
+                implicitHeight: schemeRow.implicitHeight + Appearance.padding.md * 2
             }
         }
     }

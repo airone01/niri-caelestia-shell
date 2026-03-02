@@ -16,7 +16,7 @@ Item {
 
     readonly property int anchorWsCount: (Niri.wsContextType === "item") ? Niri.wsContextAnchor?.windowCount : 1
     readonly property real rounding: Appearance.rounding.small
-    readonly property real padding: Appearance.padding.small
+    readonly property real padding: Appearance.padding.xs
     readonly property color bgColor: (Niri.wsContextType === "workspaces" && Niri.wsContextAnchor ? Colours.palette.m3surfaceContainer : Colours.palette.m3surfaceContainerHigh)
 
     property real cornerPieceSize: Config.bar.workspaces.windowIconSize + padding
@@ -156,7 +156,7 @@ Item {
         property int cornerType: 0 // 1 = bottom, 3 = top
         width: root.activated && Niri.wsContextAnchor ? root.cornerPieceSize : 0
         height: root.activated && Niri.wsContextAnchor ? root.cornerPieceSize / 2 : 0
-        radius: Appearance.padding.normal
+        radius: Appearance.padding.md
         orientation: cornerType
         color: parent.highlightColor
         opacity: parent.opacity

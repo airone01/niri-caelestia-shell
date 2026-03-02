@@ -25,7 +25,7 @@ StyledRect {
 
     anchors.left: parent?.left
     anchors.right: parent?.right
-    implicitHeight: content.implicitHeight + Appearance.padding.normal * 2
+    implicitHeight: content.implicitHeight + Appearance.padding.md * 2
 
     clip: true
     radius: Appearance.rounding.normal
@@ -42,9 +42,9 @@ StyledRect {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.padding.md
 
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         Item {
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
@@ -81,7 +81,7 @@ StyledRect {
                 MaterialIcon {
                     text: Icons.getNotifIcon(root.notifs[0]?.summary, root.urgency)
                     color: root.urgency === "critical" ? Colours.palette.m3onError : root.urgency === "low" ? Colours.palette.m3onSurface : Colours.palette.m3onSecondaryContainer
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                 }
             }
 
@@ -122,21 +122,21 @@ StyledRect {
         }
 
         ColumnLayout {
-            Layout.topMargin: -Appearance.padding.small
-            Layout.bottomMargin: -Appearance.padding.small / 2 - (root.expanded ? 0 : spacing)
+            Layout.topMargin: -Appearance.padding.xs
+            Layout.bottomMargin: -Appearance.padding.xs / 2 - (root.expanded ? 0 : spacing)
             Layout.fillWidth: true
-            spacing: Math.round(Appearance.spacing.small / 2)
+            spacing: Math.round(Appearance.spacing.sm / 2)
 
             RowLayout {
                 Layout.bottomMargin: -parent.spacing
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.smaller
+                spacing: Appearance.spacing.md
 
                 StyledText {
                     Layout.fillWidth: true
                     text: root.modelData
                     color: Colours.palette.m3onSurfaceVariant
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     elide: Text.ElideRight
                 }
 
@@ -144,12 +144,12 @@ StyledRect {
                     animate: true
                     text: root.notifs[0]?.timeStr ?? ""
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                 }
 
                 StyledRect {
-                    implicitWidth: expandBtn.implicitWidth + Appearance.padding.smaller * 2
-                    implicitHeight: groupCount.implicitHeight + Appearance.padding.small
+                    implicitWidth: expandBtn.implicitWidth + Appearance.padding.sm * 2
+                    implicitHeight: groupCount.implicitHeight + Appearance.padding.xs
 
                     color: root.urgency === "critical" ? Colours.palette.m3error : Colours.layer(Colours.palette.m3surfaceContainerHighest, 2)
                     radius: Appearance.rounding.full
@@ -169,20 +169,20 @@ StyledRect {
                         id: expandBtn
 
                         anchors.centerIn: parent
-                        spacing: Appearance.spacing.small / 2
+                        spacing: Appearance.spacing.sm / 2
 
                         StyledText {
                             id: groupCount
 
-                            Layout.leftMargin: Appearance.padding.small / 2
+                            Layout.leftMargin: Appearance.padding.xs / 2
                             animate: true
                             text: root.notifs.length
                             color: root.urgency === "critical" ? Colours.palette.m3onError : Colours.palette.m3onSurface
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                         }
 
                         MaterialIcon {
-                            Layout.rightMargin: -Appearance.padding.small / 2
+                            Layout.rightMargin: -Appearance.padding.xs / 2
                             animate: true
                             text: root.expanded ? "expand_less" : "expand_more"
                             color: root.urgency === "critical" ? Colours.palette.m3onError : Colours.palette.m3onSurface

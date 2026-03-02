@@ -58,7 +58,7 @@ Item {
         anchors.centerIn: parent
 
         implicitWidth: 400
-        implicitHeight: content.implicitHeight + Appearance.padding.large * 2
+        implicitHeight: content.implicitHeight + Appearance.padding.xl * 2
 
         radius: Appearance.rounding.normal
         color: Colours.tPalette.m3surface
@@ -102,20 +102,20 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: Appearance.padding.large
+            anchors.margins: Appearance.padding.xl
 
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             MaterialIcon {
                 Layout.alignment: Qt.AlignHCenter
                 text: "lock"
-                font.pointSize: Appearance.font.size.extraLarge * 2
+                font.pointSize: Appearance.font.size.headlineLarge * 2
             }
 
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
                 text: qsTr("Enter password")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: 500
             }
 
@@ -123,14 +123,14 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 text: root.network ? qsTr("Network: %1").arg(root.network.ssid) : ""
                 color: Colours.palette.m3outline
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
             }
 
             StyledText {
                 id: statusText
 
                 Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: Appearance.spacing.small
+                Layout.topMargin: Appearance.spacing.sm
                 visible: connectButton.connecting || connectButton.hasError
                 text: {
                     if (connectButton.hasError) {
@@ -142,17 +142,17 @@ Item {
                     return "";
                 }
                 color: connectButton.hasError ? Colours.palette.m3error : Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.weight: 400
                 wrapMode: Text.WordWrap
-                Layout.maximumWidth: parent.width - Appearance.padding.large * 2
+                Layout.maximumWidth: parent.width - Appearance.padding.xl * 2
             }
 
             Item {
                 id: passwordContainer
-                Layout.topMargin: Appearance.spacing.large
+                Layout.topMargin: Appearance.spacing.xxl
                 Layout.fillWidth: true
-                implicitHeight: Math.max(48, charList.implicitHeight + Appearance.padding.normal * 2)
+                implicitHeight: Math.max(48, charList.implicitHeight + Appearance.padding.md * 2)
 
                 focus: true
                 Keys.onPressed: event => {
@@ -250,7 +250,7 @@ Item {
                     anchors.centerIn: parent
                     text: qsTr("Password")
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.family: Appearance.font.family.mono
                     opacity: passwordContainer.passwordBuffer ? 0 : 1
 
@@ -266,10 +266,10 @@ Item {
 
                     anchors.centerIn: parent
                     implicitWidth: fullWidth
-                    implicitHeight: Appearance.font.size.normal
+                    implicitHeight: Appearance.font.size.bodyMedium
 
                     orientation: Qt.Horizontal
-                    spacing: Appearance.spacing.small / 2
+                    spacing: Appearance.spacing.sm / 2
                     interactive: false
 
                     model: ScriptModel {
@@ -339,15 +339,15 @@ Item {
             }
 
             RowLayout {
-                Layout.topMargin: Appearance.spacing.normal
+                Layout.topMargin: Appearance.spacing.lg
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 TextButton {
                     id: cancelButton
 
                     Layout.fillWidth: true
-                    Layout.minimumHeight: Appearance.font.size.normal + Appearance.padding.normal * 2
+                    Layout.minimumHeight: Appearance.font.size.bodyMedium + Appearance.padding.md * 2
                     inactiveColour: Colours.palette.m3secondaryContainer
                     inactiveOnColour: Colours.palette.m3onSecondaryContainer
                     text: qsTr("Cancel")
@@ -362,7 +362,7 @@ Item {
                     property bool hasError: false
 
                     Layout.fillWidth: true
-                    Layout.minimumHeight: Appearance.font.size.normal + Appearance.padding.normal * 2
+                    Layout.minimumHeight: Appearance.font.size.bodyMedium + Appearance.padding.md * 2
                     inactiveColour: Colours.palette.m3primary
                     inactiveOnColour: Colours.palette.m3onPrimary
                     text: qsTr("Connect")

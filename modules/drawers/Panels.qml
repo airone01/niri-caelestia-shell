@@ -145,6 +145,6 @@ Item {
         width: implicitWidth
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.padding.md
     }
 }

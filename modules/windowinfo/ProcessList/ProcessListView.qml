@@ -22,8 +22,8 @@ Column {
         id: columnHeaders
 
         width: parent.width
-        anchors.leftMargin: Appearance.padding.small
-        height: 24 + Appearance.padding.large
+        anchors.leftMargin: Appearance.padding.xs
+        height: 24 + Appearance.padding.xl
 
         StyledRect {
             width: 80
@@ -31,12 +31,12 @@ Column {
             color: processHeaderArea.containsMouse ? Qt.rgba(Colours.palette.m3onSurface.r, Colours.palette.m3onSurface.g, Colours.palette.m3onSurface.b, 0.08) : "transparent"
             radius: Appearance.rounding.small
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.normal
+            anchors.leftMargin: Appearance.padding.md
             anchors.verticalCenter: parent.verticalCenter
 
             StyledText {
                 text: "Process"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: SysMonitorService.sortBy === "name" ? Font.Bold : Font.Medium
                 color: Colours.palette.m3onSurface
@@ -74,7 +74,7 @@ Column {
 
             StyledText {
                 text: "CPU"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: SysMonitorService.sortBy === "cpu" ? Font.Bold : Font.Medium
                 color: Colours.palette.m3primary
@@ -112,7 +112,7 @@ Column {
 
             StyledText {
                 text: "RAM"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: SysMonitorService.sortBy === "memory" ? Font.Bold : Font.Medium
                 color: Colours.palette.m3tertiary
@@ -150,7 +150,7 @@ Column {
 
             StyledText {
                 text: "PID"
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 font.family: Appearance.font.family.mono
                 font.weight: SysMonitorService.sortBy === "pid" ? Font.Bold : Font.Medium
                 color: Colours.palette.m3onSurface
@@ -189,7 +189,7 @@ Column {
 
             StyledText {
                 text: SysMonitorService.sortDescending ? "↓" : "↑"
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 color: Colours.palette.m3onSurface
                 anchors.centerIn: parent
             }

@@ -66,7 +66,7 @@ ScrollBar {
         }
     }
 
-    implicitWidth: flickable ? Appearance.padding.small : 6
+    implicitWidth: flickable ? Appearance.padding.xs : 6
 
     contentItem: StyledRect {
         anchors.left: parent ? parent.left : undefined

@@ -43,8 +43,8 @@ StackView {
         property bool isSubMenu
         property bool shown
 
-        padding: Appearance.padding.smaller
-        spacing: Appearance.spacing.small
+        padding: Appearance.padding.sm
+        spacing: Appearance.spacing.sm
 
         opacity: shown ? 1 : 0
         scale: shown ? 1 : 0.8
@@ -95,9 +95,9 @@ StackView {
                         implicitHeight: label.implicitHeight
 
                         StateLayer {
-                            anchors.margins: -Appearance.padding.small / 2
-                            anchors.leftMargin: -Appearance.padding.smaller
-                            anchors.rightMargin: -Appearance.padding.smaller
+                            anchors.margins: -Appearance.padding.xs / 2
+                            anchors.leftMargin: -Appearance.padding.sm
+                            anchors.rightMargin: -Appearance.padding.sm
 
                             radius: item.radius
                             disabled: !item.modelData.enabled
@@ -135,7 +135,7 @@ StackView {
                             id: label
 
                             anchors.left: icon.right
-                            anchors.leftMargin: icon.active ? Appearance.spacing.smaller : 0
+                            anchors.leftMargin: icon.active ? Appearance.spacing.md : 0
 
                             text: labelMetrics.elidedText
                             color: item.modelData.enabled ? Colours.palette.m3onSurface : Colours.palette.m3outline
@@ -149,7 +149,7 @@ StackView {
                             font.family: label.font.family
 
                             elide: Text.ElideRight
-                            elideWidth: Config.bar.sizes.trayMenuWidth - (icon.active ? icon.implicitWidth + label.anchors.leftMargin : 0) - (expand.active ? expand.implicitWidth + Appearance.spacing.normal : 0)
+                            elideWidth: Config.bar.sizes.trayMenuWidth - (icon.active ? icon.implicitWidth + label.anchors.leftMargin : 0) - (expand.active ? expand.implicitWidth + Appearance.spacing.lg : 0)
                         }
 
                         Loader {
@@ -177,7 +177,7 @@ StackView {
 
             sourceComponent: Item {
                 implicitWidth: back.implicitWidth
-                implicitHeight: back.implicitHeight + Appearance.spacing.small / 2
+                implicitHeight: back.implicitHeight + Appearance.spacing.sm / 2
 
                 Item {
                     anchors.bottom: parent.bottom
@@ -186,9 +186,9 @@ StackView {
 
                     StyledRect {
                         anchors.fill: parent
-                        anchors.margins: -Appearance.padding.small / 2
-                        anchors.leftMargin: -Appearance.padding.smaller
-                        anchors.rightMargin: -Appearance.padding.smaller * 2
+                        anchors.margins: -Appearance.padding.xs / 2
+                        anchors.leftMargin: -Appearance.padding.sm
+                        anchors.rightMargin: -Appearance.padding.sm * 2
 
                         radius: Appearance.rounding.full
                         color: Colours.palette.m3secondaryContainer

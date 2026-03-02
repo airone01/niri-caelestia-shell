@@ -12,7 +12,7 @@ TextField {
     color: Colours.palette.m3onSurface
     placeholderTextColor: Colours.palette.m3outline
     font.family: Appearance.font.family.sans
-    font.pointSize: Appearance.font.size.smaller
+    font.pointSize: Appearance.font.size.bodySmall
     renderType: TextField.NativeRendering
     cursorVisible: !readOnly
 

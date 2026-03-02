@@ -17,8 +17,8 @@ StyledRect {
     property alias text: label.text
     property bool checked
     property bool toggle
-    property real horizontalPadding: Appearance.padding.normal
-    property real verticalPadding: Appearance.padding.smaller
+    property real horizontalPadding: Appearance.padding.md
+    property real verticalPadding: Appearance.padding.sm
     property alias font: label.font
     property int type: IconTextButton.Filled
 
@@ -58,7 +58,7 @@ StyledRect {
         id: row
 
         anchors.centerIn: parent
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         MaterialIcon {
             id: iconLabel

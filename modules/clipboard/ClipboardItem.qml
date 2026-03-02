@@ -46,8 +46,8 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: Appearance.padding.smaller
-        spacing: Appearance.spacing.small
+        anchors.margins: Appearance.padding.sm
+        spacing: Appearance.spacing.sm
 
         /* IMAGE PREVIEW */
         StyledClippingRect {
@@ -89,8 +89,8 @@ Item {
                 fillMode: Image.PreserveAspectFit
                 asynchronous: true
                 cache: false
-                width: parent.width - Appearance.padding.normal * 2
-                height: parent.height - Appearance.padding.normal * 2
+                width: parent.width - Appearance.padding.md * 2
+                height: parent.height - Appearance.padding.md * 2
                 smooth: true
 
                 // Retry loading if it fails initially
@@ -126,7 +126,7 @@ Item {
                 MaterialIcon {
                     anchors.centerIn: parent
                     text: "progress_activity"
-                    font.pointSize: Appearance.font.size.larger
+                    font.pointSize: Appearance.font.size.bodyLarge
                     color: Colours.palette.m3primary
 
                     RotationAnimation on rotation {
@@ -142,19 +142,19 @@ Item {
             Column {
                 visible: root.isImageEntry && previewImage.status === Image.Error
                 anchors.centerIn: parent
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 MaterialIcon {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: "broken_image"
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     color: Colours.palette.m3outline
                 }
 
                 StyledText {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: qsTr("Image Preview")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3outline
                 }
             }
@@ -164,19 +164,19 @@ Item {
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: !root.isImageEntry
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             // Icon indicator
             MaterialIcon {
                 text: root.isImageEntry ? "image" : "content_paste"
-                font.pointSize: Appearance.font.size.larger
+                font.pointSize: Appearance.font.size.bodyLarge
                 color: root.isImageEntry ? Colours.palette.m3tertiary : Colours.palette.m3primary
             }
 
             StyledText {
                 Layout.fillWidth: true
                 text: root.entryText
-                font.pointSize: Appearance.font.size.smaller
+                font.pointSize: Appearance.font.size.bodySmall
                 elide: Text.ElideRight
                 maximumLineCount: 1
             }
@@ -207,7 +207,7 @@ Item {
                     id: copyIcon
                     anchors.centerIn: parent
                     text: "content_copy"
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     color: Colours.palette.m3primary
                     opacity: copyFeedback.opacity === 0 ? 1 : 0
 
@@ -222,7 +222,7 @@ Item {
                     id: copyFeedback
                     anchors.centerIn: parent
                     text: "check"
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     color: Colours.palette.m3tertiary
                     opacity: 0
 
@@ -260,7 +260,7 @@ Item {
                 MaterialIcon {
                     anchors.centerIn: parent
                     text: "delete"
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     color: Colours.palette.m3error
                 }
             }

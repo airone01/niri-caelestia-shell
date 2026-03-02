@@ -9,7 +9,7 @@ StyledRect {
     required property var dialog
     required property FolderContents folder
 
-    implicitHeight: inner.implicitHeight + Appearance.padding.normal * 2
+    implicitHeight: inner.implicitHeight + Appearance.padding.md * 2
 
     color: Colours.tPalette.m3surfaceContainer
 
@@ -17,9 +17,9 @@ StyledRect {
         id: inner
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.padding.md
 
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         StyledText {
             text: qsTr("Filter:")
@@ -28,14 +28,14 @@ StyledRect {
         StyledRect {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.rightMargin: Appearance.spacing.normal
+            Layout.rightMargin: Appearance.spacing.lg
 
             color: Colours.tPalette.m3surfaceContainerHigh
             radius: Appearance.rounding.small
 
             StyledText {
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.padding.md
 
                 text: `${root.dialog.filterLabel} (${root.dialog.filters.map(f => `*.${f}`).join(", ")})`
             }
@@ -45,8 +45,8 @@ StyledRect {
             color: Colours.tPalette.m3surfaceContainerHigh
             radius: Appearance.rounding.small
 
-            implicitWidth: cancelText.implicitWidth + Appearance.padding.normal * 2
-            implicitHeight: cancelText.implicitHeight + Appearance.padding.normal * 2
+            implicitWidth: cancelText.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: cancelText.implicitHeight + Appearance.padding.md * 2
 
             StateLayer {
                 disabled: !root.dialog.selectionValid
@@ -60,7 +60,7 @@ StyledRect {
                 id: selectText
 
                 anchors.centerIn: parent
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.padding.md
 
                 text: qsTr("Select")
                 color: root.dialog.selectionValid ? Colours.palette.m3onSurface : Colours.palette.m3outline
@@ -71,8 +71,8 @@ StyledRect {
             color: Colours.tPalette.m3surfaceContainerHigh
             radius: Appearance.rounding.small
 
-            implicitWidth: cancelText.implicitWidth + Appearance.padding.normal * 2
-            implicitHeight: cancelText.implicitHeight + Appearance.padding.normal * 2
+            implicitWidth: cancelText.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: cancelText.implicitHeight + Appearance.padding.md * 2
 
             StateLayer {
                 function onClicked(): void {
@@ -84,7 +84,7 @@ StyledRect {
                 id: cancelText
 
                 anchors.centerIn: parent
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.padding.md
 
                 text: qsTr("Cancel")
             }

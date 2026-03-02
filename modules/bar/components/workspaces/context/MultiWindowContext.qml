@@ -11,8 +11,8 @@ Rectangle {
 
     readonly property int contextWidth: Config.bar.workspaces.windowContextWidth
     readonly property int baseRadius: Appearance.rounding.normal
-    readonly property int hPadding: Appearance.padding.small
-    readonly property int sideMargin: Appearance.padding.large
+    readonly property int hPadding: Appearance.padding.xs
+    readonly property int sideMargin: Appearance.padding.xl
     readonly property int textWidth: contextWidth - hPadding * 2
 
     required property var windows
@@ -131,7 +131,7 @@ Rectangle {
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: Appearance.padding.small
+            anchors.leftMargin: Appearance.padding.xs
             Layout.alignment: Qt.AlignVCenter
 
             Rectangle {
@@ -153,7 +153,7 @@ Rectangle {
 
                     anchors.centerIn: parent
                     text: multiWindowContent.index + 1
-                    font.pointSize: Appearance.font.size.ultraSmall
+                    font.pointSize: Appearance.font.size.labelSmall
                     font.family: Appearance.font.family.mono
                     font.bold: true
                     color: multiWindowContent.itemIsFocused ? Colours.palette.m3onTertiary : Colours.palette.m3onTertiary
@@ -169,13 +169,13 @@ Rectangle {
                     Layout.alignment: Qt.AlignVCenter
 
                     text: multiWindowContent.displayTitle
-                    font.pointSize: Appearance.font.size.extraSmall
+                    font.pointSize: Appearance.font.size.labelMedium
                     font.italic: multiWindowContent.itemIsFocused
                     color: multiWindowContent.itemIsFocused ? Colours.palette.m3onPrimary : (multiWindowContent.onPrimary ? Colours.palette.m3onSurfaceVariant : Colours.palette.m3onSurfaceVariant)
                 }
 
                 Rectangle {
-                    implicitWidth: classText.width + Appearance.padding.small * 2
+                    implicitWidth: classText.width + Appearance.padding.xs * 2
                     implicitHeight: classText.height
                     color: multiWindowContent.itemIsFocused ? Colours.palette.m3tertiary : "transparent"
 
@@ -193,7 +193,7 @@ Rectangle {
                         anchors.centerIn: parent
 
                         text: multiWindowContent.displaySubtitle
-                        font.pointSize: Appearance.font.size.ultraSmall
+                        font.pointSize: Appearance.font.size.labelSmall
                         font.family: Appearance.font.family.mono
                         font.bold: multiWindowContent.itemIsFocused
                         color: multiWindowContent.itemIsFocused ? Colours.palette.m3onTertiary : Colours.palette.m3tertiaryContainer
@@ -202,7 +202,7 @@ Rectangle {
 
                 // AnimatedText {
                 //     text: multiWindowContent.displaySubtitle
-                //     font.pointSize: Appearance.font.size.ultraSmall
+                //     font.pointSize: Appearance.font.size.labelSmall
                 //     font.family: Appearance.font.family.mono
                 //     font.bold: multiWindowContent.itemIsFocused
                 //     color: multiWindowContent.itemIsFocused ? Colours.palette.m3onPrimary : Colours.palette.m3tertiaryContainer

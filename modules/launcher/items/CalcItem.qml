@@ -34,13 +34,13 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        anchors.margins: Appearance.padding.larger
+        anchors.margins: Appearance.padding.lg
 
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         MaterialIcon {
             text: "function"
-            font.pointSize: Appearance.font.size.extraLarge
+            font.pointSize: Appearance.font.size.headlineLarge
             Layout.alignment: Qt.AlignVCenter
         }
 
@@ -67,8 +67,8 @@ Item {
             radius: Appearance.rounding.normal
             clip: true
 
-            implicitWidth: (stateLayer.containsMouse ? label.implicitWidth + label.anchors.rightMargin : 0) + icon.implicitWidth + Appearance.padding.normal * 2
-            implicitHeight: Math.max(label.implicitHeight, icon.implicitHeight) + Appearance.padding.small * 2
+            implicitWidth: (stateLayer.containsMouse ? label.implicitWidth + label.anchors.rightMargin : 0) + icon.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: Math.max(label.implicitHeight, icon.implicitHeight) + Appearance.padding.xs * 2
 
             Layout.alignment: Qt.AlignVCenter
 
@@ -88,11 +88,11 @@ Item {
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: icon.left
-                anchors.rightMargin: Appearance.spacing.small
+                anchors.rightMargin: Appearance.spacing.sm
 
                 text: qsTr("Open in calculator")
                 color: Colours.palette.m3onTertiary
-                font.pointSize: Appearance.font.size.normal
+                font.pointSize: Appearance.font.size.bodyMedium
 
                 opacity: stateLayer.containsMouse ? 1 : 0
 
@@ -106,11 +106,11 @@ Item {
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
-                anchors.rightMargin: Appearance.padding.normal
+                anchors.rightMargin: Appearance.padding.md
 
                 text: "open_in_new"
                 color: Colours.palette.m3onTertiary
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
             }
 
             Behavior on implicitWidth {

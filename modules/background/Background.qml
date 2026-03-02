@@ -56,8 +56,8 @@ Loader {
                 id: clockLoader
                 active: Config.background.desktopClock.enabled
 
-                anchors.margins: Appearance.padding.large * 2
-                anchors.leftMargin: Appearance.padding.large * 2 + Config.bar.sizes.innerWidth + Math.max(Appearance.padding.smaller, Config.border.thickness)
+                anchors.margins: Appearance.padding.xl * 2
+                anchors.leftMargin: Appearance.padding.xl * 2 + Config.bar.sizes.innerWidth + Math.max(Appearance.padding.sm, Config.border.thickness)
 
                 state: Config.background.desktopClock.position
                 states: [

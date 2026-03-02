@@ -14,11 +14,11 @@ GridView {
 
     required property Session session
 
-    readonly property int minCellWidth: 200 + Appearance.spacing.normal
+    readonly property int minCellWidth: 200 + Appearance.spacing.lg
     readonly property int columnsCount: Math.max(1, Math.floor(width / minCellWidth))
 
     cellWidth: width / columnsCount
-    cellHeight: 140 + Appearance.spacing.normal
+    cellHeight: 140 + Appearance.spacing.lg
 
     model: Wallpapers.list
 
@@ -36,7 +36,7 @@ GridView {
         height: root.cellHeight
 
         readonly property bool isCurrent: modelData && modelData.path === Wallpapers.actualCurrent
-        readonly property real itemMargin: Appearance.spacing.normal / 2
+        readonly property real itemMargin: Appearance.spacing.lg / 2
         readonly property real itemRadius: Appearance.rounding.normal
 
         StateLayer {
@@ -129,7 +129,7 @@ GridView {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
 
-                implicitHeight: filenameText.implicitHeight + Appearance.padding.normal * 1.5
+                implicitHeight: filenameText.implicitHeight + Appearance.padding.md * 1.5
                 radius: 0
 
                 gradient: Gradient {
@@ -189,12 +189,12 @@ GridView {
             MaterialIcon {
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.margins: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
 
                 visible: isCurrent
                 text: "check_circle"
                 color: Colours.palette.m3primary
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
             }
         }
 
@@ -203,12 +203,12 @@ GridView {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.leftMargin: Appearance.padding.normal + Appearance.spacing.normal / 2
-            anchors.rightMargin: Appearance.padding.normal + Appearance.spacing.normal / 2
-            anchors.bottomMargin: Appearance.padding.normal
+            anchors.leftMargin: Appearance.padding.md + Appearance.spacing.lg / 2
+            anchors.rightMargin: Appearance.padding.md + Appearance.spacing.lg / 2
+            anchors.bottomMargin: Appearance.padding.md
 
             text: modelData.name
-            font.pointSize: Appearance.font.size.smaller
+            font.pointSize: Appearance.font.size.bodySmall
             font.weight: 500
             color: isCurrent ? Colours.palette.m3primary : Colours.palette.m3onSurface
             elide: Text.ElideMiddle

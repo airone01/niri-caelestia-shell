@@ -59,9 +59,9 @@ Item {
     ClippingRectangle {
         id: dashboardClippingRect
         anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.padding.md
         anchors.leftMargin: 0
-        anchors.rightMargin: Appearance.padding.normal
+        anchors.rightMargin: Appearance.padding.md
 
         radius: dashboardBorder.innerRadius
         color: "transparent"
@@ -70,9 +70,9 @@ Item {
             id: dashboardLoader
 
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large + Appearance.padding.normal
-            anchors.leftMargin: Appearance.padding.large
-            anchors.rightMargin: Appearance.padding.large
+            anchors.margins: Appearance.padding.xl + Appearance.padding.md
+            anchors.leftMargin: Appearance.padding.xl
+            anchors.rightMargin: Appearance.padding.xl
 
             sourceComponent: dashboardContentComponent
         }
@@ -81,7 +81,7 @@ Item {
     InnerBorder {
         id: dashboardBorder
         leftThickness: 0
-        rightThickness: Appearance.padding.normal
+        rightThickness: Appearance.padding.md
     }
 
     Component {
@@ -102,14 +102,14 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
 
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 RowLayout {
-                    spacing: Appearance.spacing.smaller
+                    spacing: Appearance.spacing.md
 
                     StyledText {
                         text: qsTr("Dashboard")
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                         font.weight: 500
                     }
                 }

@@ -18,7 +18,7 @@ ColumnLayout {
     property bool showHeader: true
     property int pendingSwitchIndex: -1
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
 
     Connections {
         target: VPN
@@ -70,7 +70,7 @@ ColumnLayout {
         Layout.preferredHeight: contentHeight
 
         interactive: false
-        spacing: Appearance.spacing.smaller
+        spacing: Appearance.spacing.md
 
         model: ScriptModel {
             values: Config.utilities.vpn.provider.map((provider, index) => {
@@ -115,13 +115,13 @@ ColumnLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.margins: Appearance.padding.normal
+                    anchors.margins: Appearance.padding.md
 
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     StyledRect {
                         implicitWidth: implicitHeight
-                        implicitHeight: icon.implicitHeight + Appearance.padding.normal * 2
+                        implicitHeight: icon.implicitHeight + Appearance.padding.md * 2
 
                         radius: Appearance.rounding.normal
                         color: modelData.enabled && VPN.connected ? Colours.palette.m3primaryContainer : Colours.tPalette.m3surfaceContainerHigh
@@ -131,7 +131,7 @@ ColumnLayout {
 
                             anchors.centerIn: parent
                             text: modelData.enabled && VPN.connected ? "vpn_key" : "vpn_key_off"
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             fill: modelData.enabled && VPN.connected ? 1 : 0
                             color: modelData.enabled && VPN.connected ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3onSurface
                         }
@@ -152,7 +152,7 @@ ColumnLayout {
 
                         RowLayout {
                             Layout.fillWidth: true
-                            spacing: Appearance.spacing.smaller
+                            spacing: Appearance.spacing.md
 
                             StyledText {
                                 Layout.fillWidth: true
@@ -166,7 +166,7 @@ ColumnLayout {
                                     return qsTr("Disabled");
                                 }
                                 color: modelData.enabled ? (VPN.connected ? Colours.palette.m3primary : Colours.palette.m3onSurface) : Colours.palette.m3outline
-                                font.pointSize: Appearance.font.size.small
+                                font.pointSize: Appearance.font.size.labelLarge
                                 font.weight: modelData.enabled && VPN.connected ? 500 : 400
                                 elide: Text.ElideRight
                             }
@@ -175,7 +175,7 @@ ColumnLayout {
 
                     StyledRect {
                         implicitWidth: implicitHeight
-                        implicitHeight: connectIcon.implicitHeight + Appearance.padding.smaller * 2
+                        implicitHeight: connectIcon.implicitHeight + Appearance.padding.sm * 2
 
                         radius: Appearance.rounding.full
                         color: Qt.alpha(Colours.palette.m3primaryContainer, VPN.connected && modelData.enabled ? 1 : 0)
@@ -229,7 +229,7 @@ ColumnLayout {
 
                     StyledRect {
                         implicitWidth: implicitHeight
-                        implicitHeight: deleteIcon.implicitHeight + Appearance.padding.smaller * 2
+                        implicitHeight: deleteIcon.implicitHeight + Appearance.padding.sm * 2
 
                         radius: Appearance.rounding.full
                         color: "transparent"
@@ -257,7 +257,7 @@ ColumnLayout {
                     }
                 }
 
-                implicitHeight: rowLayout.implicitHeight + Appearance.padding.normal * 2
+                implicitHeight: rowLayout.implicitHeight + Appearance.padding.md * 2
             }
         }
     }
@@ -274,8 +274,8 @@ ColumnLayout {
         parent: Overlay.overlay
         x: Math.round((parent.width - width) / 2)
         y: Math.round((parent.height - height) / 2)
-        implicitWidth: Math.min(400, parent.width - Appearance.padding.large * 2)
-        padding: Appearance.padding.large * 1.5
+        implicitWidth: Math.min(400, parent.width - Appearance.padding.xl * 2)
+        padding: Appearance.padding.xl * 1.5
 
         modal: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
@@ -429,7 +429,7 @@ ColumnLayout {
                 id: selectionContent
 
                 anchors.fill: parent
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
                 visible: vpnDialog.currentState === "selection"
                 opacity: vpnDialog.currentState === "selection" ? 1 : 0
 
@@ -442,7 +442,7 @@ ColumnLayout {
 
                 StyledText {
                     text: qsTr("Add VPN Provider")
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.weight: 500
                 }
 
@@ -451,11 +451,11 @@ ColumnLayout {
                     text: qsTr("Choose a provider to add")
                     wrapMode: Text.WordWrap
                     color: Colours.palette.m3outline
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                 }
 
                 TextButton {
-                    Layout.topMargin: Appearance.spacing.normal
+                    Layout.topMargin: Appearance.spacing.lg
                     Layout.fillWidth: true
                     text: qsTr("NetBird")
                     inactiveColour: Colours.tPalette.m3surfaceContainerHigh
@@ -529,7 +529,7 @@ ColumnLayout {
                 }
 
                 TextButton {
-                    Layout.topMargin: Appearance.spacing.normal
+                    Layout.topMargin: Appearance.spacing.lg
                     Layout.fillWidth: true
                     text: qsTr("Cancel")
                     inactiveColour: Colours.palette.m3secondaryContainer
@@ -542,7 +542,7 @@ ColumnLayout {
                 id: formContent
 
                 anchors.fill: parent
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
                 visible: vpnDialog.currentState === "form"
                 opacity: vpnDialog.currentState === "form" ? 1 : 0
 
@@ -555,17 +555,17 @@ ColumnLayout {
 
                 StyledText {
                     text: vpnDialog.editIndex >= 0 ? qsTr("Edit VPN Provider") : qsTr("Add %1 VPN").arg(vpnDialog.displayName)
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.weight: 500
                 }
 
                 ColumnLayout {
                     Layout.fillWidth: true
-                    spacing: Appearance.spacing.smaller / 2
+                    spacing: Appearance.spacing.md / 2
 
                     StyledText {
                         text: qsTr("Display Name")
-                        font.pointSize: Appearance.font.size.small
+                        font.pointSize: Appearance.font.size.labelLarge
                         color: Colours.palette.m3onSurfaceVariant
                     }
 
@@ -587,7 +587,7 @@ ColumnLayout {
                         StyledTextField {
                             id: displayNameField
                             anchors.centerIn: parent
-                            width: parent.width - Appearance.padding.normal
+                            width: parent.width - Appearance.padding.md
                             horizontalAlignment: TextInput.AlignLeft
                             text: vpnDialog.displayName
                             onTextChanged: vpnDialog.displayName = text
@@ -597,11 +597,11 @@ ColumnLayout {
 
                 ColumnLayout {
                     Layout.fillWidth: true
-                    spacing: Appearance.spacing.smaller / 2
+                    spacing: Appearance.spacing.md / 2
 
                     StyledText {
                         text: qsTr("Interface (e.g., wg0, torguard)")
-                        font.pointSize: Appearance.font.size.small
+                        font.pointSize: Appearance.font.size.labelLarge
                         color: Colours.palette.m3onSurfaceVariant
                     }
 
@@ -623,7 +623,7 @@ ColumnLayout {
                         StyledTextField {
                             id: interfaceNameField
                             anchors.centerIn: parent
-                            width: parent.width - Appearance.padding.normal
+                            width: parent.width - Appearance.padding.md
                             horizontalAlignment: TextInput.AlignLeft
                             text: vpnDialog.interfaceName
                             onTextChanged: vpnDialog.interfaceName = text
@@ -632,9 +632,9 @@ ColumnLayout {
                 }
 
                 RowLayout {
-                    Layout.topMargin: Appearance.spacing.normal
+                    Layout.topMargin: Appearance.spacing.lg
                     Layout.fillWidth: true
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     TextButton {
                         Layout.fillWidth: true

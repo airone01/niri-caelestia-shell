@@ -10,14 +10,14 @@ ColumnLayout {
     required property string icon
     required property string title
 
-    spacing: Appearance.spacing.normal
+    spacing: Appearance.spacing.lg
     Layout.alignment: Qt.AlignHCenter
 
     MaterialIcon {
         Layout.alignment: Qt.AlignHCenter
         animate: true
         text: root.icon
-        font.pointSize: Appearance.font.size.extraLarge * 3
+        font.pointSize: Appearance.font.size.headlineLarge * 3
         font.bold: true
     }
 
@@ -25,7 +25,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
         animate: true
         text: root.title
-        font.pointSize: Appearance.font.size.large
+        font.pointSize: Appearance.font.size.titleMedium
         font.bold: true
     }
 }

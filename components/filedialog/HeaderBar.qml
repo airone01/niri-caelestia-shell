@@ -11,8 +11,8 @@ StyledRect {
 
     required property var dialog
 
-    implicitWidth: inner.implicitWidth + Appearance.padding.normal * 2
-    implicitHeight: inner.implicitHeight + Appearance.padding.normal * 2
+    implicitWidth: inner.implicitWidth + Appearance.padding.md * 2
+    implicitHeight: inner.implicitHeight + Appearance.padding.md * 2
 
     color: Colours.tPalette.m3surfaceContainer
 
@@ -20,12 +20,12 @@ StyledRect {
         id: inner
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
-        spacing: Appearance.spacing.small
+        anchors.margins: Appearance.padding.md
+        spacing: Appearance.spacing.sm
 
         Item {
             implicitWidth: implicitHeight
-            implicitHeight: upIcon.implicitHeight + Appearance.padding.small * 2
+            implicitHeight: upIcon.implicitHeight + Appearance.padding.xs * 2
 
             StateLayer {
                 radius: Appearance.rounding.small
@@ -58,10 +58,10 @@ StyledRect {
                 id: pathComponents
 
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small / 2
+                anchors.margins: Appearance.padding.xs / 2
                 anchors.leftMargin: 0
 
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 Repeater {
                     model: root.dialog.cwd
@@ -75,7 +75,7 @@ StyledRect {
                         spacing: 0
 
                         Loader {
-                            Layout.rightMargin: Appearance.spacing.small
+                            Layout.rightMargin: Appearance.spacing.sm
                             active: folder.index > 0
                             asynchronous: true
                             sourceComponent: StyledText {
@@ -86,8 +86,8 @@ StyledRect {
                         }
 
                         Item {
-                            implicitWidth: homeIcon.implicitWidth + (homeIcon.active ? Appearance.padding.small : 0) + folderName.implicitWidth + Appearance.padding.normal * 2
-                            implicitHeight: folderName.implicitHeight + Appearance.padding.small * 2
+                            implicitWidth: homeIcon.implicitWidth + (homeIcon.active ? Appearance.padding.xs : 0) + folderName.implicitWidth + Appearance.padding.md * 2
+                            implicitHeight: folderName.implicitHeight + Appearance.padding.xs * 2
 
                             Loader {
                                 anchors.fill: parent
@@ -107,7 +107,7 @@ StyledRect {
 
                                 anchors.left: parent.left
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.leftMargin: Appearance.padding.normal
+                                anchors.leftMargin: Appearance.padding.md
 
                                 active: folder.index === 0 && folder.modelData === "Home"
                                 asynchronous: true
@@ -123,7 +123,7 @@ StyledRect {
 
                                 anchors.left: homeIcon.right
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.leftMargin: homeIcon.active ? Appearance.padding.small : 0
+                                anchors.leftMargin: homeIcon.active ? Appearance.padding.xs : 0
 
                                 text: folder.modelData
                                 color: folder.index < root.dialog.cwd.length - 1 ? Colours.palette.m3onSurfaceVariant : Colours.palette.m3onSurface

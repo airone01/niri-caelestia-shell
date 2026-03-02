@@ -9,11 +9,12 @@ RowLayout {
 
     required property var lock
 
-    spacing: Appearance.spacing.large * 2
+    spacing: Appearance.spacing.xxl * 2
 
     ColumnLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.normal
+        visible: Config.lock.showExtras
+        spacing: Appearance.spacing.lg
 
         StyledRect {
             Layout.fillWidth: true
@@ -62,7 +63,8 @@ RowLayout {
 
     ColumnLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.normal
+        visible: Config.lock.showExtras
+        spacing: Appearance.spacing.lg
 
         StyledRect {
             Layout.fillWidth: true

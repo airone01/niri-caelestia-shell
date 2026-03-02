@@ -19,7 +19,7 @@ CollapsibleSection {
     showBackground: true
 
     ColumnLayout {
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
         Layout.fillWidth: true
 
     CollapsibleSection {
@@ -40,7 +40,7 @@ CollapsibleSection {
                 property alias contentHeight: materialFontList.contentHeight
 
                 clip: true
-                spacing: Appearance.spacing.small / 2
+                spacing: Appearance.spacing.sm / 2
                 model: Qt.fontFamilies()
 
                 StyledScrollBar.vertical: StyledScrollBar {
@@ -72,13 +72,13 @@ CollapsibleSection {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.margins: Appearance.padding.normal
+                        anchors.margins: Appearance.padding.md
 
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         StyledText {
                             text: modelData
-                            font.pointSize: Appearance.font.size.normal
+                            font.pointSize: Appearance.font.size.bodyMedium
                         }
 
                         Item {
@@ -91,12 +91,12 @@ CollapsibleSection {
                             sourceComponent: MaterialIcon {
                                 text: "check"
                                 color: Colours.palette.m3onSurfaceVariant
-                                font.pointSize: Appearance.font.size.large
+                                font.pointSize: Appearance.font.size.titleMedium
                             }
                         }
                     }
 
-                    implicitHeight: fontFamilyMaterialRow.implicitHeight + Appearance.padding.normal * 2
+                    implicitHeight: fontFamilyMaterialRow.implicitHeight + Appearance.padding.md * 2
                 }
             }
         }
@@ -119,7 +119,7 @@ CollapsibleSection {
                 property alias contentHeight: monoFontList.contentHeight
 
                 clip: true
-                spacing: Appearance.spacing.small / 2
+                spacing: Appearance.spacing.sm / 2
                 model: Qt.fontFamilies()
 
                 StyledScrollBar.vertical: StyledScrollBar {
@@ -151,13 +151,13 @@ CollapsibleSection {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.margins: Appearance.padding.normal
+                        anchors.margins: Appearance.padding.md
 
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         StyledText {
                             text: modelData
-                            font.pointSize: Appearance.font.size.normal
+                            font.pointSize: Appearance.font.size.bodyMedium
                         }
 
                         Item {
@@ -170,12 +170,12 @@ CollapsibleSection {
                             sourceComponent: MaterialIcon {
                                 text: "check"
                                 color: Colours.palette.m3onSurfaceVariant
-                                font.pointSize: Appearance.font.size.large
+                                font.pointSize: Appearance.font.size.titleMedium
                             }
                         }
                     }
 
-                    implicitHeight: fontFamilyMonoRow.implicitHeight + Appearance.padding.normal * 2
+                    implicitHeight: fontFamilyMonoRow.implicitHeight + Appearance.padding.md * 2
                 }
             }
         }
@@ -198,7 +198,7 @@ CollapsibleSection {
                 property alias contentHeight: sansFontList.contentHeight
 
                 clip: true
-                spacing: Appearance.spacing.small / 2
+                spacing: Appearance.spacing.sm / 2
                 model: Qt.fontFamilies()
 
                 StyledScrollBar.vertical: StyledScrollBar {
@@ -230,13 +230,13 @@ CollapsibleSection {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.margins: Appearance.padding.normal
+                        anchors.margins: Appearance.padding.md
 
-                        spacing: Appearance.spacing.normal
+                        spacing: Appearance.spacing.lg
 
                         StyledText {
                             text: modelData
-                            font.pointSize: Appearance.font.size.normal
+                            font.pointSize: Appearance.font.size.bodyMedium
                         }
 
                         Item {
@@ -249,19 +249,19 @@ CollapsibleSection {
                             sourceComponent: MaterialIcon {
                                 text: "check"
                                 color: Colours.palette.m3onSurfaceVariant
-                                font.pointSize: Appearance.font.size.large
+                                font.pointSize: Appearance.font.size.titleMedium
                             }
                         }
                     }
 
-                    implicitHeight: fontFamilySansRow.implicitHeight + Appearance.padding.normal * 2
+                    implicitHeight: fontFamilySansRow.implicitHeight + Appearance.padding.md * 2
                 }
             }
         }
     }
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.normal
+        contentSpacing: Appearance.spacing.lg
 
         SliderInput {
             Layout.fillWidth: true

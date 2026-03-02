@@ -37,7 +37,7 @@ DeviceDetails {
     sections: [
         Component {
             ColumnLayout {
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 SectionHeader {
                     title: qsTr("Connection status")
@@ -85,12 +85,12 @@ DeviceDetails {
 
                     RowLayout {
                         Layout.fillWidth: true
-                        Layout.topMargin: Appearance.spacing.normal
-                        spacing: Appearance.spacing.normal
+                        Layout.topMargin: Appearance.spacing.lg
+                        spacing: Appearance.spacing.lg
 
                         TextButton {
                             Layout.fillWidth: true
-                            Layout.minimumHeight: Appearance.font.size.normal + Appearance.padding.normal * 2
+                            Layout.minimumHeight: Appearance.font.size.bodyMedium + Appearance.padding.md * 2
                             visible: root.providerEnabled
                             enabled: !VPN.connecting
                             inactiveColour: Colours.palette.m3primaryContainer
@@ -141,7 +141,7 @@ DeviceDetails {
         },
         Component {
             ColumnLayout {
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 SectionHeader {
                     title: qsTr("Provider details")
@@ -149,7 +149,7 @@ DeviceDetails {
                 }
 
                 SectionContainer {
-                    contentSpacing: Appearance.spacing.small / 2
+                    contentSpacing: Appearance.spacing.sm / 2
 
                     PropertyRow {
                         label: qsTr("Provider")
@@ -203,8 +203,8 @@ DeviceDetails {
 
         parent: Overlay.overlay
         anchors.centerIn: parent
-        width: Math.min(400, parent.width - Appearance.padding.large * 2)
-        padding: Appearance.padding.large * 1.5
+        width: Math.min(400, parent.width - Appearance.padding.xl * 2)
+        padding: Appearance.padding.xl * 1.5
 
         modal: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
@@ -267,21 +267,21 @@ DeviceDetails {
         }
 
         contentItem: ColumnLayout {
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             StyledText {
                 text: qsTr("Edit VPN Provider")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: 500
             }
 
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.smaller / 2
+                spacing: Appearance.spacing.md / 2
 
                 StyledText {
                     text: qsTr("Display Name")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
@@ -303,7 +303,7 @@ DeviceDetails {
                     StyledTextField {
                         id: displayNameField
                         anchors.centerIn: parent
-                        width: parent.width - Appearance.padding.normal
+                        width: parent.width - Appearance.padding.md
                         horizontalAlignment: TextInput.AlignLeft
                         text: editVpnDialog.displayName
                         onTextChanged: editVpnDialog.displayName = text
@@ -313,11 +313,11 @@ DeviceDetails {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.smaller / 2
+                spacing: Appearance.spacing.md / 2
 
                 StyledText {
                     text: qsTr("Interface (e.g., wg0, torguard)")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
@@ -339,7 +339,7 @@ DeviceDetails {
                     StyledTextField {
                         id: interfaceNameField
                         anchors.centerIn: parent
-                        width: parent.width - Appearance.padding.normal
+                        width: parent.width - Appearance.padding.md
                         horizontalAlignment: TextInput.AlignLeft
                         text: editVpnDialog.interfaceName
                         onTextChanged: editVpnDialog.interfaceName = text
@@ -348,9 +348,9 @@ DeviceDetails {
             }
 
             RowLayout {
-                Layout.topMargin: Appearance.spacing.normal
+                Layout.topMargin: Appearance.spacing.lg
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 TextButton {
                     Layout.fillWidth: true

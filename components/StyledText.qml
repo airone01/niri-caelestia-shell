@@ -17,7 +17,7 @@ Text {
     textFormat: Text.PlainText
     color: Colours.palette.m3onSurface
     font.family: Appearance.font.family.sans
-    font.pointSize: Appearance.font.size.smaller
+    font.pointSize: Appearance.font.size.bodySmall
 
     Behavior on color {
         CAnim {}

@@ -17,7 +17,7 @@ CollapsibleSection {
 
     ColumnLayout {
         Layout.fillWidth: true
-        spacing: Appearance.spacing.small / 2
+        spacing: Appearance.spacing.sm / 2
 
         Repeater {
             model: M3Variants.list
@@ -59,13 +59,13 @@ CollapsibleSection {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.margins: Appearance.padding.normal
+                    anchors.margins: Appearance.padding.md
 
-                    spacing: Appearance.spacing.normal
+                    spacing: Appearance.spacing.lg
 
                     MaterialIcon {
                         text: modelData.icon
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                         fill: modelData.variant === Schemes.currentVariant ? 1 : 0
                     }
 
@@ -79,11 +79,11 @@ CollapsibleSection {
                         visible: modelData.variant === Schemes.currentVariant
                         text: "check"
                         color: Colours.palette.m3primary
-                        font.pointSize: Appearance.font.size.large
+                        font.pointSize: Appearance.font.size.titleMedium
                     }
                 }
 
-                implicitHeight: variantRow.implicitHeight + Appearance.padding.normal * 2
+                implicitHeight: variantRow.implicitHeight + Appearance.padding.md * 2
             }
         }
     }

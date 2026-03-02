@@ -8,13 +8,13 @@ StyledRect {
     required property int extra
 
     anchors.right: parent.right
-    anchors.margins: Appearance.padding.normal
+    anchors.margins: Appearance.padding.md
 
     color: Colours.palette.m3tertiary
     radius: Appearance.rounding.small
 
-    implicitWidth: count.implicitWidth + Appearance.padding.normal * 2
-    implicitHeight: count.implicitHeight + Appearance.padding.small * 2
+    implicitWidth: count.implicitWidth + Appearance.padding.md * 2
+    implicitHeight: count.implicitHeight + Appearance.padding.xs * 2
 
     opacity: extra > 0 ? 1 : 0
     scale: extra > 0 ? 1 : 0.5

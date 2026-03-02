@@ -109,9 +109,9 @@ Item {
 
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.bottomMargin: Appearance.spacing.normal
+                    Layout.bottomMargin: Appearance.spacing.lg
                     text: qsTr("Wallpaper")
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     font.weight: 600
                 }
 
@@ -120,7 +120,7 @@ Item {
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.bottomMargin: -Appearance.padding.large * 2
+                    Layout.bottomMargin: -Appearance.padding.xl * 2
 
                     active: {
                         const isActive = root.session.activeIndex === 3;
@@ -164,18 +164,18 @@ Item {
                     id: sidebarLayout
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    spacing: Appearance.spacing.small
+                    spacing: Appearance.spacing.sm
 
                     readonly property var rootPane: sidebarFlickable.rootPane
 
                     readonly property bool allSectionsExpanded: themeModeSection.expanded && colorVariantSection.expanded && colorSchemeSection.expanded && animationsSection.expanded && fontsSection.expanded && scalesSection.expanded && transparencySection.expanded && borderSection.expanded && backgroundSection.expanded
 
                     RowLayout {
-                        spacing: Appearance.spacing.smaller
+                        spacing: Appearance.spacing.md
 
                         StyledText {
                             text: qsTr("Appearance")
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             font.weight: 500
                         }
 

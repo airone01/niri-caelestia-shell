@@ -10,7 +10,7 @@ import qs.services
 Item {
     id: root
 
-    readonly property int minWidth: 400 + 400 + Appearance.spacing.normal + 120 + Appearance.padding.large * 2
+    readonly property int minWidth: 400 + 400 + Appearance.spacing.lg + 120 + Appearance.padding.xl * 2
 
     function displayTemp(temp: real): string {
         return `${Math.ceil(Config.services.useFahrenheit ? temp * 1.8 + 32 : temp)}°${Config.services.useFahrenheit ? "F" : "C"}`;
@@ -31,26 +31,26 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             MaterialIcon {
                 Layout.alignment: Qt.AlignHCenter
                 text: "tune"
-                font.pointSize: Appearance.font.size.extraLarge * 2
+                font.pointSize: Appearance.font.size.headlineLarge * 2
                 color: Colours.palette.m3onSurfaceVariant
             }
 
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
                 text: qsTr("No widgets enabled")
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 color: Colours.palette.m3onSurface
             }
 
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
                 text: qsTr("Enable widgets in dashboard settings")
-                font.pointSize: Appearance.font.size.small
+                font.pointSize: Appearance.font.size.labelLarge
                 color: Colours.palette.m3onSurfaceVariant
             }
         }
@@ -61,7 +61,7 @@ Item {
 
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
         visible: !placeholder.visible
 
         Ref {
@@ -72,11 +72,11 @@ Item {
             id: mainColumn
 
             Layout.fillWidth: true
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
                 visible: Config.dashboard.performance.showCpu || (Config.dashboard.performance.showGpu && SystemUsage.gpuType !== "NONE")
 
                 HeroCard {
@@ -114,7 +114,7 @@ Item {
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
                 visible: Config.dashboard.performance.showMemory || Config.dashboard.performance.showStorage || Config.dashboard.performance.showNetwork
 
                 GaugeCard {
@@ -180,13 +180,13 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large
-            spacing: Appearance.spacing.small
+            anchors.margins: Appearance.padding.xl
+            spacing: Appearance.spacing.sm
 
             // Header Section
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 MaterialIcon {
                     text: {
@@ -213,14 +213,14 @@ Item {
 
                         return charging ? `battery_charging_${(level + 3) * 10}` : `battery_${level}_bar`;
                     }
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     color: batteryTank.accentColor
                 }
 
                 StyledText {
                     Layout.fillWidth: true
                     text: qsTr("Battery")
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     color: Colours.palette.m3onSurface
                 }
             }
@@ -237,7 +237,7 @@ Item {
                 StyledText {
                     Layout.alignment: Qt.AlignRight
                     text: `${Math.round(batteryTank.percentage * 100)}%`
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     font.weight: Font.Medium
                     color: batteryTank.accentColor
                 }
@@ -262,7 +262,7 @@ Item {
 
                         return `${min}m`;
                     }
-                    font.pointSize: Appearance.font.size.smaller
+                    font.pointSize: Appearance.font.size.bodySmall
                     color: Colours.palette.m3onSurfaceVariant
                 }
             }
@@ -281,19 +281,19 @@ Item {
         property color accentColor: Colours.palette.m3primary
 
         Layout.fillWidth: true
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
 
         MaterialIcon {
             text: parent.icon
             fill: 1
             color: parent.accentColor
-            font.pointSize: Appearance.spacing.large
+            font.pointSize: Appearance.spacing.xxl
         }
 
         StyledText {
             Layout.fillWidth: true
             text: parent.title
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
             elide: Text.ElideRight
         }
     }
@@ -363,11 +363,11 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.leftMargin: Appearance.padding.large
-            anchors.rightMargin: Appearance.padding.large
-            anchors.topMargin: Appearance.padding.normal
-            anchors.bottomMargin: Appearance.padding.normal
-            spacing: Appearance.spacing.small
+            anchors.leftMargin: Appearance.padding.xl
+            anchors.rightMargin: Appearance.padding.xl
+            anchors.topMargin: Appearance.padding.md
+            anchors.bottomMargin: Appearance.padding.md
+            spacing: Appearance.spacing.sm
 
             CardHeader {
                 icon: heroCard.icon
@@ -378,25 +378,25 @@ Item {
             RowLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 Column {
                     Layout.alignment: Qt.AlignBottom
                     Layout.fillWidth: true
-                    spacing: Appearance.spacing.small
+                    spacing: Appearance.spacing.sm
 
                     Row {
-                        spacing: Appearance.spacing.small
+                        spacing: Appearance.spacing.sm
 
                         StyledText {
                             text: heroCard.secondaryValue
-                            font.pointSize: Appearance.font.size.normal
+                            font.pointSize: Appearance.font.size.bodyMedium
                             font.weight: Font.Medium
                         }
 
                         StyledText {
                             text: heroCard.secondaryLabel
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             color: Colours.palette.m3onSurfaceVariant
                             anchors.baseline: parent.children[0].baseline
                         }
@@ -420,21 +420,21 @@ Item {
         Column {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: Appearance.padding.large
+            anchors.margins: Appearance.padding.xl
             anchors.rightMargin: 32
             spacing: 0
 
             StyledText {
                 anchors.right: parent.right
                 text: heroCard.mainLabel
-                font.pointSize: Appearance.font.size.normal
+                font.pointSize: Appearance.font.size.bodyMedium
                 color: Colours.palette.m3onSurfaceVariant
             }
 
             StyledText {
                 anchors.right: parent.right
                 text: heroCard.mainValue
-                font.pointSize: Appearance.font.size.extraLarge
+                font.pointSize: Appearance.font.size.headlineLarge
                 font.weight: Font.Medium
                 color: heroCard.accentColor
             }
@@ -473,8 +473,8 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large
-            spacing: Appearance.spacing.smaller
+            anchors.margins: Appearance.padding.xl
+            spacing: Appearance.spacing.md
 
             CardHeader {
                 icon: gaugeCard.icon
@@ -536,7 +536,7 @@ Item {
                 StyledText {
                     anchors.centerIn: parent
                     text: `${Math.round(gaugeCard.percentage * 100)}%`
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     font.weight: Font.Medium
                     color: gaugeCard.accentColor
                 }
@@ -545,7 +545,7 @@ Item {
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
                 text: gaugeCard.subtitle
-                font.pointSize: Appearance.font.size.smaller
+                font.pointSize: Appearance.font.size.bodySmall
                 color: Colours.palette.m3onSurfaceVariant
             }
         }
@@ -607,8 +607,8 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large
-            spacing: Appearance.spacing.smaller
+            anchors.margins: Appearance.padding.xl
+            spacing: Appearance.spacing.md
 
             CardHeader {
                 icon: "hard_disk"
@@ -625,7 +625,7 @@ Item {
                 MaterialIcon {
                     text: "unfold_more"
                     color: Colours.palette.m3onSurfaceVariant
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     visible: storageGaugeCard.diskCount > 1
                     opacity: 0.7
                     ToolTip.visible: hintHover.hovered
@@ -692,7 +692,7 @@ Item {
                 StyledText {
                     anchors.centerIn: parent
                     text: storageGaugeCard.currentDisk ? `${Math.round(storageGaugeCard.currentDisk.perc * 100)}%` : "—"
-                    font.pointSize: Appearance.font.size.extraLarge
+                    font.pointSize: Appearance.font.size.headlineLarge
                     font.weight: Font.Medium
                     color: storageGaugeCard.accentColor
                 }
@@ -708,7 +708,7 @@ Item {
                     const totalFmt = SystemUsage.formatKib(storageGaugeCard.currentDisk.total);
                     return `${usedFmt.value.toFixed(1)} / ${Math.floor(totalFmt.value)} ${totalFmt.unit}`;
                 }
-                font.pointSize: Appearance.font.size.smaller
+                font.pointSize: Appearance.font.size.bodySmall
                 color: Colours.palette.m3onSurfaceVariant
             }
         }
@@ -735,8 +735,8 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.large
-            spacing: Appearance.spacing.small
+            anchors.margins: Appearance.padding.xl
+            spacing: Appearance.spacing.sm
 
             CardHeader {
                 icon: "swap_vert"
@@ -860,7 +860,7 @@ Item {
                 StyledText {
                     anchors.centerIn: parent
                     text: qsTr("Collecting data...")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                     visible: NetworkUsage.downloadHistory.length < 2
                     opacity: 0.6
@@ -870,17 +870,17 @@ Item {
             // Download row
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 MaterialIcon {
                     text: "download"
                     color: Colours.palette.m3tertiary
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                 }
 
                 StyledText {
                     text: qsTr("Download")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
@@ -893,7 +893,7 @@ Item {
                         const fmt = NetworkUsage.formatBytes(NetworkUsage.downloadSpeed ?? 0);
                         return fmt ? `${fmt.value.toFixed(1)} ${fmt.unit}` : "0.0 B/s";
                     }
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.weight: Font.Medium
                     color: Colours.palette.m3tertiary
                 }
@@ -902,17 +902,17 @@ Item {
             // Upload row
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 MaterialIcon {
                     text: "upload"
                     color: Colours.palette.m3secondary
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                 }
 
                 StyledText {
                     text: qsTr("Upload")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
@@ -925,7 +925,7 @@ Item {
                         const fmt = NetworkUsage.formatBytes(NetworkUsage.uploadSpeed ?? 0);
                         return fmt ? `${fmt.value.toFixed(1)} ${fmt.unit}` : "0.0 B/s";
                     }
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                     font.weight: Font.Medium
                     color: Colours.palette.m3secondary
                 }
@@ -934,17 +934,17 @@ Item {
             // Session totals
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.spacing.normal
+                spacing: Appearance.spacing.lg
 
                 MaterialIcon {
                     text: "history"
                     color: Colours.palette.m3onSurfaceVariant
-                    font.pointSize: Appearance.font.size.normal
+                    font.pointSize: Appearance.font.size.bodyMedium
                 }
 
                 StyledText {
                     text: qsTr("Total")
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
@@ -958,7 +958,7 @@ Item {
                         const up = NetworkUsage.formatBytesTotal(NetworkUsage.uploadTotal ?? 0);
                         return (down && up) ? `↓${down.value.toFixed(1)}${down.unit} ↑${up.value.toFixed(1)}${up.unit}` : "↓0.0B ↑0.0B";
                     }
-                    font.pointSize: Appearance.font.size.small
+                    font.pointSize: Appearance.font.size.labelLarge
                     color: Colours.palette.m3onSurfaceVariant
                 }
             }

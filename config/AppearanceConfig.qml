@@ -19,21 +19,36 @@ JsonObject {
 
     component Spacing: JsonObject {
         property real scale: 1
-        property int extraSmall: 5 * scale
-        property int small: 7 * scale
-        property int smaller: 10 * scale
-        property int normal: 12 * scale
-        property int larger: 15 * scale
-        property int large: 20 * scale
+        // Canonical names (ascending order)
+        property int xs: 5 * scale
+        property int sm: 7 * scale
+        property int md: 10 * scale
+        property int lg: 12 * scale
+        property int xl: 15 * scale
+        property int xxl: 20 * scale
+        // Backward-compat aliases
+        readonly property int extraSmall: xs
+        readonly property int small: sm
+        readonly property int smaller: md
+        readonly property int normal: lg
+        readonly property int larger: xl
+        readonly property int large: xxl
     }
 
     component Padding: JsonObject {
         property real scale: 1
-        property int small: 5 * scale
-        property int smaller: 7 * scale
-        property int normal: 10 * scale
-        property int larger: 12 * scale
-        property int large: 15 * scale
+        // Canonical names (ascending order)
+        property int xs: 5 * scale
+        property int sm: 7 * scale
+        property int md: 10 * scale
+        property int lg: 12 * scale
+        property int xl: 15 * scale
+        // Backward-compat aliases
+        readonly property int small: xs
+        readonly property int smaller: sm
+        readonly property int normal: md
+        readonly property int larger: lg
+        readonly property int large: xl
     }
 
     component FontFamily: JsonObject {
@@ -45,14 +60,24 @@ JsonObject {
 
     component FontSize: JsonObject {
         property real scale: 1
-        property int ultraSmall: 8 * scale
-        property int extraSmall: 10 * scale
-        property int small: 11 * scale
-        property int smaller: 12 * scale
-        property int normal: 13 * scale
-        property int larger: 15 * scale
-        property int large: 18 * scale
-        property int extraLarge: 28 * scale
+        // M3-inspired canonical names (ascending order)
+        property int labelSmall: 8 * scale
+        property int labelMedium: 10 * scale
+        property int labelLarge: 11 * scale
+        property int bodySmall: 12 * scale
+        property int bodyMedium: 13 * scale
+        property int bodyLarge: 15 * scale
+        property int titleMedium: 18 * scale
+        property int headlineLarge: 28 * scale
+        // Backward-compat aliases
+        readonly property int ultraSmall: labelSmall
+        readonly property int extraSmall: labelMedium
+        readonly property int small: labelLarge
+        readonly property int smaller: bodySmall
+        readonly property int normal: bodyMedium
+        readonly property int larger: bodyLarge
+        readonly property int large: titleMedium
+        readonly property int extraLarge: headlineLarge
     }
 
     component FontStuff: JsonObject {
@@ -90,6 +115,7 @@ JsonObject {
 
     component Transparency: JsonObject {
         property bool enabled: false
+        property bool reduceTransparency: false
         property real base: 0.85
         property real layers: 0.4
     }

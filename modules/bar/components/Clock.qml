@@ -10,7 +10,7 @@ Column {
 
     property color colour: Colours.palette.m3tertiary
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     Loader {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -32,7 +32,7 @@ Column {
 
         horizontalAlignment: StyledText.AlignHCenter
         text: Time.format(Config.services.useTwelveHourClock ? "hh\nmm\nA" : "hh\nmm")
-        font.pointSize: Appearance.font.size.smaller
+        font.pointSize: Appearance.font.size.bodySmall
         font.family: Appearance.font.family.mono
         color: root.colour
     }

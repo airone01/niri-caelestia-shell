@@ -26,15 +26,15 @@ ColumnLayout {
     }
 
     anchors.fill: parent
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     Label {
-        Layout.topMargin: Appearance.padding.large * 2
+        Layout.topMargin: Appearance.padding.xl * 2
 
         text: root.client?.title ?? qsTr("No active client")
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
-        font.pointSize: Appearance.font.size.large
+        font.pointSize: Appearance.font.size.titleMedium
         font.weight: 500
     }
 
@@ -42,16 +42,16 @@ ColumnLayout {
         text: root.client?.app_id ?? qsTr("No active client")
         color: Colours.palette.m3tertiary
 
-        font.pointSize: Appearance.font.size.larger
+        font.pointSize: Appearance.font.size.bodyLarge
     }
 
     StyledRect {
         Layout.fillWidth: true
         Layout.preferredHeight: 1
-        Layout.leftMargin: Appearance.padding.large * 2
-        Layout.rightMargin: Appearance.padding.large * 2
-        Layout.topMargin: Appearance.spacing.normal
-        Layout.bottomMargin: Appearance.spacing.large
+        Layout.leftMargin: Appearance.padding.xl * 2
+        Layout.rightMargin: Appearance.padding.xl * 2
+        Layout.topMargin: Appearance.spacing.lg
+        Layout.bottomMargin: Appearance.spacing.xxl
 
         color: Colours.palette.m3secondary
     }
@@ -164,11 +164,11 @@ ColumnLayout {
         required property string text
         property alias color: icon.color
 
-        Layout.leftMargin: Appearance.padding.large
-        Layout.rightMargin: Appearance.padding.large
+        Layout.leftMargin: Appearance.padding.xl
+        Layout.rightMargin: Appearance.padding.xl
         Layout.fillWidth: true
 
-        spacing: Appearance.spacing.smaller
+        spacing: Appearance.spacing.md
 
         MaterialIcon {
             id: icon
@@ -183,13 +183,13 @@ ColumnLayout {
 
             text: detail.text
             elide: Text.ElideRight
-            font.pointSize: Appearance.font.size.normal
+            font.pointSize: Appearance.font.size.bodyMedium
         }
     }
 
     component Label: StyledText {
-        Layout.leftMargin: Appearance.padding.large
-        Layout.rightMargin: Appearance.padding.large
+        Layout.leftMargin: Appearance.padding.xl
+        Layout.rightMargin: Appearance.padding.xl
         Layout.fillWidth: true
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter

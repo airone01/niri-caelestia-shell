@@ -10,8 +10,8 @@ Row {
     anchors.top: parent.top
     anchors.bottom: parent.bottom
 
-    padding: Appearance.padding.large
-    spacing: Appearance.spacing.normal
+    padding: Appearance.padding.xl
+    spacing: Appearance.spacing.lg
 
     Ref {
         service: SystemUsage
@@ -44,14 +44,14 @@ Row {
 
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.margins: Appearance.padding.large
+        anchors.margins: Appearance.padding.xl
         implicitWidth: icon.implicitWidth
 
         StyledRect {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.bottom: icon.top
-            anchors.bottomMargin: Appearance.spacing.small
+            anchors.bottomMargin: Appearance.spacing.sm
 
             implicitWidth: Config.dashboard.sizes.resourceProgessThickness
 

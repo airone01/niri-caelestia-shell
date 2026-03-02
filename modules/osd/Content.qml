@@ -17,14 +17,14 @@ Item {
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
 
-    implicitWidth: layout.implicitWidth + Appearance.padding.large * 2
-    implicitHeight: layout.implicitHeight + Appearance.padding.large * 2
+    implicitWidth: layout.implicitWidth + Appearance.padding.xl * 2
+    implicitHeight: layout.implicitHeight + Appearance.padding.xl * 2
 
     ColumnLayout {
         id: layout
 
         anchors.centerIn: parent
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         // Speaker volume
         CustomMouseArea {

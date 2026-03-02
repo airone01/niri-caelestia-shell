@@ -42,7 +42,7 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.small
+            anchors.margins: Appearance.padding.xs
             radius: Appearance.rounding.small
         }
     }
@@ -59,14 +59,14 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 text: "scan_delete"
                 color: Colours.palette.m3outline
-                font.pointSize: Appearance.font.size.extraLarge * 2
+                font.pointSize: Appearance.font.size.headlineLarge * 2
                 font.weight: 500
             }
 
             StyledText {
                 text: qsTr("This folder is empty")
                 color: Colours.palette.m3outline
-                font.pointSize: Appearance.font.size.large
+                font.pointSize: Appearance.font.size.titleMedium
                 font.weight: 500
             }
         }
@@ -80,10 +80,10 @@ Item {
         id: view
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.small + Appearance.padding.normal
+        anchors.margins: Appearance.padding.xs + Appearance.padding.md
 
-        cellWidth: Sizes.itemWidth + Appearance.spacing.small
-        cellHeight: Sizes.itemWidth + Appearance.spacing.small * 2 + Appearance.padding.normal * 2 + 1
+        cellWidth: Sizes.itemWidth + Appearance.spacing.sm
+        cellHeight: Sizes.itemWidth + Appearance.spacing.sm * 2 + Appearance.padding.md * 2 + 1
 
         clip: true
         focus: true
@@ -117,7 +117,7 @@ Item {
             required property int index
             required property FileSystemEntry modelData
 
-            readonly property real nonAnimHeight: icon.implicitHeight + name.anchors.topMargin + name.implicitHeight + Appearance.padding.normal * 2
+            readonly property real nonAnimHeight: icon.implicitHeight + name.anchors.topMargin + name.implicitHeight + Appearance.padding.md * 2
 
             implicitWidth: Sizes.itemWidth
             implicitHeight: nonAnimHeight
@@ -145,9 +145,9 @@ Item {
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                anchors.topMargin: Appearance.padding.normal
+                anchors.topMargin: Appearance.padding.md
 
-                implicitSize: Sizes.itemWidth - Appearance.padding.normal * 2
+                implicitSize: Sizes.itemWidth - Appearance.padding.md * 2
 
                 Component.onCompleted: {
                     const file = item.modelData;
@@ -168,8 +168,8 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: icon.bottom
-                anchors.topMargin: Appearance.spacing.small
-                anchors.margins: Appearance.padding.normal
+                anchors.topMargin: Appearance.spacing.sm
+                anchors.margins: Appearance.padding.md
 
                 horizontalAlignment: Text.AlignHCenter
                 elide: item.GridView.isCurrentItem ? Text.ElideNone : Text.ElideRight
@@ -221,7 +221,7 @@ Item {
     CurrentItem {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Appearance.padding.small
+        anchors.margins: Appearance.padding.xs
 
         currentItem: view.currentItem
     }

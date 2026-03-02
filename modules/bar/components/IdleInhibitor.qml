@@ -8,7 +8,7 @@ StyledRect {
     id: root
 
     implicitWidth: implicitHeight
-    implicitHeight: icon.implicitHeight + Appearance.padding.small * 2
+    implicitHeight: icon.implicitHeight + Appearance.padding.xs * 2
 
     radius: Appearance.rounding.full
     color: Qt.alpha(Colours.palette.m3primaryContainer, IdleInhibitor.enabled ? 1 : 0)
@@ -28,6 +28,6 @@ StyledRect {
         text: "coffee"
         color: IdleInhibitor.enabled ? Colours.palette.m3onPrimaryContainer : Colours.palette.m3secondary
         font.bold: true
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 }

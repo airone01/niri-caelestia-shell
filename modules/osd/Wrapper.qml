@@ -31,7 +31,8 @@ Item {
             Anim {
                 target: root
                 property: "implicitWidth"
-                easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
+                duration: Appearance.anim.durations.small
+                easing.bezierCurve: Appearance.anim.curves.emphasizedDecel
             }
         },
         Transition {
@@ -41,7 +42,8 @@ Item {
             Anim {
                 target: root
                 property: "implicitWidth"
-                easing.bezierCurve: Appearance.anim.curves.emphasized
+                duration: Appearance.anim.durations.small / 2
+                easing.bezierCurve: Appearance.anim.curves.emphasizedAccel
             }
         }
     ]

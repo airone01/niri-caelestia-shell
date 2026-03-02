@@ -26,7 +26,7 @@ ColumnLayout {
 
     signal itemSelected(var item)
 
-    spacing: Appearance.spacing.small
+    spacing: Appearance.spacing.sm
 
     Loader {
         id: headerLoader
@@ -39,13 +39,13 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         Layout.topMargin: root.headerComponent ? 0 : 0
-        spacing: Appearance.spacing.small
+        spacing: Appearance.spacing.sm
         visible: root.title !== "" || root.description !== ""
 
         StyledText {
             visible: root.title !== ""
             text: root.title
-            font.pointSize: Appearance.font.size.large
+            font.pointSize: Appearance.font.size.titleMedium
             font.weight: 500
         }
 
@@ -77,7 +77,7 @@ ColumnLayout {
         model: root.model
         delegate: root.delegate
 
-        spacing: Appearance.spacing.small / 2
+        spacing: Appearance.spacing.sm / 2
         interactive: false
         clip: false
     }

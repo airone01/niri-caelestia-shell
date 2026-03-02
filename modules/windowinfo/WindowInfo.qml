@@ -20,9 +20,9 @@ Item {
         id: child
 
         anchors.fill: parent
-        anchors.margins: Appearance.padding.large
+        anchors.margins: Appearance.padding.xl
 
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.spacing.lg
 
         // Preview {
         //     screen: root.screen
@@ -42,7 +42,7 @@ Item {
         // }
 
         ColumnLayout {
-            spacing: Appearance.spacing.normal
+            spacing: Appearance.spacing.lg
 
             Layout.preferredWidth: Config.winfo.sizes.detailsWidth
             Layout.fillHeight: true

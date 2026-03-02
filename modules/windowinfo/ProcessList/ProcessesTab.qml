@@ -5,7 +5,7 @@ import qs.config
 ColumnLayout {
     id: processesTab
     anchors.fill: parent
-    spacing: Appearance.padding.normal
+    spacing: Appearance.padding.md
 
     property var contextMenu: null
 

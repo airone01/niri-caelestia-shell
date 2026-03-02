@@ -15,8 +15,8 @@ Item {
 
     required property var wrapper
 
-    implicitWidth: layout.implicitWidth + Appearance.padding.normal * 2
-    implicitHeight: layout.implicitHeight + Appearance.padding.normal * 2
+    implicitWidth: layout.implicitWidth + Appearance.padding.md * 2
+    implicitHeight: layout.implicitHeight + Appearance.padding.md * 2
 
     ButtonGroup {
         id: sinks
@@ -34,7 +34,7 @@ Item {
         spacing: 0
 
         StyledText {
-            Layout.bottomMargin: Appearance.spacing.small / 2
+            Layout.bottomMargin: Appearance.spacing.sm / 2
             text: qsTr("Output device")
             font.weight: 500
         }
@@ -55,8 +55,8 @@ Item {
         }
 
         StyledText {
-            Layout.topMargin: Appearance.spacing.normal
-            Layout.bottomMargin: Appearance.spacing.small / 2
+            Layout.topMargin: Appearance.spacing.lg
+            Layout.bottomMargin: Appearance.spacing.sm / 2
             text: qsTr("Input device")
             font.weight: 500
         }
@@ -75,15 +75,15 @@ Item {
         }
 
         StyledText {
-            Layout.topMargin: Appearance.spacing.normal
-            Layout.bottomMargin: Appearance.spacing.small / 2
+            Layout.topMargin: Appearance.spacing.lg
+            Layout.bottomMargin: Appearance.spacing.sm / 2
             text: qsTr("Volume (%1)").arg(Audio.muted ? qsTr("Muted") : `${Math.round(Audio.volume * 100)}%`)
             font.weight: 500
         }
 
         CustomMouseArea {
             Layout.fillWidth: true
-            implicitHeight: Appearance.padding.normal * 3
+            implicitHeight: Appearance.padding.md * 3
 
             onWheel: event => {
                 if (event.angleDelta.y > 0)
@@ -107,11 +107,11 @@ Item {
         }
 
         StyledRect {
-            Layout.topMargin: Appearance.spacing.normal
+            Layout.topMargin: Appearance.spacing.lg
             visible: Config.general.apps.audio.length > 0
 
-            implicitWidth: expandBtn.implicitWidth + Appearance.padding.normal * 2
-            implicitHeight: expandBtn.implicitHeight + Appearance.padding.small
+            implicitWidth: expandBtn.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: expandBtn.implicitHeight + Appearance.padding.xs
 
             radius: Appearance.rounding.normal
             color: Colours.palette.m3primaryContainer
@@ -129,10 +129,10 @@ Item {
                 id: expandBtn
 
                 anchors.centerIn: parent
-                spacing: Appearance.spacing.small
+                spacing: Appearance.spacing.sm
 
                 StyledText {
-                    Layout.leftMargin: Appearance.padding.smaller
+                    Layout.leftMargin: Appearance.padding.sm
                     text: qsTr("Open settings")
                     color: Colours.palette.m3onPrimaryContainer
                 }
@@ -140,7 +140,7 @@ Item {
                 MaterialIcon {
                     text: "chevron_right"
                     color: Colours.palette.m3onPrimaryContainer
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                 }
             }
         }

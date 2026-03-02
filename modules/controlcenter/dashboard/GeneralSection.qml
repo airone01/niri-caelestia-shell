@@ -17,7 +17,7 @@ SectionContainer {
 
     StyledText {
         text: qsTr("General Settings")
-        font.pointSize: Appearance.font.size.normal
+        font.pointSize: Appearance.font.size.bodyMedium
     }
 
     SwitchRow {
@@ -39,7 +39,7 @@ SectionContainer {
     }
 
     SectionContainer {
-        contentSpacing: Appearance.spacing.normal
+        contentSpacing: Appearance.spacing.lg
 
         SliderInput {
             Layout.fillWidth: true

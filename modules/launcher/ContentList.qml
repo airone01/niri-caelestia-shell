@@ -20,6 +20,7 @@ Item {
 
     readonly property bool showWallpapers: search.text.startsWith(`${Config.launcher.actionPrefix}wallpaper `)
     readonly property Item currentList: showWallpapers ? wallpaperList.item : appList.item
+    readonly property string activeMode: showWallpapers ? "wallpapers" : (appList.item?.state ?? "apps")
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
@@ -112,8 +113,8 @@ Item {
         opacity: root.currentList?.count === 0 ? 1 : 0
         scale: root.currentList?.count === 0 ? 1 : 0.5
 
-        spacing: Appearance.spacing.normal
-        padding: Appearance.padding.large
+        spacing: Appearance.spacing.lg
+        padding: Appearance.padding.xl
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -121,7 +122,7 @@ Item {
         MaterialIcon {
             text: root.state === "wallpapers" ? "wallpaper_slideshow" : "manage_search"
             color: Colours.palette.m3onSurfaceVariant
-            font.pointSize: Appearance.font.size.extraLarge
+            font.pointSize: Appearance.font.size.headlineLarge
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -132,14 +133,14 @@ Item {
             StyledText {
                 text: root.state === "wallpapers" ? qsTr("No wallpapers found") : qsTr("No results")
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.larger
+                font.pointSize: Appearance.font.size.bodyLarge
                 font.weight: 500
             }
 
             StyledText {
                 text: root.state === "wallpapers" && Wallpapers.list.length === 0 ? qsTr("Try putting some wallpapers in %1").arg(Paths.shortenHome(Paths.wallsdir)) : qsTr("Try searching for something else")
                 color: Colours.palette.m3onSurfaceVariant
-                font.pointSize: Appearance.font.size.normal
+                font.pointSize: Appearance.font.size.bodyMedium
             }
         }
 

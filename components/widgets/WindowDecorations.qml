@@ -10,9 +10,9 @@ import qs.config
 RowLayout {
     id: root
     property var client: Niri.focusedWindow
-    property int implicitSize: Appearance.font.size.normal
+    property int implicitSize: Appearance.font.size.bodyMedium
 
-    spacing: Appearance.padding.small / 2
+    spacing: Appearance.padding.xs / 2
 
     // Pin feature removed - Niri doesn't support window pinning
     // TODO: Implement alternative if Niri adds pin support in future

@@ -21,7 +21,7 @@ StyledRect {
 
     clip: true
     implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: iconColumn.implicitHeight + Appearance.padding.normal * 2 - (Config.bar.status.showLockStatus && !Niri.capsLock && !Niri.numLock ? iconColumn.spacing : 0)
+    implicitHeight: iconColumn.implicitHeight + Appearance.padding.md * 2 - (Config.bar.status.showLockStatus && !Niri.capsLock && !Niri.numLock ? iconColumn.spacing : 0)
 
     ColumnLayout {
         id: iconColumn
@@ -29,9 +29,9 @@ StyledRect {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Appearance.padding.normal
+        anchors.bottomMargin: Appearance.padding.md
 
-        spacing: Appearance.spacing.smaller / 2
+        spacing: Appearance.spacing.md / 2
 
         // Lock keys status
         WrappedLoader {
@@ -160,7 +160,7 @@ StyledRect {
             active: Config.bar.status.showBluetooth
 
             sourceComponent: ColumnLayout {
-                spacing: Appearance.spacing.smaller / 2
+                spacing: Appearance.spacing.md / 2
 
                 // Bluetooth icon
                 MaterialIcon {

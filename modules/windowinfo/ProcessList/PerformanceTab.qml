@@ -7,7 +7,7 @@ import QtQuick.Layouts
 
 ColumnLayout {
     id: root
-    spacing: Appearance.padding.normal
+    spacing: Appearance.padding.md
 
     Component.onCompleted: {
         SysMonitorService.addRef();
@@ -48,8 +48,8 @@ ColumnLayout {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.normal
-            spacing: Appearance.padding.large
+            anchors.margins: Appearance.padding.md
+            spacing: Appearance.padding.xl
 
             // TextEdit {
             //     text: "GPUS:\n" + JSON.stringify(SysMonitorService.gpus, null, 2)
@@ -65,12 +65,12 @@ ColumnLayout {
             RowLayout {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 32
-                spacing: Appearance.padding.normal
+                spacing: Appearance.padding.md
 
                 StyledText {
                     text: "   CPU"
                     font.family: Appearance.font.family.mono
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.weight: Font.Bold
                     color: Colours.palette.m3onSurface
                     Layout.alignment: Qt.AlignVCenter
@@ -79,14 +79,14 @@ ColumnLayout {
                 InfoBadge {
                     text: SysMonitorService.totalCpuUsage.toFixed(1) + "%"
                     badgeColor: Colours.palette.info
-                    fontSize: Appearance.font.size.small
+                    fontSize: Appearance.font.size.labelLarge
                     fontWeight: Font.Bold
                 }
 
                 InfoBadge {
                     text: SysMonitorService.cpuTemperature + "°C"
                     badgeColor: Colours.palette.warning
-                    fontSize: Appearance.font.size.small
+                    fontSize: Appearance.font.size.labelLarge
                     fontWeight: Font.Bold
                 }
 
@@ -98,7 +98,7 @@ ColumnLayout {
                     implicitWidth: 110
                     text: SysMonitorService.cpuCount + " cores"
                     badgeColor: Colours.palette.success
-                    fontSize: Appearance.font.size.small
+                    fontSize: Appearance.font.size.labelLarge
                     fontWeight: Font.Bold
                     Layout.alignment: Qt.AlignVCenter
                 }
@@ -130,12 +130,12 @@ ColumnLayout {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
                             Layout.preferredWidth: parent.parent.width
-                            spacing: Appearance.padding.small
+                            spacing: Appearance.padding.xs
 
                             InfoBadge {
                                 text: individualCpuUsage.index
                                 badgeColor: Colours.palette.m3onSurfaceVariant
-                                fontSize: Appearance.font.size.small
+                                fontSize: Appearance.font.size.labelLarge
 
                                 implicitWidth: 50
                                 implicitHeight: 20
@@ -176,7 +176,7 @@ ColumnLayout {
                             InfoBadge {
                                 text: individualCpuUsage.modelData ? individualCpuUsage.modelData.toFixed(0) + "%" : "0%"
                                 badgeColor: Colours.palette.m3onSurface
-                                fontSize: Appearance.font.size.small
+                                fontSize: Appearance.font.size.labelLarge
                                 fontWeight: Font.Medium
 
                                 implicitWidth: 50
@@ -192,7 +192,7 @@ ColumnLayout {
     // GPU Section
     // GPU Section (Multi-GPU Support)
     ColumnLayout {
-        spacing: Appearance.padding.normal
+        spacing: Appearance.padding.md
 
         Repeater {
             model: SysMonitorService.gpus || []
@@ -209,17 +209,17 @@ ColumnLayout {
 
                 ColumnLayout {
                     anchors.fill: parent
-                    anchors.margins: Appearance.padding.normal
+                    anchors.margins: Appearance.padding.md
                     spacing: 0
 
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: Appearance.padding.normal
+                        spacing: Appearance.padding.md
 
                         StyledText {
                             text: " 󰾲  GPU"
                             font.family: Appearance.font.family.mono
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             font.weight: Font.Bold
                             color: Colours.palette.m3onSurface
                             Layout.alignment: Qt.AlignVCenter
@@ -228,14 +228,14 @@ ColumnLayout {
                         InfoBadge {
                             text: videocard.gpu.usage !== undefined ? videocard.gpu.usage.toFixed(1) + "%" : "N/A"
                             badgeColor: Colours.palette.info
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
 
                         InfoBadge {
                             text: videocard.gpu.temperature !== undefined ? videocard.gpu.temperature + "°C" : "N/A"
                             badgeColor: Colours.palette.warning
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
 
@@ -247,7 +247,7 @@ ColumnLayout {
                             text: videocard.gpu.name ? videocard.gpu.name : "Unknown"
                             badgeColor: Colours.palette.success
                             implicitWidth: 340
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                             Layout.alignment: Qt.AlignVCenter
                         }
@@ -255,13 +255,13 @@ ColumnLayout {
 
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: Appearance.padding.normal
+                        spacing: Appearance.padding.md
 
                         InfoBadge {
                             implicitWidth: 165
                             text: (videocard.gpu.memoryTotal) ? (videocard.gpu.memoryUsed / 1024).toFixed(0) + " GB / " + (videocard.gpu.memoryTotal / 1024).toFixed(0) + " GB" : "N/A"
                             badgeColor: Colours.palette.m3primary
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
 
@@ -297,22 +297,22 @@ ColumnLayout {
 
         RowLayout {
             anchors.fill: parent
-            anchors.margins: Appearance.padding.normal
+            anchors.margins: Appearance.padding.md
             spacing: 0
 
             // Memory
             RowLayout {
                 ColumnLayout {
                     Layout.alignment: Qt.AlignLeft
-                    spacing: Appearance.padding.large
+                    spacing: Appearance.padding.xl
 
                     RowLayout {
-                        spacing: Appearance.padding.normal
+                        spacing: Appearance.padding.md
 
                         StyledText {
                             text: "   MEMORY"
                             font.family: Appearance.font.family.mono
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             font.weight: Font.Bold
                             color: Colours.palette.m3onSurface
                         }
@@ -320,7 +320,7 @@ ColumnLayout {
                         InfoBadge {
                             text: SysMonitorService.totalMemoryKB > 0 ? ((SysMonitorService.usedMemoryKB / SysMonitorService.totalMemoryKB) * 100).toFixed(1) + "%" : "Null"
                             badgeColor: Colours.palette.info
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
                     }
@@ -330,7 +330,7 @@ ColumnLayout {
                             implicitHeight: 24
                             text: SysMonitorService.formatSystemMemory(SysMonitorService.usedMemoryKB) + " / " + SysMonitorService.formatSystemMemory(SysMonitorService.totalMemoryKB)
                             badgeColor: Colours.palette.m3tertiary
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Black
                         }
                         AnimatedBar {
@@ -357,7 +357,7 @@ ColumnLayout {
             RowLayout {
                 ColumnLayout {
                     Layout.alignment: Qt.AlignRight
-                    spacing: Appearance.padding.large
+                    spacing: Appearance.padding.xl
 
                     RowLayout {
                         Layout.alignment: Qt.AlignRight
@@ -365,14 +365,14 @@ ColumnLayout {
                         InfoBadge {
                             text: SysMonitorService.totalSwapKB > 0 ? ((SysMonitorService.usedSwapKB / SysMonitorService.totalSwapKB) * 100).toFixed(1) + "%" : "Not available"
                             badgeColor: Colours.palette.info
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
 
                         StyledText {
                             text: "SWAP 󰿡 "
                             font.family: Appearance.font.family.mono
-                            font.pointSize: Appearance.font.size.large
+                            font.pointSize: Appearance.font.size.titleMedium
                             font.weight: Font.Bold
                             color: Colours.palette.m3onSurface
                         }
@@ -403,7 +403,7 @@ ColumnLayout {
                             implicitHeight: 24
                             text: SysMonitorService.totalSwapKB > 0 ? SysMonitorService.formatSystemMemory(SysMonitorService.usedSwapKB) + " / " + SysMonitorService.formatSystemMemory(SysMonitorService.totalSwapKB) : "No swap configured"
                             badgeColor: Colours.palette.m3tertiary
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Black
                         }
                     }
@@ -416,7 +416,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: 80
-        spacing: Appearance.padding.normal
+        spacing: Appearance.padding.md
 
         // Network
         StyledRect {
@@ -432,22 +432,22 @@ ColumnLayout {
                 StyledText {
                     text: "  NETWORK"
                     font.family: Appearance.font.family.mono
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.weight: Font.Bold
                     color: Colours.palette.m3onSurface
                     Layout.alignment: Qt.AlignHCenter
                 }
 
                 ColumnLayout {
-                    spacing: Appearance.padding.small
+                    spacing: Appearance.padding.xs
                     Layout.alignment: Qt.AlignHCenter
 
                     RowLayout {
-                        spacing: Appearance.padding.small
+                        spacing: Appearance.padding.xs
 
                         StyledText {
                             text: "↑"
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             font.family: Appearance.font.family.mono
                             font.weight: Font.Black
                             color: Colours.palette.info
@@ -456,17 +456,17 @@ ColumnLayout {
                             implicitWidth: 120
                             text: SysMonitorService.networkTxRate > 0 ? root.formatNetworkSpeed(SysMonitorService.networkTxRate) : "0 B/s"
                             badgeColor: Colours.palette.info
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
                     }
 
                     RowLayout {
-                        spacing: Appearance.padding.small
+                        spacing: Appearance.padding.xs
 
                         StyledText {
                             text: "↓"
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             font.family: Appearance.font.family.mono
                             font.weight: Font.Black
                             color: Colours.palette.success
@@ -475,7 +475,7 @@ ColumnLayout {
                             implicitWidth: 120
                             text: SysMonitorService.networkRxRate > 0 ? root.formatNetworkSpeed(SysMonitorService.networkRxRate) : "0 B/s"
                             badgeColor: Colours.palette.success
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
                     }
@@ -497,21 +497,21 @@ ColumnLayout {
                 StyledText {
                     text: "  DISK"
                     font.family: Appearance.font.family.mono
-                    font.pointSize: Appearance.font.size.large
+                    font.pointSize: Appearance.font.size.titleMedium
                     font.weight: Font.Bold
                     color: Colours.palette.m3onSurface
                     Layout.alignment: Qt.AlignHCenter
                 }
 
                 ColumnLayout {
-                    spacing: Appearance.padding.small
+                    spacing: Appearance.padding.xs
                     Layout.alignment: Qt.AlignHCenter
                     RowLayout {
-                        spacing: Appearance.padding.small
+                        spacing: Appearance.padding.xs
 
                         StyledText {
                             text: "W"
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             font.family: Appearance.font.family.mono
                             font.weight: Font.Black
                             color: Colours.palette.info
@@ -521,17 +521,17 @@ ColumnLayout {
                             implicitWidth: 120
                             text: root.formatDiskSpeed(SysMonitorService.diskWriteRate)
                             badgeColor: Colours.palette.info
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
                     }
 
                     RowLayout {
-                        spacing: Appearance.padding.small
+                        spacing: Appearance.padding.xs
 
                         StyledText {
                             text: "R"
-                            font.pointSize: Appearance.font.size.small
+                            font.pointSize: Appearance.font.size.labelLarge
                             font.family: Appearance.font.family.mono
                             font.weight: Font.Black
                             color: Colours.palette.success
@@ -540,7 +540,7 @@ ColumnLayout {
                             implicitWidth: 120
                             text: root.formatDiskSpeed(SysMonitorService.diskReadRate)
                             badgeColor: Colours.palette.success
-                            fontSize: Appearance.font.size.small
+                            fontSize: Appearance.font.size.labelLarge
                             fontWeight: Font.Bold
                         }
                     }

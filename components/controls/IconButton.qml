@@ -15,7 +15,7 @@ StyledRect {
     property alias icon: label.text
     property bool checked
     property bool toggle
-    property real padding: type === IconButton.Text ? Appearance.padding.small / 2 : Appearance.padding.smaller
+    property real padding: type === IconButton.Text ? Appearance.padding.xs / 2 : Appearance.padding.sm
     property alias font: label.font
     property int type: IconButton.Filled
     property bool disabled

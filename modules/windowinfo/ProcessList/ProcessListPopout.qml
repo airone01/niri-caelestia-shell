@@ -37,12 +37,12 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.padding.md
 
         SystemOverview {
             id: systemOverview
             // anchors.centerIn: parent
-            // width: parent.width - Appearance.padding.normal * 2
+            // width: parent.width - Appearance.padding.md * 2
             Layout.fillWidth: true
         }
 
@@ -54,7 +54,7 @@ Item {
 
             ProcessListView {
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.small
+                anchors.margins: Appearance.padding.xs
                 contextMenu: processContextMenu // keep if you want context menu
             }
         }

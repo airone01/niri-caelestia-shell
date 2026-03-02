@@ -18,6 +18,6 @@ Item {
     readonly property real itemH: anchorWs ? (anchorWs.height + Config.bar.workspaces.windowIconGap * 2) : Config.bar.workspaces.windowIconSize
     readonly property real expandedW: Config.bar.workspaces.windowContextWidth - Config.bar.workspaces.windowIconSize
 
-    implicitHeight: anchorWs ? ((itemH + Appearance.padding.small) * anchorWsCount) : itemH - Appearance.padding.normal
+    implicitHeight: anchorWs ? ((itemH + Appearance.padding.xs) * anchorWsCount) : itemH - Appearance.padding.md
     implicitWidth: root.expandedW
 }
