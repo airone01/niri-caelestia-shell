@@ -45,11 +45,11 @@ Item {
 
             readonly property bool notifExpanded: root.visibilities.notifsExpanded
             readonly property int collapsedHeight: notifListWidget.showHeader ? 52 : 0
-            readonly property int listContentHeight: 52 + Appearance.spacing.sm + notifListWidget.implicitHeight + Appearance.padding.md
             readonly property int screenHalfHeight: (Screen.height || 1080) / 2
+            readonly property int desiredHeight: notifListWidget.desiredContentHeight + Appearance.padding.md * 2
             readonly property int expandedHeight: Notifs.list.length === 0
                 ? collapsedHeight + 120
-                : Math.max(collapsedHeight + 120, Math.min(listContentHeight, screenHalfHeight))
+                : Math.max(collapsedHeight + 120, Math.min(desiredHeight, screenHalfHeight))
 
             Behavior on Layout.preferredHeight {
                 Anim {

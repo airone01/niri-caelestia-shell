@@ -23,17 +23,18 @@ Item {
     property bool expandable: true
     property bool expanded: true
 
+    readonly property real desiredContentHeight: headerRow.implicitHeight + column.spacing + notifList.contentHeight + notifList.spacing * Math.max(0, Notifs.list.length - 1)
+
     implicitHeight: column.implicitHeight
 
     ColumnLayout {
         id: column
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
+        anchors.fill: parent
         spacing: Appearance.spacing.sm
 
         // Header row
         RowLayout {
+            id: headerRow
             Layout.fillWidth: true
             visible: root.showHeader
             spacing: Appearance.spacing.sm
@@ -135,7 +136,6 @@ Item {
         Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredHeight: root.expanded ? Math.max(120, notifList.contentHeight + notifList.spacing * Math.max(0, Notifs.list.length - 1)) : 0
             visible: root.expanded
             clip: true
 

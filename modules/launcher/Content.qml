@@ -19,7 +19,7 @@ Item {
     readonly property int rounding: Appearance.rounding.large
 
     implicitWidth: listWrapper.width + padding * 2
-    implicitHeight: searchWrapper.height + listWrapper.height + (modeIndicator.visible ? modeIndicator.height + root.padding : 0) + padding * 2
+    implicitHeight: searchWrapper.height + listWrapper.height + padding * 2
 
     anchors.top: parent.top
     anchors.horizontalCenter: parent.horizontalCenter
