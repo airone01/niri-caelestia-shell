@@ -38,6 +38,15 @@ SectionContainer {
         }
     }
 
+    SwitchRow {
+        label: qsTr("Wallpaper as avatar")
+        checked: root.rootItem.useWallpaperAvatar
+        onToggled: checked => {
+            root.rootItem.useWallpaperAvatar = checked;
+            root.rootItem.saveConfig();
+        }
+    }
+
     SectionContainer {
         contentSpacing: Appearance.spacing.lg
 

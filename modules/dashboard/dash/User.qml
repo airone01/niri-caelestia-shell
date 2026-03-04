@@ -39,6 +39,14 @@ Row {
             path: `${Paths.home}/.face`
         }
 
+        CachingImage {
+            id: wallpaperFallback
+
+            anchors.fill: parent
+            path: Wallpapers.current
+            visible: pfp.status !== Image.Ready && Config.dashboard.useWallpaperAvatar
+        }
+
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true

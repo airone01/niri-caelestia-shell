@@ -29,6 +29,9 @@ Item {
     property string weatherLocation: Config.services.weatherLocation ?? ""
     property bool useFahrenheit: Config.services.useFahrenheit ?? false
 
+    // Avatar
+    property bool useWallpaperAvatar: Config.dashboard.useWallpaperAvatar ?? true
+
     // Performance Resources
     property bool showBattery: Config.dashboard.performance.showBattery ?? false
     property bool showGpu: Config.dashboard.performance.showGpu ?? true
@@ -46,6 +49,7 @@ Item {
         Config.dashboard.dragThreshold = root.dragThreshold;
         Config.services.weatherLocation = root.weatherLocation;
         Config.services.useFahrenheit = root.useFahrenheit;
+        Config.dashboard.useWallpaperAvatar = root.useWallpaperAvatar;
         Config.dashboard.performance.showBattery = root.showBattery;
         Config.dashboard.performance.showGpu = root.showGpu;
         Config.dashboard.performance.showCpu = root.showCpu;

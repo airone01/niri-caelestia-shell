@@ -252,6 +252,7 @@ Singleton {
         return {
             enabled: dashboard.enabled,
             showOnHover: dashboard.showOnHover,
+            useWallpaperAvatar: dashboard.useWallpaperAvatar,
             mediaUpdateInterval: dashboard.mediaUpdateInterval,
             resourceUpdateInterval: dashboard.resourceUpdateInterval,
             dragThreshold: dashboard.dragThreshold,

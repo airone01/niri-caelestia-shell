@@ -54,5 +54,19 @@ Item {
             elide: Text.ElideRight
             width: Math.min(implicitWidth, root.parent.width - icon.implicitWidth - info.anchors.leftMargin - Appearance.padding.xl * 2)
         }
+
+        StyledText {
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: !Weather.error && Weather.city !== ""
+
+            animate: true
+            text: Weather.city
+            color: Colours.palette.m3onSurfaceVariant
+            font.pointSize: Appearance.font.size.labelSmall
+            font.weight: 400
+
+            elide: Text.ElideRight
+            width: Math.min(implicitWidth, root.parent.width - icon.implicitWidth - info.anchors.leftMargin - Appearance.padding.xl * 2)
+        }
     }
 }
