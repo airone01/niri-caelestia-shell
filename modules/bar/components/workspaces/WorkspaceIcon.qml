@@ -52,6 +52,7 @@ Item {
                 }
 
                 color: Config.bar.workspaces.occupiedBg || root.workspace.isOccupied || root.workspace.activeWsId === root.workspace.ws ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)
+                opacity: root.workspace.isOccupied || root.workspace.activeWsId === root.workspace.ws ? 1.0 : 0.35
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
@@ -82,7 +83,7 @@ Item {
     component Interaction: StateLayer {
         id: mouseArea
         anchors.fill: root
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        acceptedButtons: Qt.LeftButton
         cursorShape: (Qt.PointingHandCursor)
         pressAndHoldInterval: Appearance.anim.durations.small
 
@@ -91,17 +92,6 @@ Item {
         hoverEnabled: true
 
         onClicked: mouse => {
-            if (mouse.button === Qt.RightButton) {
-                const thing = root.workspace;
-                const winds = Niri.getWindowsByWorkspaceIndex(thing.index + thing.groupOffset);
-
-                if (thing && winds.length > 0) {
-                    Niri.wsContextAnchor = thing;
-                    Niri.wsContextType = "workspace";
-                    root.workspace.windowPopoutSignal.requestWindowPopout();
-                }
-                return;
-            }
             if (mouse.button === Qt.LeftButton) {
                 const wsArrayIndex = root.workspace.index + root.workspace.groupOffset;
                 if (Niri.focusedWorkspaceIndex !== wsArrayIndex)
