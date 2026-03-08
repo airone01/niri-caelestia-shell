@@ -11,4 +11,5 @@ build/
 // ...existing code...
 REVIEW.md
 TODO.md
+task.md
 __pycache__/
