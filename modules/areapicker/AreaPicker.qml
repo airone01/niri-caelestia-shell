@@ -11,6 +11,7 @@ Scope {
 
         property bool freeze
         property bool closing
+        property string mode: "screenshot" // "screenshot", "ocr", "lens"
 
         Variants {
             model: Quickshell.screens
@@ -48,13 +49,29 @@ Scope {
         target: "picker"
 
         function open(): void {
+            root.mode = "screenshot";
             root.freeze = false;
             root.closing = false;
             root.activeAsync = true;
         }
 
         function openFreeze(): void {
+            root.mode = "screenshot";
             root.freeze = true;
+            root.closing = false;
+            root.activeAsync = true;
+        }
+
+        function regionOcr(): void {
+            root.mode = "ocr";
+            root.freeze = false;
+            root.closing = false;
+            root.activeAsync = true;
+        }
+
+        function regionSearch(): void {
+            root.mode = "lens";
+            root.freeze = false;
             root.closing = false;
             root.activeAsync = true;
         }

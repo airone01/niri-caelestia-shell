@@ -117,7 +117,10 @@ MouseArea {
     anchors.fill: parent
     opacity: 0
     hoverEnabled: true
-    cursorShape: Qt.CrossCursor
+    cursorShape: Qt.BlankCursor
+
+    property real cursorX: 0
+    property real cursorY: 0
 
     Component.onCompleted: {
         // Break binding if frozen
@@ -158,11 +161,22 @@ MouseArea {
         if (closeAnim.running)
             return;
 
-        Quickshell.execDetached(["sh", "-c", `grim -l 0 -g '${screen.x + Math.ceil(rsx)},${screen.y + Math.ceil(rsy)} ${Math.floor(sw)}x${Math.floor(sh)}' - | swappy -f -`]);
+        const geom = `${screen.x + Math.ceil(rsx)},${screen.y + Math.ceil(rsy)} ${Math.floor(sw)}x${Math.floor(sh)}`;
+        const scriptsDir = Quickshell.shellDir + "/scripts/areaPicker";
+
+        if (loader.mode === "ocr") {
+            Quickshell.execDetached(["sh", scriptsDir + "/region_ocr.sh", geom]);
+        } else if (loader.mode === "lens") {
+            Quickshell.execDetached(["sh", scriptsDir + "/region_search.sh", geom]);
+        } else {
+            Quickshell.execDetached(["sh", "-c", `grim -l 0 -g '${geom}' - | swappy -f -`]);
+        }
         closeAnim.start();
     }
 
     onPositionChanged: event => {
+        cursorX = event.x;
+        cursorY = event.y;
         const x = event.x;
         const y = event.y;
 
@@ -239,6 +253,100 @@ MouseArea {
 
         sourceComponent: ScreencopyView {
             captureSource: root.screen
+        }
+    }
+
+    // Custom cursor with mode indicator
+    Item {
+        id: cursorIndicator
+        x: root.cursorX - crosshair.width / 2
+        y: root.cursorY - crosshair.height / 2
+        z: 100
+        visible: !root.pressed
+
+        // Crosshair
+        Rectangle {
+            id: crosshair
+            width: 24
+            height: 24
+            color: "transparent"
+
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: 2
+                height: parent.height
+                color: Colours.palette.m3onSurface
+                opacity: 0.9
+            }
+            Rectangle {
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width
+                height: 2
+                color: Colours.palette.m3onSurface
+                opacity: 0.9
+            }
+        }
+
+        // Mode badge
+        StyledRect {
+            x: crosshair.width / 2 + 8
+            y: crosshair.height / 2 + 8
+            radius: Appearance.rounding.full
+            color: {
+                switch (root.loader.mode) {
+                case "ocr": return Colours.palette.m3tertiaryContainer;
+                case "lens": return Colours.palette.m3secondaryContainer;
+                default: return Colours.palette.m3primaryContainer;
+                }
+            }
+
+            implicitWidth: badgeRow.implicitWidth + Appearance.padding.md * 2
+            implicitHeight: badgeRow.implicitHeight + Appearance.padding.xs * 2
+
+            Row {
+                id: badgeRow
+                anchors.centerIn: parent
+                spacing: Appearance.spacing.xs
+
+                MaterialIcon {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: {
+                        switch (root.loader.mode) {
+                        case "ocr": return "document_scanner";
+                        case "lens": return "image_search";
+                        default: return "crop";
+                        }
+                    }
+                    color: {
+                        switch (root.loader.mode) {
+                        case "ocr": return Colours.palette.m3onTertiaryContainer;
+                        case "lens": return Colours.palette.m3onSecondaryContainer;
+                        default: return Colours.palette.m3onPrimaryContainer;
+                        }
+                    }
+                    font.pointSize: Appearance.font.size.labelLarge
+                }
+
+                StyledText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: {
+                        switch (root.loader.mode) {
+                        case "ocr": return qsTr("OCR");
+                        case "lens": return qsTr("Lens");
+                        default: return qsTr("Screenshot");
+                        }
+                    }
+                    color: {
+                        switch (root.loader.mode) {
+                        case "ocr": return Colours.palette.m3onTertiaryContainer;
+                        case "lens": return Colours.palette.m3onSecondaryContainer;
+                        default: return Colours.palette.m3onPrimaryContainer;
+                        }
+                    }
+                    font.pointSize: Appearance.font.size.labelMedium
+                    font.bold: true
+                }
+            }
         }
     }
 

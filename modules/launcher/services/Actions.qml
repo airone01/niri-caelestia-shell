@@ -77,6 +77,28 @@ Searcher {
             }
         },
         Action {
+            name: qsTr("OCR")
+            desc: qsTr("Extract text from a screen region")
+            icon: "document_scanner"
+
+            function onClicked(list: AppList): void {
+                list.visibilities.launcher = false;
+                const configName = Quickshell.shellDir.toString().replace(/\/$/, "").split("/").pop();
+                Quickshell.execDetached(["qs", "-c", configName, "ipc", "call", "picker", "regionOcr"]);
+            }
+        },
+        Action {
+            name: qsTr("Google Lens")
+            desc: qsTr("Search a screen region with Google Lens")
+            icon: "image_search"
+
+            function onClicked(list: AppList): void {
+                list.visibilities.launcher = false;
+                const configName = Quickshell.shellDir.toString().replace(/\/$/, "").split("/").pop();
+                Quickshell.execDetached(["qs", "-c", configName, "ipc", "call", "picker", "regionSearch"]);
+            }
+        },
+        Action {
             name: qsTr("Transparency")
             desc: qsTr("Change shell transparency")
             icon: "opacity"
