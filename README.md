@@ -724,6 +724,7 @@ To set the wallpaper, you can use the app launcher command `> wallpaper`.
 * [Quickshell](https://github.com/quickshell/quickshell) – Core shell framework
 * [Caelestia](https://github.com/caelestia-shell/caelestia-shell) – Original project
 * [Niri-Caelestia-Shell](https://github.com/jutraim/niri-caelestia-shell) – Niri adaptation this fork is based on
+* [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland) – Many features and ideas inspired from
 * [Niri](https://github.com/YaLTeR/niri) – Window manager backend
 * All upstream contributors :)
 
