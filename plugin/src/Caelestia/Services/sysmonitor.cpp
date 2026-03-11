@@ -16,9 +16,21 @@ namespace caelestia {
 
 SysMonitor::SysMonitor(QObject* parent) : QObject(parent) {
     m_clockTicks = sysconf(_SC_CLK_TCK);
+    
+    // Initialize default structures so QML doesn't crash on undefined properties
+    m_gpu["type"] = "NONE";
+    m_gpu["name"] = "";
+    m_gpu["utilization"] = 0.0;
+    m_gpu["temperature"] = 0.0;
+    
+    m_cpu["temperature"] = 0.0;
+    m_cpu["model"] = "";
+    m_cpu["frequency"] = 0.0;
+    
     connect(&m_timer, &QTimer::timeout, this, &SysMonitor::updateAll);
     m_timer.setInterval(m_updateInterval);
     updateSystemOnce(); // Static info
+    updateGpuOnce(); // Static GPU info
 }
 
 SysMonitor::~SysMonitor() {}
@@ -30,6 +42,7 @@ QVariantList SysMonitor::disk() const { return m_disk; }
 QVariantList SysMonitor::processes() const { return m_processes; }
 QVariantMap SysMonitor::system() const { return m_system; }
 QVariantList SysMonitor::diskmounts() const { return m_diskmounts; }
+QVariantMap SysMonitor::gpu() const { return m_gpu; }
 
 int SysMonitor::updateInterval() const { return m_updateInterval; }
 void SysMonitor::setUpdateInterval(int interval) {
@@ -74,6 +87,7 @@ void SysMonitor::updateAll() {
     updateDisk();
     updateProcesses();
     updateDiskmounts();
+    updateGpu();
 }
 
 void SysMonitor::updateMemory() {
@@ -170,12 +184,37 @@ void SysMonitor::updateCpu() {
         }
     }
     
-    // Get temperature (thermal_zone0)
-    QFile tmp("/sys/class/thermal/thermal_zone0/temp");
-    if (tmp.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        newCpu.insert("temperature", tmp.readAll().trimmed().toDouble() / 1000.0);
-    } else {
-        newCpu.insert("temperature", 0.0);
+    // Get temperature (/sys/class/hwmon/hwmonN)
+    bool tempFound = false;
+    QDir hwmonDir("/sys/class/hwmon");
+    for (const QString& hwmonD : hwmonDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        QFile nameF(hwmonDir.absoluteFilePath(hwmonD) + "/name");
+        if (nameF.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QString hwName = QString::fromUtf8(nameF.readAll().trimmed());
+            if (hwName == "coretemp" || hwName == "k10temp" || hwName == "zenpower") {
+                // Find temp1_input or Tctl/Tdie equivalent
+                QDir hwD(hwmonDir.absoluteFilePath(hwmonD));
+                QStringList inputs = hwD.entryList(QStringList() << "temp*_input", QDir::Files);
+                if (!inputs.isEmpty()) {
+                    QFile tempInput(hwD.absoluteFilePath(inputs.first()));
+                    if (tempInput.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                        newCpu.insert("temperature", tempInput.readAll().trimmed().toDouble() / 1000.0);
+                        tempFound = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    if (!tempFound) {
+        // Fallback to thermal_zone0
+        QFile tmp("/sys/class/thermal/thermal_zone0/temp");
+        if (tmp.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            newCpu.insert("temperature", tmp.readAll().trimmed().toDouble() / 1000.0);
+        } else {
+            newCpu.insert("temperature", 0.0);
+        }
     }
 
     m_cpu = newCpu;
@@ -415,6 +454,128 @@ void SysMonitor::updateDiskmounts() {
     if (m_diskmounts != newMounts) {
         m_diskmounts = newMounts;
         emit diskmountsChanged();
+    }
+}
+
+void SysMonitor::updateGpuOnce() {
+    QString gType = "NONE";
+    QString gName = "";
+
+    // 1. Check NVIDIA via nvidia-smi
+    QProcess nvidiaSmi;
+    nvidiaSmi.start("nvidia-smi", QStringList() << "--query-gpu=name" << "--format=csv,noheader");
+    nvidiaSmi.waitForFinished(1000);
+    if (nvidiaSmi.exitStatus() == QProcess::NormalExit && nvidiaSmi.exitCode() == 0) {
+        QString out = QString::fromUtf8(nvidiaSmi.readAllStandardOutput()).trimmed();
+        qDebug() << "[SysMonitor] GPU detection nvidia-smi output:" << out;
+        if (!out.isEmpty()) {
+            gType = "NVIDIA";
+            gName = out;
+            // Clean up name
+            gName = gName.replace(QRegularExpression("(?i)NVIDIA GeForce |NVIDIA |Graphics"), "").trimmed();
+        }
+    } else {
+        qDebug() << "[SysMonitor] GPU detection nvidia-smi failed or not found";
+    }
+
+    // 2. Fallback to lspci and /sys/class/drm generic polling
+    if (gType == "NONE") {
+        QFile drmFile;
+        QDir drmDir("/sys/class/drm");
+        for (const QString& d : drmDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+            if (d.startsWith("card") && !d.contains("-")) {
+                if (QFile::exists(drmDir.absoluteFilePath(d) + "/device/gpu_busy_percent")) {
+                    gType = "GENERIC";
+                    break;
+                }
+            }
+        }
+
+        QProcess lspci;
+        lspci.start("sh", QStringList() << "-c" << "lspci 2>/dev/null | grep -i 'vga\\|3d\\|display' | head -1");
+        lspci.waitForFinished(1000);
+        QString lspciOut = QString::fromUtf8(lspci.readAllStandardOutput()).trimmed();
+        
+        QRegularExpression bracketRe("\\[([^\\]]+)\\]");
+        QRegularExpressionMatch match = bracketRe.match(lspciOut);
+        if (match.hasMatch()) {
+            gName = match.captured(1);
+        } else if (lspciOut.contains(": ")) {
+            gName = lspciOut.split(": ").last().trimmed();
+        }
+        
+        if (!gName.isEmpty()) {
+            gName = gName.replace(QRegularExpression("(?i)AMD Radeon |AMD |Intel |\\(R\\)|\\(TM\\)|Graphics|Corporation"), "").replace("  ", " ").trimmed();
+        }
+    }
+
+    qDebug() << "[SysMonitor] updateGpuOnce result -" << "Type:" << gType << "Name:" << gName;
+
+    m_gpu["type"] = gType;
+    m_gpu["name"] = gName;
+    m_gpu["utilization"] = 0.0;
+    m_gpu["temperature"] = 0.0;
+    emit gpuChanged();
+}
+
+void SysMonitor::updateGpu() {
+    QString gType = m_gpu["type"].toString();
+    if (gType == "NONE") return;
+
+    QVariantMap newGpu = m_gpu;
+
+    if (gType == "NVIDIA") {
+        QProcess nvidiaSmi;
+        nvidiaSmi.start("nvidia-smi", QStringList() << "--query-gpu=utilization.gpu,temperature.gpu" << "--format=csv,noheader,nounits");
+        nvidiaSmi.waitForFinished(500);
+        if (nvidiaSmi.exitStatus() == QProcess::NormalExit && nvidiaSmi.exitCode() == 0) {
+            QString out = QString::fromUtf8(nvidiaSmi.readAllStandardOutput()).trimmed();
+            QStringList parts = out.split(",");
+            if (parts.size() == 2) {
+                newGpu["utilization"] = parts[0].trimmed().toDouble() / 100.0;
+                newGpu["temperature"] = parts[1].trimmed().toDouble();
+            }
+        }
+    } else if (gType == "GENERIC") {
+        // Read usage
+        QDir drmDir("/sys/class/drm");
+        double usageTotal = 0.0;
+        int count = 0;
+        QString cPath;
+        
+        for (const QString& d : drmDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+            if (d.startsWith("card") && !d.contains("-")) {
+                QFile useF(drmDir.absoluteFilePath(d) + "/device/gpu_busy_percent");
+                if (useF.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                    usageTotal += useF.readAll().trimmed().toDouble() / 100.0;
+                    count++;
+                    cPath = drmDir.absoluteFilePath(d);
+                }
+            }
+        }
+        
+        if (count > 0) newGpu["utilization"] = usageTotal / count;
+        
+        // Read temp via hwmon bounds inside device node
+        if (!cPath.isEmpty()) {
+            QDir dHw(cPath + "/device/hwmon");
+            QStringList hwmons = dHw.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+            if (!hwmons.isEmpty()) {
+                QDir hwM(dHw.absoluteFilePath(hwmons.first()));
+                // Try temp1_input
+                QFile tF(hwM.absoluteFilePath("temp1_input"));
+                if (tF.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                    newGpu["temperature"] = tF.readAll().trimmed().toDouble() / 1000.0;
+                }
+            }
+        }
+    }
+
+    qDebug() << "[SysMonitor] updateGpu result -" << "Utilization:" << newGpu["utilization"] << "Temp:" << newGpu["temperature"];
+
+    if (m_gpu != newGpu) {
+        m_gpu = newGpu;
+        emit gpuChanged();
     }
 }
 

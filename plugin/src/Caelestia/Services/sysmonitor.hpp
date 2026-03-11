@@ -21,6 +21,7 @@ class SysMonitor : public QObject {
     Q_PROPERTY(QVariantList processes READ processes NOTIFY processesChanged)
     Q_PROPERTY(QVariantMap system READ system NOTIFY systemChanged)
     Q_PROPERTY(QVariantList diskmounts READ diskmounts NOTIFY diskmountsChanged)
+    Q_PROPERTY(QVariantMap gpu READ gpu NOTIFY gpuChanged)
 
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval NOTIFY updateIntervalChanged)
     Q_PROPERTY(int maxProcesses READ maxProcesses WRITE setMaxProcesses NOTIFY maxProcessesChanged)
@@ -37,6 +38,7 @@ public:
     QVariantList processes() const;
     QVariantMap system() const;
     QVariantList diskmounts() const;
+    QVariantMap gpu() const;
 
     int updateInterval() const;
     void setUpdateInterval(int interval);
@@ -51,6 +53,7 @@ public:
     Q_INVOKABLE void stop();
     Q_INVOKABLE void updateAll();
     Q_INVOKABLE void updateSystemOnce();
+    Q_INVOKABLE void updateGpuOnce();
 
 signals:
     void memoryChanged();
@@ -60,6 +63,7 @@ signals:
     void processesChanged();
     void systemChanged();
     void diskmountsChanged();
+    void gpuChanged();
     void updateIntervalChanged();
     void maxProcessesChanged();
     void sortByChanged();
@@ -72,6 +76,7 @@ private:
     void updateProcesses();
     void updateSystem();
     void updateDiskmounts();
+    void updateGpu();
 
     QTimer m_timer;
     int m_updateInterval = 2000;
@@ -85,6 +90,7 @@ private:
     QVariantList m_processes;
     QVariantMap m_system;
     QVariantList m_diskmounts;
+    QVariantMap m_gpu;
 
     // Process State
     struct ProcessInfo {
