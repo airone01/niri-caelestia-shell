@@ -3,6 +3,7 @@
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
 import "modules"
+import "components"
 import "modules/drawers"
 import "modules/areapicker"
 import "modules/lock"
@@ -26,6 +27,8 @@ ShellRoot {
 
     // Native polkit authentication agent — replaces polkit-kde-authentication-agent-1
     PolkitDialog {}
+
+    ReloadPopup {}
 
     // Initialize BatteryMonitor service
     property var _batteryMonitor: BatteryMonitor
