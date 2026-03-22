@@ -1,10 +1,10 @@
 // LockContent.qml — clock → avatar → username → password pill
 // Qt6 compatible, no QtGraphicalEffects.
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import SddmComponents 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import SddmComponents
 
 Item {
     id: root
@@ -138,8 +138,8 @@ Item {
 
                     // Icon (uses text fallback if Material Symbols not installed)
                     Text {
-                        text:  root.authFailed ? "⚠" : "🔒"
-                        font { pixelSize: 16 }
+                        text:  root.authFailed ? "\ue000" : "\ue897"
+                        font { family: "Material Symbols Rounded"; pixelSize: 20 }
                         color: root.authFailed ? root.colError
                              : passwordField.activeFocus ? root.colPrimary
                              : root.colTextSecondary
@@ -175,8 +175,8 @@ Item {
 
                         Text {
                             anchors.centerIn: parent
-                            text:  "›"
-                            font { pixelSize: 22; weight: Font.Bold }
+                            text:  "\ue5c8"
+                            font { family: "Material Symbols Rounded"; pixelSize: 22; weight: Font.Bold }
                             color: root.colPrimaryText
                         }
 

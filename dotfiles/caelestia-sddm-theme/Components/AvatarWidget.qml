@@ -1,6 +1,6 @@
 // AvatarWidget.qml — circular avatar with primary ring
 
-import QtQuick 2.15
+import QtQuick
 
 Item {
     id: root
@@ -53,8 +53,8 @@ Item {
         Text {
             anchors.centerIn: parent
             visible: avatarImg.status !== Image.Ready
-            text:  "👤"
-            font { pixelSize: 32 }
+            text:  "\ue7fd"
+            font { family: "Material Symbols Rounded"; pixelSize: 32 }
             color: Qt.rgba(root.colTextPrimary.r, root.colTextPrimary.g, root.colTextPrimary.b, 0.55)
         }
     }

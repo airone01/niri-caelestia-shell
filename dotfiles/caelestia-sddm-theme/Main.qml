@@ -16,11 +16,11 @@
 //   - Status area: error in m3error, caps/kb in m3onSurfaceVariant
 //   - Bottom bar: session + keyboard (SDDM ComboBox) + power buttons
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import QtQuick.Effects
-import SddmComponents 2.0
+import SddmComponents
 
 Rectangle {
     id: root
@@ -643,8 +643,8 @@ Rectangle {
                     leftMargin:     12
                     verticalCenter: parent.verticalCenter
                 }
-                text: "\u229E  "
-                font.pixelSize: 12
+                text: "\ue84f"
+                font { family: "Material Symbols Rounded"; pixelSize: 14 }
                 color: root.m3onSurfaceVariant
             }
 
@@ -694,8 +694,8 @@ Rectangle {
                     leftMargin:     12
                     verticalCenter: parent.verticalCenter
                 }
-                text: "\u2328  "
-                font.pixelSize: 12
+                text: "\ue312"
+                font { family: "Material Symbols Rounded"; pixelSize: 14 }
                 color: root.m3onSurfaceVariant
             }
 
@@ -757,8 +757,8 @@ Rectangle {
                         Behavior on color { ColorAnimation { duration: 100 } }
                         Text {
                             anchors.centerIn: parent
-                            text: "\u23F8"
-                            font.pixelSize: 13
+                            text: "\uef44"
+                            font { family: "Material Symbols Rounded"; pixelSize: 15 }
                             color: sMa.containsMouse ? root.m3primary : root.m3onSurfaceVariant
                             Behavior on color { ColorAnimation { duration: 100 } }
                         }
@@ -784,8 +784,8 @@ Rectangle {
                         Behavior on color { ColorAnimation { duration: 100 } }
                         Text {
                             anchors.centerIn: parent
-                            text: "\u21BA"
-                            font.pixelSize: 14
+                            text: "\uf053"
+                            font { family: "Material Symbols Rounded"; pixelSize: 16 }
                             color: rMa.containsMouse ? root.m3primary : root.m3onSurfaceVariant
                             Behavior on color { ColorAnimation { duration: 100 } }
                         }
@@ -811,8 +811,8 @@ Rectangle {
                         Behavior on color { ColorAnimation { duration: 100 } }
                         Text {
                             anchors.centerIn: parent
-                            text: "\u23FB"
-                            font.pixelSize: 14
+                            text: "\ue8ac"
+                            font { family: "Material Symbols Rounded"; pixelSize: 16 }
                             color: pMa.containsMouse ? root.m3error : root.m3onSurfaceVariant
                             Behavior on color { ColorAnimation { duration: 100 } }
                         }

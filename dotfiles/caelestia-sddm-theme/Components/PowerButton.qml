@@ -1,7 +1,7 @@
 // PowerButton.qml
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 
 Item {
     id: root
@@ -10,6 +10,7 @@ Item {
     property bool   isDestructive:    false
     property color  colTextSecondary: "#c8c5d0"
     property color  colPrimary:       "#cbbdff"
+    property string fontName:         "Material Symbols Rounded"
 
     signal clicked()
 
@@ -30,7 +31,7 @@ Item {
         Text {
             anchors.centerIn: parent
             text:  root.icon
-            font { pixelSize: 16 }
+            font { family: root.fontName; pixelSize: 18 }
             color: ma.containsMouse ? root.colPrimary : root.colTextSecondary
             Behavior on color { ColorAnimation { duration: 120 } }
         }

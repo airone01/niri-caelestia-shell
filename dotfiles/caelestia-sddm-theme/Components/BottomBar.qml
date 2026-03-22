@@ -1,9 +1,9 @@
 // BottomBar.qml — session | keyboard | power pills
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import SddmComponents 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import SddmComponents
 
 Item {
     id: root
@@ -38,7 +38,11 @@ Item {
             anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
             spacing: 8
 
-            Text { text: "⊞"; font.pixelSize: 13; color: root.colTextSecondary }
+            Text {
+                text: "\ue84f"
+                font { family: "Material Symbols Rounded"; pixelSize: 15 }
+                color: root.colTextSecondary
+            }
 
             ComboBox {
                 id:           sessionCombo
@@ -85,7 +89,11 @@ Item {
             anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
             spacing: 8
 
-            Text { text: "⌨"; font.pixelSize: 13; color: root.colTextSecondary }
+            Text {
+                text: "\ue312"
+                font { family: "Material Symbols Rounded"; pixelSize: 15 }
+                color: root.colTextSecondary
+            }
 
             ComboBox {
                 id:           kbCombo
@@ -131,9 +139,9 @@ Item {
             anchors { fill: parent; leftMargin: 10; rightMargin: 10 }
             spacing: 2
 
-            PowerButton { icon: "💤"; tooltip: "Suspend";  colTextSecondary: root.colTextSecondary; colPrimary: root.colPrimary; onClicked: sddm.suspend() }
-            PowerButton { icon: "↺";  tooltip: "Reboot";   colTextSecondary: root.colTextSecondary; colPrimary: root.colPrimary; onClicked: sddm.reboot() }
-            PowerButton { icon: "⏻";  tooltip: "Power Off"; colTextSecondary: root.colTextSecondary; colPrimary: root.colError;   isDestructive: true; onClicked: sddm.powerOff() }
+            PowerButton { icon: "\uef44"; tooltip: "Suspend";  colTextSecondary: root.colTextSecondary; colPrimary: root.colPrimary; onClicked: sddm.suspend() }
+            PowerButton { icon: "\uf053"; tooltip: "Reboot";   colTextSecondary: root.colTextSecondary; colPrimary: root.colPrimary; onClicked: sddm.reboot() }
+            PowerButton { icon: "\ue8ac"; tooltip: "Power Off"; colTextSecondary: root.colTextSecondary; colPrimary: root.colError;   isDestructive: true; onClicked: sddm.powerOff() }
         }
     }
 
