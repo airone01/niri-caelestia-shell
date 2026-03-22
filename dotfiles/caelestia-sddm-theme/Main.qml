@@ -19,7 +19,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QtQuick.Effects 1.0
+import QtGraphicalEffects 1.15
 import SddmComponents 2.0
 
 Rectangle {
@@ -95,14 +95,12 @@ Rectangle {
         visible:      false
     }
 
-    MultiEffect {
+    FastBlur {
+        id: wallBlur
         source:         wallImg
         anchors.fill:   parent
         visible:        wallImg.status === Image.Ready
-        blurEnabled:    blurWallpaper
-        blur:           blurWallpaper ? 1.0 : 0.0
-        blurMax:        blurRadius
-        blurMultiplier: 1.0
+        radius:         blurWallpaper ? blurRadius : 0
     }
 
     // Layer 2: dark scrim (dimScrim in source — subtle, 0.20)
@@ -201,15 +199,15 @@ Rectangle {
             }
         }
 
-        // Drop shadow (layer.effect MultiEffect in source)
+        // Drop shadow (DropShadow in Qt5 fallback)
         layer.enabled: true
-        layer.effect: MultiEffect {
-            shadowEnabled:         true
-            blurMax:               36
-            shadowVerticalOffset:  8
-            shadowHorizontalOffset: 0
-            shadowBlur:            0.7
-            shadowColor:           Qt.rgba(0, 0, 0, 0.45)
+        layer.effect: DropShadow {
+            transparentBorder:     true
+            radius:                36
+            samples:               73
+            verticalOffset:        8
+            horizontalOffset:      0
+            color:                 Qt.rgba(0, 0, 0, 0.45)
         }
 
         // ── CENTER CONTENT  (Center.qml → ColumnLayout) ───────────────────
