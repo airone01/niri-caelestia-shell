@@ -838,18 +838,4 @@ Rectangle {
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // VIRTUAL KEYBOARD (optional)
-    // ═══════════════════════════════════════════════════════════════════════
-
-    Loader {
-        z: 99
-        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-        active: false
-        source: active ? "Components/VirtualKeyboard.qml" : ""
-        onStatusChanged: {
-            if (status === Loader.Error)
-                console.log("[caelestia-sddm] qt6-virtualkeyboard not installed")
-        }
-    }
 }

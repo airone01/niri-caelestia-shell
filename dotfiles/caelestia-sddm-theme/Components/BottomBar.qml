@@ -38,12 +38,6 @@ Item {
             anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
             spacing: 8
 
-            Text {
-                text: "\ue84f"
-                font { family: "Material Symbols Rounded"; pixelSize: 15 }
-                color: root.colTextSecondary
-            }
-
             ComboBox {
                 id:           sessionCombo
                 model:        sessionModel
