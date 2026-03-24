@@ -6,6 +6,7 @@ JsonObject {
     property int dragThreshold: 20
     property ScrollActions scrollActions: ScrollActions {}
     property Workspaces workspaces: Workspaces {}
+    property ActiveWindow activeWindow: ActiveWindow {} 
     property Tray tray: Tray {}
     property Status status: Status {}
     property Clock clock: Clock {}
@@ -90,6 +91,11 @@ JsonObject {
         property string label: "◦" // ""
         property string occupiedLabel: " " // "󰮯"
         property string activeLabel: "󰮯" //Handled in workspace.qml
+    }
+
+    component ActiveWindow: JsonObject {
+        property bool compact: false
+        property bool inverted: false
     }
 
     component Tray: JsonObject {

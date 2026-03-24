@@ -45,6 +45,21 @@ Item {
     }
     property Title current: text1
 
+    readonly property string windowTitle: Niri.focusedWindowTitle ?? qsTr("Desktop")
+
+    function getCompactName() {
+        if (!root.windowTitle || root.windowTitle === qsTr("Desktop"))
+            return qsTr("Desktop");
+        // " - " (standard hyphen), " — " (em dash), " – " (en dash)
+        const parts = root.windowTitle.split(/\s+[\-\u2013\u2014]\s+/);
+        if (parts.length > 1)
+            return parts[parts.length - 1].trim();
+        return root.windowTitle;
+    }
+
+
+
+
     clip: true
     implicitWidth: Math.max(icon.implicitWidth, current.implicitHeight, colIndicator.implicitWidth)
     implicitHeight: icon.implicitHeight + current.implicitWidth + current.anchors.topMargin + (colIndicator.visible ? colIndicator.implicitHeight + Appearance.spacing.xs : 0)
@@ -83,7 +98,7 @@ Item {
     TextMetrics {
         id: metrics
 
-        text: Niri.focusedWindowTitle ?? qsTr("Desktop")
+        text: Config.bar.activeWindow.compact ? root.getCompactName() : root.windowTitle //Niri.focusedWindowTitle ?? qsTr("Desktop")
         font.pointSize: Appearance.font.size.bodySmall
         font.family: Appearance.font.family.mono
         elide: Qt.ElideRight
@@ -115,11 +130,16 @@ Item {
         color: root.colour
         opacity: root.current === this ? 1 : 0
 
-        transform: Rotation {
-            angle: 90
-            origin.x: text.implicitHeight / 2
-            origin.y: text.implicitHeight / 2
-        }
+        transform: [
+            Translate {
+                x: Config.bar.activeWindow.inverted ? -implicitWidth + text.implicitHeight : 0
+            },
+            Rotation {
+                angle: Config.bar.activeWindow.inverted ? 270 : 90
+                origin.x: text.implicitHeight / 2
+                origin.y: text.implicitHeight / 2
+            }
+        ]
 
         width: implicitHeight
         height: implicitWidth

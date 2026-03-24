@@ -33,6 +33,8 @@ Item {
     property bool showBluetooth: Config.bar.status.showBluetooth ?? true
     property bool showBattery: Config.bar.status.showBattery ?? true
     property bool showLockStatus: Config.bar.status.showLockStatus ?? true
+    property bool activeWindowCompact: Config.bar.activeWindow.compact ?? false
+    property bool activeWindowInverted: Config.bar.activeWindow.inverted ?? false
     property bool trayBackground: Config.bar.tray.background ?? false
     property bool trayCompact: Config.bar.tray.compact ?? false
     property bool trayRecolour: Config.bar.tray.recolour ?? false
@@ -67,6 +69,8 @@ Item {
         Config.bar.clock.showIcon = root.clockShowIcon;
         Config.bar.clock.background = root.clockBackground;
         Config.bar.clock.showDate = root.clockShowDate;
+        Config.bar.activeWindow.compact = root.activeWindowCompact;
+        Config.bar.activeWindow.inverted = root.activeWindowInverted;
         Config.bar.persistent = root.persistent;
         Config.bar.showOnHover = root.showOnHover;
         Config.bar.dragThreshold = root.dragThreshold;
@@ -618,6 +622,35 @@ Item {
                                 checked: root.popoutStatusIcons
                                 onToggled: checked => {
                                     root.popoutStatusIcons = checked;
+                                    root.saveConfig();
+                                }
+                            }
+                        }
+
+
+                        SectionContainer {
+                            Layout.fillWidth: true
+                            alignTop: true
+
+                            StyledText {
+                                text: qsTr("Active window")
+                                font.pointSize: Appearance.font.size.normal
+                            }
+
+                            SwitchRow {
+                                label: qsTr("Compact")
+                                checked: root.activeWindowCompact
+                                onToggled: checked => {
+                                    root.activeWindowCompact = checked;
+                                    root.saveConfig();
+                                }
+                            }
+
+                            SwitchRow {
+                                label: qsTr("Inverted")
+                                checked: root.activeWindowInverted
+                                onToggled: checked => {
+                                    root.activeWindowInverted = checked;
                                     root.saveConfig();
                                 }
                             }

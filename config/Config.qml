@@ -207,6 +207,10 @@ Singleton {
                 occupiedLabel: bar.workspaces.occupiedLabel,
                 activeLabel: bar.workspaces.activeLabel
             },
+            activeWindow: {
+                compact: bar.activeWindow.compact,
+                inverted: bar.activeWindow.inverted
+            },
             tray: {
                 background: bar.tray.background,
                 compact: bar.tray.compact,
