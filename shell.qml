@@ -10,6 +10,8 @@ import "modules/lock"
 import "modules/quicktoggles"
 import "modules/background"
 import "modules/polkit"
+import "modules/manga"
+import "modules/novel"
 import qs.modules.controlcenter
 import qs.services
 
@@ -24,6 +26,9 @@ ShellRoot {
 
     Shortcuts {}
     QuickTogglesPanel {}
+
+    MangaPanel {}
+    NovelPanel {}
 
     // Native polkit authentication agent — replaces polkit-kde-authentication-agent-1
     PolkitDialog {}
