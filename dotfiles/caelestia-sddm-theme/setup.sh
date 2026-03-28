@@ -4,8 +4,8 @@
 set -e
 THEME_NAME="caelestia-sddm-theme"
 THEME_INSTALL_DIR="/usr/share/sddm/themes/$THEME_NAME"
-REAL_USER="${SUDO_USER:-$USER}"                          # actual user even under sudo
-REAL_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)   # real home dir
+REAL_USER="${SUDO_USER:-$USER}"                          
+REAL_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)   
 CONFIG_DIR="$REAL_HOME/.config/$THEME_NAME"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -29,7 +29,7 @@ info "Checking dependencies..."
 MISSING=()
 command -v sddm-greeter-qt6 &>/dev/null || MISSING+=("sddm")
 if command -v pacman &>/dev/null; then
-    for pkg in qt6-svg qt6-declarative qt6-multimedia-ffmpeg; do
+    for pkg in qt6-svg qt6-declarative qt6-multimedia-ffmpeg qt6-quickeffects; do
         pacman -Q "$pkg" &>/dev/null || MISSING+=("$pkg")
     done
 fi
@@ -53,13 +53,21 @@ read -rp "Choice [1/2]: " MODE_CHOICE
 info "Installing theme to $THEME_INSTALL_DIR ..."
 sudo mkdir -p "$THEME_INSTALL_DIR"
 sudo cp -rf "$SCRIPT_DIR"/. "$THEME_INSTALL_DIR/"
-ok "Theme files installed"
 
-# Fonts
-if ls "$SCRIPT_DIR/fonts/"* &>/dev/null 2>&1; then
-    sudo cp -r "$SCRIPT_DIR/fonts/"* /usr/share/fonts/ 2>/dev/null || true
-    ok "Fonts installed"
+# Ensure assets folder exists in destination for fallback
+if [[ -d "$SCRIPT_DIR/assets" ]]; then
+    sudo mkdir -p "$THEME_INSTALL_DIR/assets"
+    sudo cp -f "$SCRIPT_DIR/assets/"* "$THEME_INSTALL_DIR/assets/"
 fi
+
+# Create initial theme.conf if missing
+if [[ ! -f "$THEME_INSTALL_DIR/theme.conf" ]]; then
+    sudo tee "$THEME_INSTALL_DIR/theme.conf" > /dev/null << CONF
+[General]
+background=assets/background.jpg
+CONF
+fi
+ok "Theme files installed"
 
 # ── Config dir (owned by real user, not root) ─────────────────────────────
 sudo -u "$REAL_USER" mkdir -p "$CONFIG_DIR"
@@ -67,13 +75,14 @@ sudo -u "$REAL_USER" mkdir -p "$CONFIG_DIR"
 if [[ "$MODE_CHOICE" == "1" ]]; then
     # ── Matugen mode ──────────────────────────────────────────────────────
     sudo -u "$REAL_USER" bash -c "
-        cp -n '$SCRIPT_DIR/Matugen/SddmColors.qml'     '$CONFIG_DIR/SddmColors.qml'
+        cp    '$SCRIPT_DIR/Matugen/SddmColors.qml'     '$CONFIG_DIR/SddmColors.qml'
         cp -n '$SCRIPT_DIR/Matugen/Colors.qml'         '$CONFIG_DIR/Colors.qml'
         cp    '$SCRIPT_DIR/Matugen/sddm-theme-apply.sh' '$CONFIG_DIR/sddm-theme-apply.sh'
         cp -n '$SCRIPT_DIR/Components/Settings.qml'    '$CONFIG_DIR/Settings.qml'
         chmod +x '$CONFIG_DIR/sddm-theme-apply.sh'
     "
 
+    # Set up passwordless sudo for the apply script
     SUDOERS_FILE="/etc/sudoers.d/${THEME_NAME}-${REAL_USER}"
     echo "$REAL_USER ALL=(ALL) NOPASSWD: $CONFIG_DIR/sddm-theme-apply.sh" \
         | sudo tee "$SUDOERS_FILE" > /dev/null
@@ -93,8 +102,12 @@ if [[ "$MODE_CHOICE" == "1" ]]; then
     fi
 
     info "Applying initial colors..."
-    sudo -u "$REAL_USER" bash -c "sudo '$CONFIG_DIR/sddm-theme-apply.sh'" || \
-        warn "Apply script failed — run manually: sudo $CONFIG_DIR/sddm-theme-apply.sh"
+    # Ensure line 5 of Colors.qml has a wallpaper for the first run if Matugen hasn't run yet
+    if [[ -f "$CONFIG_DIR/Colors.qml" ]] && ! grep -q "//" "$CONFIG_DIR/Colors.qml"; then
+        sed -i '5i // assets/background.jpg' "$CONFIG_DIR/Colors.qml"
+    fi
+    sudo -u "$REAL_USER" "$CONFIG_DIR/sddm-theme-apply.sh" || \
+        warn "Apply script failed — check if you have a wallpaper set."
 
 else
     # ── Manual mode ───────────────────────────────────────────────────────
@@ -110,10 +123,7 @@ else
         | sudo tee "$SUDOERS_FILE" > /dev/null
     sudo chmod 0440 "$SUDOERS_FILE"
 
-    # Apply immediately
-    sudo cp "$CONFIG_DIR/Colors.qml"   "$THEME_INSTALL_DIR/Components/Colors.qml"
-    sudo cp "$CONFIG_DIR/Settings.qml" "$THEME_INSTALL_DIR/Components/Settings.qml"
-    ok "Colors and settings applied"
+    ok "Config files installed"
     info "Edit $CONFIG_DIR/Colors.qml and Settings.qml to customize"
     info "Then run: $CONFIG_DIR/sddm-theme-apply.sh"
 fi
@@ -125,6 +135,7 @@ info "Configuring $SDDM_CONF ..."
 
 sudo tee "$SDDM_CONF" > /dev/null << CONF
 [General]
+# Set InputMethod=qtvirtualkeyboard if you want a virtual keyboard
 InputMethod=
 
 [Theme]
@@ -132,32 +143,8 @@ Current=$THEME_NAME
 CONF
 ok "sddm.conf configured"
 
-# ── Guide ─────────────────────────────────────────────────────────────────
-sudo -u "$REAL_USER" tee "$CONFIG_DIR/GUIDE.txt" > /dev/null << GUIDE
-caelestia-sddm-theme — quick reference
-═══════════════════════════════════════
-Config : $CONFIG_DIR
-Theme  : $THEME_INSTALL_DIR
-
-Edit Settings.qml or Colors.qml, then apply:
-  $CONFIG_DIR/sddm-theme-apply.sh
-
-Test without rebooting (from theme source dir):
-  ./test.sh
-  ./test.sh --wallpaper ~/Pictures/wall.jpg
-  ./test.sh --no-blur
-
-Uninstall:
-  sudo rm -rf $THEME_INSTALL_DIR
-  rm -rf $CONFIG_DIR
-  sudo rm -f /etc/sudoers.d/${THEME_NAME}-${REAL_USER}
-GUIDE
-
 echo ""
 echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${GREEN}${BOLD}  Done! Reboot to activate SDDM theme.${NC}"
 echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo ""
-echo "  Test first:  ./test.sh --wallpaper ~/Pictures/Wallpapers/wall.jpg"
-echo "  Guide:       $CONFIG_DIR/GUIDE.txt"
 echo ""

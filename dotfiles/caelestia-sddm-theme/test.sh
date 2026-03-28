@@ -48,15 +48,10 @@ command -v sddm-greeter-qt6 &>/dev/null || die "sddm-greeter-qt6 not found. Plea
 # ── Auto-detect wallpaper ─────────────────────────────────────────────────
 if [[ -z "$WALLPAPER" ]]; then
     # Try theme config hint
-    WP_HINT="$HOME/.config/caelestia-sddm-theme/current_wallpaper"
-    [[ -f "$WP_HINT" ]] && WALLPAPER=$(cat "$WP_HINT")
-fi
-
-if [[ -z "$WALLPAPER" ]]; then
-    # Try Caelestia shell config
-    SHELL_JSON="$HOME/.config/caelestia/shell.json"
-    if [[ -f "$SHELL_JSON" ]]; then
-        WALLPAPER=$(python3 -c "import json,os; d=json.load(open('$SHELL_JSON')); p=os.path.expanduser(d.get('paths',{}).get('wallpaper','')); print(p if os.path.isfile(p) else '')" 2>/dev/null || true)
+    WP_HINT="$HOME/.config/caelestia-sddm-theme/Colors.qml"
+    if [[ -f "$WP_HINT" ]]; then
+        WALLPAPER=$(sed -n '5p' "$WP_HINT" | sed 's/^\/\/\s*//' | xargs)
+        WALLPAPER="${WALLPAPER/#\~/$HOME}"
     fi
 fi
 
@@ -67,13 +62,24 @@ if [[ -z "$WALLPAPER" ]]; then
     done
 fi
 
-if [[ -n "$WALLPAPER" && -f "$WALLPAPER" ]]; then
-    WP_ABS="file://$(realpath "$WALLPAPER")"
-    info "Wallpaper: $(basename "$WALLPAPER")"
-else
-    WP_ABS=""
-    warn "No wallpaper found — using theme default colors"
+# ── Create temporary theme copy ──────────────────────────────────────────
+# We copy to /tmp so the greeter loads from an isolated path
+TMP_THEME=$(mktemp -d /tmp/caelestia-sddm-test.XXXXXX)
+cp -r "$THEME_DIR/." "$TMP_THEME/"
+
+# Copy user config if available
+CONFIG_DIR="$HOME/.config/caelestia-sddm-theme"
+if [[ -d "$CONFIG_DIR" ]]; then
+    cp -f "$CONFIG_DIR/Colors.qml" "$TMP_THEME/Components/Colors.qml" 2>/dev/null || true
+    cp -f "$CONFIG_DIR/Settings.qml" "$TMP_THEME/Components/Settings.qml" 2>/dev/null || true
 fi
+
+# ── Set defaults for testing ─────────────────────────────────────────────
+WP_REL="assets/background.jpg"
+info "Using theme default assets (no search)."
+
+# Patch theme.conf in the temporary directory
+sed -i "s|background=.*|background=$WP_REL|" "$TMP_THEME/theme.conf"
 
 # Configuration values
 BLUR_V="true"; BLUR_R="64"
@@ -81,30 +87,24 @@ $NO_BLUR && { BLUR_V="false"; BLUR_R="0"; }
 ANIM_MS="300"
 $FAST && ANIM_MS="0"
 
-# ── Create temporary theme copy ──────────────────────────────────────────
-# We copy to /tmp so the greeter loads from an isolated path
-TMP_THEME=$(mktemp -d /tmp/caelestia-sddm-test.XXXXXX)
-cp -r "$THEME_DIR/." "$TMP_THEME/"
-
-# Patch Main.qml with test settings using Python
+# ── Patch Main.qml with test overrides using Python ──────────────────────
 python3 - << PY
-import re
+import re, os
 
 path = "$TMP_THEME/Main.qml"
 with open(path, "r") as f:
     content = f.read()
 
-# Patch wallpaper
-content = re.sub(r'(property string wallpaperPath:\s*)\"[^\"]*\"', r'\g<1>"$WP_ABS"', content)
-# Patch blur
-content = re.sub(r'(property bool\s+blurWallpaper:\s*)\w+', r'\g<1>$BLUR_V', content)
-content = re.sub(r'(property int\s+blurRadius:\s*)\d+', r'\g<1>$BLUR_R', content)
-# Patch animations
-content = re.sub(r'(property int\s+animMs:\s*)\d+', r'\g<1>$ANIM_MS', content)
+# Patch Settings overrides
+# Handle the (settings && settings.key) || default pattern
+content = re.sub(r'(readonly property bool\s+blurWallpaper:\s*).*', r'\1 $BLUR_V', content)
+content = re.sub(r'(readonly property int\s+blurRadius:\s*).*', r'\1 $BLUR_R', content)
+content = re.sub(r'(readonly property int\s+animMs:\s*).*', r'\1 $ANIM_MS', content)
 
 with open(path, "w") as f:
     f.write(content)
 PY
+
 
 cleanup() {
     rm -rf "$TMP_THEME"
@@ -128,7 +128,6 @@ echo ""
 ok "Launching greeter..."
 
 # Run sddm-greeter-qt6
-# We set QML2_IMPORT_PATH to include our temporary Components directory
 export QML2_IMPORT_PATH="$TMP_THEME/Components/:$QML2_IMPORT_PATH"
 
 sddm-greeter-qt6 \
