@@ -16,8 +16,6 @@ Item {
 
     signal novelSelected(string novelId)
 
-    property string currentFilter: "hot"
-
     function reset() {
         console.log("[NovelBrowseView] Resetting search and filters")
         searchBar.text = ""
@@ -26,6 +24,8 @@ Item {
         Novel.clearNovelList()
         Novel.fetchHot()
     }
+
+    property string currentFilter: "hot"
 
     function _switchFilter(f) {
         if (currentFilter === f) return
@@ -73,20 +73,58 @@ Item {
                 }
 
                 // Search bar (shown when search icon is tapped)
-                StyledInputField {
-                    id: searchBar
+                StyledRect {
+                    id: searchBarContainer
+                    visible: searchBar.visible
                     Layout.fillWidth: true
-                    visible: false
-                    text: ""
-                    horizontalAlignment: TextInput.AlignLeft
+                    Layout.preferredHeight: 40
+                    color: c.m3surfaceContainer
+                    radius: Appearance.rounding.full
+                    border.width: 1
+                    border.color: searchBar.activeFocus ? c.m3primary : Qt.alpha(c.m3outline, 0.2)
                     
-                    onTextEdited: searchDebounce.restart()
-                    
-                    Keys.onEscapePressed: {
-                        visible = false
-                        text = ""
-                        browseView.currentFilter = "hot"
-                        Novel.fetchHot()
+                    Behavior on border.color { CAnim {} }
+
+                    RowLayout {
+                        anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.xs }
+                        spacing: Appearance.spacing.sm
+
+                        MaterialIcon {
+                            text: "search"
+                            font.pointSize: 20
+                            color: c.m3primary
+                            opacity: 0.7
+                        }
+
+                        StyledTextField {
+                            id: searchBar
+                            property bool visible: false
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                            placeholderText: qsTr("Search novels...")
+                            text: ""
+                            
+                            onTextChanged: if (searchBar.visible) searchDebounce.restart()
+                            
+                            Keys.onEscapePressed: {
+                                visible = false
+                                text = ""
+                                browseView.currentFilter = "hot"
+                                Novel.fetchHot()
+                            }
+                        }
+
+                        IconButton {
+                            type: IconButton.Ghost
+                            icon: "close"
+                            onClicked: {
+                                searchBar.visible = false
+                                searchBar.text = ""
+                                browseView.currentFilter = "hot"
+                                Novel.fetchHot()
+                            }
+                            Tooltip { target: parent; text: qsTr("Close search") }
+                        }
                     }
                 }
 
@@ -190,17 +228,12 @@ Item {
 
                 IconButton {
                     id: searchToggle
+                    visible: !searchBar.visible
                     type: IconButton.Tonal
-                    icon: searchBar.visible ? "close" : "search"
+                    icon: "search"
                     onClicked: {
-                        searchBar.visible = !searchBar.visible
-                        if (searchBar.visible) {
-                            searchBar.forceActiveFocus()
-                        } else {
-                            searchBar.text = ""
-                            browseView.currentFilter = "hot"
-                            Novel.fetchHot()
-                        }
+                        searchBar.visible = true
+                        searchBar.forceActiveFocus()
                     }
                 }
             }
@@ -216,9 +249,9 @@ Item {
             Layout.fillWidth: true; height: 56
             color: c.m3surfaceContainerLow; clip: true
 
-            RowLayout {
-                anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.md }
-                spacing: Appearance.spacing.sm
+            Row {
+                anchors.centerIn: parent
+                spacing: Appearance.spacing.md
 
                 Chip {
                     text: qsTr("Hot")

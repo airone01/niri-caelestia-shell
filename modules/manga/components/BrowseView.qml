@@ -65,19 +65,56 @@ Item {
                 }
 
                 // Search bar
-                StyledInputField {
-                    id: searchBar
+                StyledRect {
+                    id: searchBarContainer
+                    visible: searchBar.visible
                     Layout.fillWidth: true
-                    visible: false
-                    text: ""
-                    horizontalAlignment: TextInput.AlignLeft
+                    Layout.preferredHeight: 40
+                    color: c.m3surfaceContainer
+                    radius: Appearance.rounding.full
+                    border.width: 1
+                    border.color: searchBar.activeFocus ? c.m3primary : Qt.alpha(c.m3outline, 0.2)
                     
-                    onTextEdited: searchDebounce.restart()
-                    
-                    Keys.onEscapePressed: {
-                        visible = false
-                        text = ""
-                        Manga.fetchByOrigin(browseView.currentTagId, true)
+                    Behavior on border.color { CAnim {} }
+
+                    RowLayout {
+                        anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.xs }
+                        spacing: Appearance.spacing.sm
+
+                        MaterialIcon {
+                            text: "search"
+                            font.pointSize: 20
+                            color: c.m3primary
+                            opacity: 0.7
+                        }
+
+                        StyledTextField {
+                            id: searchBar
+                            property bool visible: false
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                            placeholderText: qsTr("Search titles...")
+                            text: ""
+                            
+                            onTextChanged: if (searchBar.visible) searchDebounce.restart()
+                            
+                            Keys.onEscapePressed: {
+                                visible = false
+                                text = ""
+                                Manga.fetchByOrigin(browseView.currentTagId, true)
+                            }
+                        }
+
+                        IconButton {
+                            type: IconButton.Ghost
+                            icon: "close"
+                            onClicked: {
+                                searchBar.visible = false
+                                searchBar.text = ""
+                                Manga.fetchByOrigin(browseView.currentTagId, true)
+                            }
+                            Tooltip { target: parent; text: qsTr("Close search") }
+                        }
                     }
                 }
 
@@ -94,16 +131,12 @@ Item {
 
                 IconButton {
                     id: searchToggle
+                    visible: !searchBar.visible
                     type: IconButton.Tonal
-                    icon: searchBar.visible ? "close" : "search"
+                    icon: "search"
                     onClicked: {
-                        searchBar.visible = !searchBar.visible
-                        if (searchBar.visible) {
-                            searchBar.forceActiveFocus()
-                        } else {
-                            searchBar.text = ""
-                            Manga.fetchByOrigin(browseView.currentTagId, true)
-                        }
+                        searchBar.visible = true
+                        searchBar.forceActiveFocus()
                     }
                 }
             }

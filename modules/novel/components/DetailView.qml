@@ -258,30 +258,59 @@ Item {
 
         // ── Search & Sort bar ────────────────────────────────────────────────
         Rectangle {
-            Layout.fillWidth: true; height: 48
+            Layout.fillWidth: true; height: 64
             color: c.m3surfaceContainerLow
             visible: Novel.currentNovel !== null
 
             RowLayout {
-                anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.sm }
-                spacing: Appearance.spacing.sm
+                anchors { fill: parent; margins: Appearance.padding.md }
+                spacing: Appearance.spacing.md
 
-                MaterialIcon {
-                    text: "search"
-                    font.pointSize: 18
-                    color: c.m3onSurfaceVariant; opacity: 0.5
-                }
-
-                StyledInputField {
-                    id: chapterSearch
+                StyledRect {
                     Layout.fillWidth: true
-                    placeholderText: qsTr("Filter chapters...")
-                    text: detailView._chapterFilter
-                    onTextEdited: detailView._chapterFilter = text
+                    Layout.fillHeight: true
+                    color: c.m3surfaceContainer
+                    radius: Appearance.rounding.full
+                    border.width: 1
+                    border.color: chapterSearch.activeFocus ? c.m3primary : Qt.alpha(c.m3outline, 0.2)
+                    
+                    Behavior on border.color { CAnim {} }
+
+                    RowLayout {
+                        anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.xs }
+                        spacing: Appearance.spacing.sm
+
+                        MaterialIcon {
+                            text: "search"
+                            font.pointSize: 20
+                            color: c.m3primary
+                            opacity: 0.7
+                        }
+
+                        StyledTextField {
+                            id: chapterSearch
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                            placeholderText: qsTr("Filter chapters...")
+                            text: detailView._chapterFilter
+                            onTextChanged: detailView._chapterFilter = text
+                        }
+
+                        IconButton {
+                            visible: detailView._chapterFilter !== ""
+                            type: IconButton.Ghost
+                            icon: "close"
+                            onClicked: {
+                                detailView._chapterFilter = ""
+                                chapterSearch.text = ""
+                            }
+                            Tooltip { target: parent; text: qsTr("Clear filter") }
+                        }
+                    }
                 }
 
                 IconButton {
-                    type: IconButton.Ghost
+                    type: IconButton.Tonal
                     icon: detailView._sortAscending ? "arrow_upward" : "arrow_downward"
                     onClicked: detailView._sortAscending = !detailView._sortAscending
                     Tooltip {
@@ -293,7 +322,7 @@ Item {
 
             Rectangle {
                 anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-                height: 1; color: c.m3outlineVariant; opacity: 0.2
+                height: 1; color: c.m3outlineVariant; opacity: 0.3
             }
         }
 
