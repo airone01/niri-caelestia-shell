@@ -32,12 +32,12 @@ Item {
             z: 2
 
             RowLayout {
-                anchors { fill: parent; leftMargin: Appearance.padding.lg; rightMargin: Appearance.padding.md }
+                anchors { fill: parent; leftMargin: Appearance.padding.lg; rightMargin: Appearance.padding.lg }
                 spacing: Appearance.spacing.md
 
                 // Wordmark
                 RowLayout {
-                    spacing: Appearance.spacing.xs
+                    spacing: Appearance.spacing.md
                     visible: !searchBar.visible
                     Layout.fillWidth: true
 
@@ -49,7 +49,7 @@ Item {
 
                     StyledText {
                         text: qsTr("Manga")
-                        font.pointSize: Appearance.font.size.titleMedium
+                        font.pointSize: Appearance.font.size.headlineLarge
                         font.weight: Font.Bold
                         color: c.m3onSurface
                     }
@@ -114,32 +114,31 @@ Item {
             color: c.m3surfaceContainerLow
             clip: true
 
-            ListView {
-                id: tagList
-                anchors { fill: parent; leftMargin: Appearance.padding.md; rightMargin: Appearance.padding.md }
-                orientation: ListView.Horizontal
+            RowLayout {
+                anchors { fill: parent; leftMargin: Appearance.padding.lg; rightMargin: Appearance.padding.lg }
                 spacing: Appearance.spacing.sm
-                clip: true
-                boundsBehavior: Flickable.StopAtBounds
 
-                model: ListModel {
-                    ListElement { label: qsTr("Hot");     tagId: "";       icon: "local_fire_department" }
-                    ListElement { label: qsTr("Latest");  tagId: "latest"; icon: "new_releases" }
-                    ListElement { label: qsTr("Manga");   tagId: "ja";     icon: "menu_book" }
-                    ListElement { label: qsTr("Manhwa");  tagId: "ko";     icon: "auto_stories" }
-                    ListElement { label: qsTr("Manhua");  tagId: "zh";     icon: "import_contacts" }
-                }
+                Repeater {
+                    model: [
+                        { label: qsTr("Hot"),     tagId: "",       icon: "local_fire_department" },
+                        { label: qsTr("Latest"),  tagId: "latest", icon: "new_releases" },
+                        { label: qsTr("Manga"),   tagId: "ja",     icon: "menu_book" },
+                        { label: qsTr("Manhwa"),  tagId: "ko",     icon: "auto_stories" },
+                        { label: qsTr("Manhua"),  tagId: "zh",     icon: "import_contacts" }
+                    ]
 
-                delegate: Chip {
-                    text: label
-                    icon: model.icon
-                    selected: browseView.currentTagId === tagId
-                    
-                    onClicked: {
-                        browseView.currentTagId = tagId
-                        searchBar.text = ""
-                        searchBar.visible = false
-                        Manga.fetchByOrigin(tagId, true)
+                    delegate: Chip {
+                        text: modelData.label
+                        icon: modelData.icon
+                        selected: browseView.currentTagId === modelData.tagId
+                        Layout.alignment: Qt.AlignVCenter
+                        
+                        onClicked: {
+                            browseView.currentTagId = modelData.tagId
+                            searchBar.text = ""
+                            searchBar.visible = false
+                            Manga.fetchByOrigin(modelData.tagId, true)
+                        }
                     }
                 }
             }

@@ -45,7 +45,7 @@ Item {
 
                 // Title (hidden while search bar is open)
                 RowLayout {
-                    spacing: Appearance.spacing.xs
+                    spacing: Appearance.spacing.md
                     visible: !searchBar.visible
                     Layout.fillWidth: true
 
@@ -57,7 +57,7 @@ Item {
 
                     StyledText {
                         text: qsTr("Novel")
-                        font.pointSize: Appearance.font.size.titleMedium
+                        font.pointSize: Appearance.font.size.headlineLarge
                         font.weight: Font.Bold
                         color: c.m3onSurface
                     }

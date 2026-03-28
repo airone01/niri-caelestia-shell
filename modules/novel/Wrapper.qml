@@ -41,14 +41,18 @@ Item {
             Anim {
                 target: root
                 property: "implicitWidth"
-                duration: Appearance.anim.durations.small
+                duration: Appearance.anim.durations.normal
                 easing.bezierCurve: Appearance.anim.curves.emphasizedAccel
             }
         }
     ]
 
     NovelReader {
-        anchors.fill: parent
+        width: 600
+        height: parent.height
+        anchors.right: parent.right
         visible: true
     }
+
+    clip: true
 }
