@@ -88,7 +88,7 @@
     };
 
     nativeBuildInputs = [cmake ninja pkg-config];
-    buildInputs = [qt6.qtbase qt6.qtdeclarative fftw qt6.qtmultimedia libqalculate pipewire aubio libcava kdePackages.networkmanager-qt];
+    buildInputs = [qt6.qtbase qt6.qtdeclarative qt6.qt5compat fftw qt6.qtmultimedia libqalculate pipewire aubio libcava kdePackages.networkmanager-qt];
 
     dontWrapQtApps = true;
     cmakeFlags =
